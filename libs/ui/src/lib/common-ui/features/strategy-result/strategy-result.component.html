@@ -1,0 +1,129 @@
+<verisure-alert
+  *ngIf="alertStatus"
+  @alertAnimation
+  size="md"
+  [label]="alertStatus.message"
+  [type]="alertStatus.status === 404 ? 'information' : 'error'"
+></verisure-alert>
+<ng-container *ngIf="alertStatus === null">
+  <ng-container *ngIf="info.estado === status.SUCCESS">
+    <div>
+      <div style="display: flex; flex-direction: column">
+        <span
+          style="
+            /* h4/bold */
+
+            font-family: 'Fira Sans';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 24px;
+            line-height: 40px;
+          "
+        >
+          ID Estrategia Comercial : {{ info.id }}
+        </span>
+      </div>
+    </div>
+    <div class="content-strategy">
+      <verisure-card-item>
+        <div card-details>
+          <div class="content-equifax" *ngIf="content.motorDeRegla.estadoId">
+            <div
+              [ngStyle]="{
+                background:
+                  content.motorDeRegla.estadoId === '3'
+                    ? '#CCF7FF'
+                    : content.motorDeRegla.estadoId === '1'
+                    ? '#FFEBEF'
+                    : content.motorDeRegla.estadoId === '2'
+                    ? '#FAFAFA'
+                    : '#FFE9DB'
+              }"
+              alt="image"
+            >
+              <img [src]="currentImgSrc()" alt="" />
+            </div>
+            <div alt="content">
+              <span> Score: {{ content.equifax.score }} </span>
+              <span> ISE: {{ content.equifax.ise }} </span>
+            </div>
+          </div>
+        </div>
+        <div
+          card-details
+          style="border: none"
+          *ngIf="content.motorDeRegla.estadoId"
+        >
+          <verisure-alert
+            *ngIf="content.motorDeRegla.estadoId !== '4'"
+            size="sm"
+            urlIcons="assets/icons/icon-success-mini-alert.svg"
+            [label]="'Asignar a ' + content.motorDeRegla.estadoGlosa"
+            type="success"
+          ></verisure-alert>
+          <verisure-alert
+            *ngIf="content.motorDeRegla.estadoId === '4'"
+            size="sm"
+            [label]="content.motorDeRegla.estadoGlosa"
+            type="error"
+            urlIcons="assets/icons/icon-error-mini-alert.svg"
+          ></verisure-alert>
+        </div>
+      </verisure-card-item>
+      <verisure-card-item>
+        <div *ngIf="content.user" card-header>
+          <object
+            style="background-color: #ffebef00"
+            data="assets/icons/assignment-ind-icon.svg"
+            type="image/svg+xml"
+          ></object>
+          <span
+            >Cliente
+            {{
+              capitalizeFullName(content.user.nombre ? content.user.nombre : '')
+            }}
+          </span>
+          <span> {{ formatearRut(content.user.rut) }}</span>
+        </div>
+        <div card-header *ngIf="content.user.ultimaConsulta !== null">
+          <verisure-tiny-card
+            icon="icon-calendar-user"
+            [label]="
+              'Última consulta: ' +
+              formatDate(content.user.ultimaConsulta ?? '')
+            "
+            width="fit-content"
+          ></verisure-tiny-card>
+        </div>
+        <div card-details>
+          <span>Tipo de cliente: {{ content.user.tipoPersona }}</span>
+        </div>
+      </verisure-card-item>
+    </div>
+  </ng-container>
+  <div *ngIf="info.estado !== status.SUCCESS">
+    <verisure-card-item>
+      <div card-header style="border-bottom: 0px">
+        <verisure-alert
+          size="sm"
+          [type]="info.estado === status.PROCCESS ? 'warning' : 'error'"
+          [urlIcons]="
+            info.estado === status.PROCCESS
+              ? 'assets/icons/icon-time-mini-alert.svg'
+              : 'assets/icons/icon-error-mini-alert.svg'
+          "
+          [label]="info.estado === status.PROCCESS ? 'En espera' : 'Error'"
+        ></verisure-alert>
+      </div>
+
+      <div
+        card-details
+        [innerHTML]="
+          info?.estado === status?.PROCCESS
+            ? 'Estamos procesando su solicitud'
+            : 'Existen problemas con la plataforma Equifax, esto podría tardar más de lo normal, disculpa las molestias'
+        "
+      ></div>
+    </verisure-card-item>
+  </div>
+</ng-container>

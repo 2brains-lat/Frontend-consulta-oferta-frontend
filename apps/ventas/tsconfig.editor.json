@@ -1,0 +1,7 @@
+{
+  "extends": "./tsconfig.json",
+  "include": ["src/**/*.ts", "../../libs/ui/src/lib/common-ui/features/offers-to-offer/utils.ts"],
+  "compilerOptions": {
+    "types": ["jest", "node"]
+  }
+}

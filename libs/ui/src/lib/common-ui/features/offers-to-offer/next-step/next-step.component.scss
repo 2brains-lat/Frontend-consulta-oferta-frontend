@@ -1,0 +1,71 @@
+@use '../../../../../styles/global-theme.scss' as theme;
+@use '../../../components/button/button.component.scss' as btn;
+@use '../../../components/alert/alert.component.scss' as alert;
+@use '../../../components/breadcrumb/breadcrumb.component.scss' as bread;
+verisure-next-step {
+  z-index: 100;
+  position: sticky;
+  bottom: 0px;
+  width: 100%;
+  margin-top: auto;
+
+  & .alert-container {
+    padding: 10px;
+  }
+  & > div.container {
+    border-top: 1px solid rgba(0, 0, 0, 0.18);
+    display: flex;
+    background: #ffffff;
+    flex-direction: column;
+    gap: 16px;
+    padding: 32px 20px;
+    padding-top: 16px;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+
+    verisure-button {
+      width: 100%;
+      @include btn.VerisureButton(theme.$my-theme);
+    }
+    a {
+      /* link/link-regular */
+
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      /* identical to box height */
+
+      text-align: center;
+      text-decoration-line: underline;
+
+      /* Secondary/700 */
+
+      color: #262626;
+    }
+    @media only screen and (min-width: 768px) {
+      display: flex;
+      background: #fafafa !important;
+      flex-direction: row-reverse;
+      verisure-button {
+        width: max-content;
+        margin-left: auto;
+      }
+    }
+  }
+  verisure-alert {
+    @include alert.VerisureAlert(theme.$my-theme);
+    & .alerta.success {
+      height: 20px;
+    }
+    & .alerta .left-info img.icon {
+      height: 20px;
+      width: 20px;
+    }
+  }
+}
+verisure-breadcrumb {
+  @include bread.VerisureBreadcrumb(theme.$my-theme);
+}

@@ -1,0 +1,13 @@
+<div id="master-title">
+  <span>
+    Maestro
+    {{ formatTitle(navSubitemName) }}:
+    {{ formatTitle(itemTabSelectedName) }}
+  </span>
+</div>
+
+<ng-content id="master-tabs-select" select="[tabs-select]"></ng-content>
+
+<ng-content id="master-searchbar" select="[searchbar-container]"></ng-content>
+
+<ng-content id="master-table" select="[table-container]"></ng-content>

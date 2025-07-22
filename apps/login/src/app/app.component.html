@@ -1,0 +1,22 @@
+<verisure-loader [isLoading]="isLoading"></verisure-loader>
+<div class="login-container">
+  <div class="picture-on-desktop"></div>
+  <div class="backgroundImage">
+    <div class="card">
+      <div class="welcome">
+        <img
+          class="svg-logo-white"
+          src="/assets/verisure-white-logo.svg"
+          alt=""
+        />
+        <img class="svg-logo" src="/assets/verisure-logo.svg" alt="" />
+        <h2 class="title">¡Hola!</h2>
+        <h5 class="subtitle">
+          Te damos la bienvenida a nuestra nueva plataforma
+        </h5>
+      </div>
+      <button (click)="login()" type="button" class="join">Ingresar</button>
+    </div>
+    <div class="tag">version {{ version }}</div>
+  </div>
+</div>

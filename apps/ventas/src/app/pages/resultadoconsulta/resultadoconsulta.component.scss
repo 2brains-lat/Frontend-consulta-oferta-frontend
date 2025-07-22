@@ -1,0 +1,16 @@
+verisure-breadcrumb {
+  @media only screen and (max-width: 767px) {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    right: 0;
+    z-index: 10;
+  }
+  @media only screen and (min-width: 768px) {
+    top: 79px;
+    left: 23.5vw;
+    width: 75vw;
+    right: 0;
+    z-index: 10;
+  }
+}

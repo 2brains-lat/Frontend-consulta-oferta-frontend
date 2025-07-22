@@ -1,0 +1,8 @@
+<div class="alerta" [ngClass]="[type, size]" [routerLink]="[url]">
+  <div class="left-info">
+    <img class="icon" [src]="urlIcons" alt="" />
+    <div class="info-text">
+      <div class="content-alert" [innerHTML]="label"></div>
+    </div>
+  </div>
+</div>

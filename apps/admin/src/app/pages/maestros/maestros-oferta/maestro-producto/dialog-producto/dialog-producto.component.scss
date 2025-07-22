@@ -1,0 +1,80 @@
+.dialog-productos {
+  font-family: 'Fira Sans' !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+
+  padding: 32px;
+  width: 850px;
+  box-shadow: 0px 0px 16px 0px #ffebef;
+  padding: 32px;
+  gap: 32px;
+  background: #ffffff;
+  border-radius: 16px;
+  border: 1px solid #ffebef;
+  z-index: 100;
+}
+
+.select-items {
+  z-index: 1000;
+}
+
+.btn-modal-close {
+  float: right;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  border-radius: 50%;
+  top: 32px;
+  border: 2px solid #ab192d;
+  right: 32px;
+  color: #ab192d;
+  background: white;
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.modal-productos-title {
+  font-family: 'Fira Sans';
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.modal-productos-subtitle {
+  font-family: 'Fira Sans';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.col-5 {
+  width: 47%;
+  display: inline-block;
+  margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.col-btn {
+  width: 44% !important;
+}
+
+.col-10 {
+  width: 97%;
+  display: inline-block;
+  margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.actions-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}

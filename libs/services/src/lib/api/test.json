@@ -1,0 +1,59 @@
+const inmuebleBda = [
+    {
+      tipoInmuebleId: 1,
+      tipoClienteId: 2,
+      glosa: 'Oficina',
+      verisureId: 110,
+      motorReglasId: 110,
+    },
+    {
+      tipoInmuebleId: 2,
+      tipoClienteId: 2,
+      glosa: 'Oficina en altura',
+      verisureId: 111,
+      motorReglasId: 111,
+    },
+    {
+      tipoInmuebleId: 3,
+      tipoClienteId: 2,
+      glosa: 'Local a pie de calle',
+      verisureId: 130,
+      motorReglasId: 130,
+    },
+    {
+      tipoInmuebleId: 4,
+      tipoClienteId: 2,
+      glosa: 'Local en centro comercial',
+      verisureId: 131,
+      motorReglasId: 131,
+    },
+    {
+      tipoInmuebleId: 5,
+      tipoClienteId: 2,
+      glosa: 'Otros',
+      verisureId: 180,
+      motorReglasId: 180,
+    },
+    {
+      tipoInmuebleId: 8,
+      tipoClienteId: 1,
+      glosa: 'Casa',
+      verisureId: 100,
+      motorReglasId: 100,
+    },
+    {
+      tipoInmuebleId: 9,
+      tipoClienteId: 1,
+      glosa: 'Departamento',
+      verisureId: 120,
+      motorReglasId: 120,
+    },
+    {
+      tipoInmuebleId: 14,
+      tipoClienteId: 1,
+      glosa: 'Otros',
+      verisureId: 180,
+      motorReglasId: 180,
+    },
+  ];
+  

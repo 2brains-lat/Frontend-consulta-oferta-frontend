@@ -1,0 +1,13 @@
+{
+  "folders": [
+    {
+      "path": "../../../../../angularpoc/msal-angular-demo"
+    },
+    {
+      "path": "../../../.."
+    }
+  ],
+  "settings": {
+    "compile-hero.disable-compile-files-on-did-save-code": false
+  }
+}

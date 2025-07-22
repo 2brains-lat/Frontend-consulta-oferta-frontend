@@ -1,0 +1,26 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <a
+      aria-label="Drop down menu Button"
+      style="position: absolute; z-index: 120"
+      routerLink="/"
+    >
+      <span class="brand-icon" style="position: relative; z-index: -1">
+        <object data="assets/icons/verisure-icon.svg"></object>
+      </span>
+    </a>
+    <span class="spacer"></span>
+    <span class="profile-red-icon">
+      <object data="assets/icons/profile-red.svg"></object>
+    </span>
+    <button
+      aria-label="Drop down menu Button"
+      mat-icon-button
+      (click)="onMenuClick($event)"
+    >
+      <span class="menu-icon">
+        <object data="assets/icons/menu-icon.svg"></object>
+      </span>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>

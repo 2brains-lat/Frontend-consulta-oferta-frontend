@@ -1,0 +1,50 @@
+@use '../../../components/card-item/card-item.component.scss' as card;
+@use '../../../../../styles/global-theme.scss' as theme;
+@use '../../../components/alert/alert.component.scss' as alert;
+@use '../../../components/button/button.component.scss' as button;
+verisure-screen-resumen {
+  .screen-resumen-content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  verisure-button {
+    @include button.VerisureButton(theme.$my-theme);
+  }
+  verisure-card-item {
+    @include card.VerisureCardItem(theme.$my-theme);
+    & [card-details] {
+      /* body1/regular */
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1.1rem;
+      line-height: 24px;
+      color: #636466;
+      padding-bottom: 11px;
+    }
+    & > div {
+      /* Secondary/w */
+
+      background: #ffffff;
+      /* Secondary/200 */
+
+      border: 1px solid #dcddde;
+      border-radius: 16px;
+    }
+  }
+  verisure-alert {
+    @include alert.VerisureAlert(theme.$my-theme);
+    .alerta {
+      padding: 3px 10px;
+
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 17px;
+      display: flex;
+      align-items: center;
+    }
+  }
+}

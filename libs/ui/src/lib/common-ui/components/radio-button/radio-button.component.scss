@@ -1,0 +1,147 @@
+@use '../card-emphasis/card-emphasis.component.scss' as card;
+
+@mixin VerisureRadioButton($theme) {
+  $my-colors: map-get($theme, 'color');
+  $my-custom-colors: map-get($theme, 'customcolors');
+  $my-primary: map-get($my-colors, 'primary');
+  $my-fontSizes: map-get($theme, 'fontSize');
+
+  display: block;
+  padding-bottom: 10px;
+
+  mat-label {
+    color: rgba(0, 0, 0, 0.6);
+    padding-bottom: 10px;
+    font-family: 'Fira Sans' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: map-get($my-fontSizes, 'md') !important;
+  }
+  label,
+  p {
+    font-family: 'Fira Sans' !important;
+    font-style: normal !important;
+    font-weight: 400 !important;
+    font-size: map-get($my-fontSizes, 'md') !important;
+  }
+  .mat-mdc-radio-checked {
+    color: map-get($my-primary, 500) !important;
+    .mdc-radio__inner-circle {
+      transform: scale(0.37) !important;
+      -webkit-transform: scale(0.37) !important;
+      -moz-transform: scale(0.37) !important;
+      -ms-transform: scale(0.37) !important;
+      -o-transform: scale(0.37) !important;
+    }
+    .mat-mdc-radio-button .mdc-form-field,
+    mdc-radio,
+    .mat-mdc-radio-button,
+    .mat-mdc-radio-button .mdc-radio,
+    .mat-mdc-radio-button {
+      color: map-get($my-primary, 500) !important;
+    }
+  }
+  .mdc-radio__outer-circle {
+    border-width: 1px;
+  }
+  .mdc-form-field {
+    width: 100%;
+    label {
+      height: 40px;
+      width: 100%;
+      display: flex;
+      justify-items: center;
+      text-align: left;
+      align-items: center;
+      flex-direction: row;
+      align-content: center;
+      justify-content: flex-start;
+      position: relative;
+      z-index: 10;
+    }
+  }
+
+  #kit-selector {
+    .mdc-radio {
+      padding: 7px;
+      margin: 0px 4px;
+      -webkit-transform: scale(0.98);
+      -moz-transform: scale(0.98);
+      -ms-transform: scale(0.98);
+      -o-transform: scale(0.98);
+    }
+    div.kit-container {
+      display: flex !important;
+      flex-direction: row;
+      align-content: center;
+      justify-content: center;
+      align-items: center;
+
+      object {
+        position: relative;
+        z-index: -1;
+        height: 32px;
+        width: 30px;
+        padding: 5px 10px;
+        border-radius: 75px;
+        background: #ffebef;
+        margin: 0px 15px 0px 0px;
+        border: 1px solid #ff527500;
+      }
+      object.active {
+        /* Primary/300 */
+
+        border: 1px solid #ff5274;
+      }
+      & .kit-content,
+      & .kit-content:hover {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        .title {
+          /* body1/bold */
+          font-family: 'Fira Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 1.1rem;
+          line-height: 24px;
+          /* or 150% */
+          /* Secondary/700 */
+          color: #262626 !important;
+          //
+        }
+        .description {
+          /* body1/regular */
+          font-family: 'Fira Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 1rem;
+          line-height: 14px;
+          /* identical to box height, or 150% */
+          /* Secondary/700 */
+          color: #262626 !important;
+        }
+        .title,
+        .description {
+          display: -webkit-box;
+          overflow: hidden;
+          white-space: normal;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          &.title {
+            -webkit-line-clamp: 2;
+          }
+          &.active {
+            font-weight: 800;
+          }
+        }
+      }
+    }
+
+    @include card.VerisureCardEmphasis($theme);
+    .emphasis-container {
+      padding: 8px 1px !important;
+    }
+  }
+}

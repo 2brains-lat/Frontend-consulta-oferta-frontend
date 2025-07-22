@@ -1,0 +1,18 @@
+version: '3.3'
+services:
+  main:
+    build:
+      context: ./
+      dockerfile: docker/Dockerfile
+    restart: always
+    ports:
+      - 8080:8080
+    volumes:
+      - ./dist/apps/ventas:/usr/share/nginx/html/ventas
+      - ./dist/apps/admin:/usr/share/nginx/html/admin
+      - ./dist/apps/marketing:/usr/share/nginx/html/marketing
+      - ./dist/apps/back-office:/usr/share/nginx/html/back-office
+# networks:
+#   default:
+#     name: verisure-network
+    #external: true

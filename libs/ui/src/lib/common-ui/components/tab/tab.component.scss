@@ -1,0 +1,136 @@
+@use '../../../../styles/global-theme.scss' as mytheme;
+
+@mixin VerisureTabButton($theme) {
+  $my-colors: map-get($theme, 'color');
+  $my-custom-colors: map-get($theme, 'customcolors');
+  $my-primary: map-get($my-colors, 'primary');
+  $my-secondary: map-get($my-colors, 'accent');
+  $my-fontSizes: map-get($theme, 'fontSize');
+  overflow-x: auto;
+  mat-button-toggle-group.subtab {
+    border: 0px !important;
+    border-bottom: 1px solid map-get($my-secondary, 200) !important;
+    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content,
+    .mat-button-toggle-label-content {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 17px;
+      /* identical to box height */
+      text-align: center;
+      /* Secondary/700 */
+      color: #262626;
+      padding: 4px 16px;
+    }
+
+    & > mat-button-toggle {
+      background-color: map-get($my-secondary, 100) !important;
+      border-left: 0px !important;
+    }
+    & > mat-button-toggle:first-child {
+      border-radius: 16px 0px 0px 0px;
+    }
+    & > mat-button-toggle:last-child {
+      border-radius: 0px 16px 0px 0px;
+    }
+    & > mat-button-toggle:last-child:first-child {
+      border-radius: 16px 16px 0px 0px;
+      -webkit-border-radius: 16px 16px 0px 0px;
+      -moz-border-radius: 16px 16px 0px 0px;
+      -ms-border-radius: 16px 16px 0px 0px;
+      -o-border-radius: 16px 16px 0px 0px;
+    }
+    mat-button-toggle.mat-button-toggle-disabled {
+      border-bottom: 1px solid map-get($my-secondary, 400) !important;
+      background-color: map-get($my-secondary, 100) !important;
+
+      span.mat-button-toggle-label-content {
+        color: grey !important;
+      }
+    }
+    .mat-button-toggle-checked,
+    .mat-mdc-focus-indicator
+      .mdc-tab--active
+      .ng-star-inserted
+      .mdc-tab-indicator--active {
+      border-bottom: 1px solid map-get($my-primary, 500) !important;
+      background: map-get($my-primary, 100) !important ;
+    }
+  }
+  mat-button-toggle-group.tab {
+    /* body1/regular */
+    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content,
+    .mat-button-toggle-label-content {
+      font-family: 'Fira Sans' !important;
+      font-style: bold !important;
+      font-weight: 400 !important;
+      font-size: map-get($my-fontSizes, 'md') !important;
+      line-height: 24px !important;
+      /* identical to box height, or 150% */
+      padding: 4px 12px;
+      /* Secondary/700 */
+      color: #262626;
+    }
+
+    & {
+      z-index: 0;
+      border-radius: 7px;
+      border: solid 0px #26262600 !important;
+    }
+
+    & > mat-button-toggle:not(:first-child),
+    & > mat-button-toggle:not(:last-child) {
+      border-radius: 0px;
+      border: 1px solid map-get($my-secondary, 700);
+      border-left: solid 1px #e0e0e0;
+      border-right: 1px #e0e0e000;
+    }
+    & > mat-button-toggle:first-child {
+      border-radius: 8px 0px 0px 8px;
+      border: 1px solid map-get($my-secondary, 700);
+
+      border-left: solid 1px map-get($my-secondary, 700);
+      border-right: solid 1px #e0e0e000;
+    }
+    & > mat-button-toggle:last-child {
+      border-radius: 0px 8px 8px 0px;
+      border: 1px solid map-get($my-secondary, 700);
+      border-left: solid 1px #e0e0e0;
+      -webkit-border-radius: 0px 8px 8px 0px;
+      -moz-border-radius: 0px 8px 8px 0px;
+      -ms-border-radius: 0px 8px 8px 0px;
+      -o-border-radius: 0px 8px 8px 0px;
+    }
+    & > mat-button-toggle:last-child:first-child {
+      border-radius: 8px;
+      -webkit-border-radius: 8px;
+      -moz-border-radius: 8px;
+      -ms-border-radius: 8px;
+      -o-border-radius: 8px;
+    }
+    mat-button-toggle.mat-button-toggle-disabled {
+      border: 1px solid map-get($my-secondary, 400) !important;
+      background-color: map-get($my-secondary, 100) !important;
+
+      span.mat-button-toggle-label-content {
+        color: grey !important;
+      }
+    }
+    .mat-button-toggle-checked,
+    .mat-mdc-focus-indicator
+      .mdc-tab--active
+      .ng-star-inserted
+      .mdc-tab-indicator--active {
+      border: 1px solid map-get($my-primary, 500) !important;
+    }
+  }
+  .mat-button-toggle-checked,
+  .mat-mdc-focus-indicator
+    .mdc-tab--active
+    .ng-star-inserted
+    .mdc-tab-indicator--active {
+    z-index: 10 !important;
+    background: map-get($my-primary, 100) !important ;
+  }
+}

@@ -1,0 +1,16 @@
+<div>
+  <div class="message-content">
+    <div class="message-content-icon">
+      <object type="image/svg+xml" [data]="iconSvgUrl | safe"></object>
+    </div>
+    <div class="message-content-title" [innerHTML]="textContent.title"></div>
+    <div
+      class="message-content-subtitle"
+      [innerHTML]="textContent.content"
+    ></div>
+  </div>
+  <!-- button -->
+  <verisure-button (onClick)="onClickButton()" variant="primary" size="medium">
+    <p content>{{ buttonContent.label }}</p>
+  </verisure-button>
+</div>

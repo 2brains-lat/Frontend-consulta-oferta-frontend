@@ -1,0 +1,122 @@
+@use '../../../../../styles/global-theme.scss' as theme;
+@use '../../../components/alert/alert.component.scss' as alert;
+@use '../../../components/button/button.component.scss' as button;
+@use '../../../components/card-item/card-item.component.scss' as card;
+
+verisure-signatures {
+  verisure-alert {
+    @include alert.VerisureAlert(theme.$my-theme);
+    .alerta {
+      padding: 3px 10px;
+
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 17px;
+      display: flex;
+      align-items: center;
+    }
+  }
+  verisure-card-item {
+    @include card.VerisureCardItem(theme.$my-theme);
+    & [card-details] {
+      /* body1/regular */
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1.1rem;
+      line-height: 24px;
+      color: #636466;
+      padding-bottom: 11px;
+    }
+    & > div {
+      /* Secondary/w */
+
+      background: #ffffff;
+      /* Secondary/200 */
+
+      border: 1px solid #dcddde;
+      border-radius: 16px;
+    }
+  }
+  verisure-button {
+    @include button.VerisureButton(theme.$my-theme);
+  }
+  .firmantes-title {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 8px;
+    padding-bottom: 16px;
+    line-height: 17px;
+  }
+  .card-firmantes {
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px;
+    gap: 16px;
+
+    width: auto;
+    height: auto;
+    background: #ffffff;
+    border: 1px solid #fafafa;
+    border-radius: 16px;
+  }
+  .card-firmante-sub-content {
+    /* body1/regular */
+    margin-bottom: 16px;
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    line-height: 24px;
+    min-height: 16px;
+    padding: 16px 0px;
+    border-bottom: 1px solid #e4e4e4;
+    color: #636466;
+  }
+  .card-firmantes-content-result {
+    gap: 4px;
+    width: -webkit-fill-available;
+    display: flex;
+    flex-direction: column;
+    .card-firmantes-sub-title {
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+      color: #262626;
+    }
+
+    & .card-apoderados {
+      display: flex;
+      gap: 16px;
+      justify-content: flex-start;
+      font-family: 'Fira Sans';
+      align-items: center;
+      font-weight: 400;
+      color: #636466;
+
+      object {
+        padding: 8px;
+        background: #d246460d;
+        border-radius: 64px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        height: -webkit-fill-available;
+      }
+    }
+  }
+}

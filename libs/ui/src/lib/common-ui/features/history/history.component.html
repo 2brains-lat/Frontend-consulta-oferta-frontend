@@ -1,0 +1,239 @@
+<div style="max-width: 100%">
+  <verisure-input
+    [control]="$any(formHistory.controls['rut'])"
+    type="search"
+    label="Ingresa Rut de Cliente"
+    placeholder="Ej: 19.456.789-0"
+    #searchHistory
+    width="100%"
+    (currentSearch)="getNewSearch($event)"
+  ></verisure-input>
+
+  <div class="container-history-result">
+    <div class="tabs-filters">
+      <verisure-button
+        type="submit"
+        (onClick)="openFilter($event)"
+        variant="ghost"
+        size="medium"
+        [matBadgeHidden]="keywordsFilters.length <= 0"
+        [matBadge]="keywordsFilters.length"
+        matBadgePosition="after"
+        matBadgeColor="primary"
+      >
+        <p content>Filtrar</p>
+        <object svg data="/assets/icons/filter-icon.svg"></object>
+      </verisure-button>
+
+      <verisure-button
+        type="submit"
+        variant="ghost"
+        size="medium"
+        [disabled]="keywordsFilters.length <= 0"
+        (onClick)="cleanFilters($event)"
+      >
+        <p content>Limpiar Filtro</p>
+        <object
+          *ngIf="keywordsFilters.length <= 0"
+          svg
+          data="assets/icons/trash-disabled-icon.svg"
+        ></object>
+        <object
+          *ngIf="keywordsFilters.length > 0"
+          svg
+          data="assets/icons/icon-delete-button-active.svg"
+        ></object>
+      </verisure-button>
+    </div>
+
+    <div class="history-counts" *ngIf="keywordsFilters.length === 0">
+      {{
+        myResults.length > 0
+          ? myResults.length === 1
+            ? myResults.length + ' resultado'
+            : myResults.length + ' resultados'
+          : 'Sin resultados'
+      }}
+    </div>
+
+    <div class="chips-filters-container" *ngIf="keywordsFilters.length > 0">
+      <mat-chip-grid
+        #chipGrid
+        aria-label="Enter keywords"
+        [formControl]="$any(formControlChips.controls['chipsFilters'])"
+      >
+        <mat-chip-row
+          *ngFor="let keyword of keywordsFilters"
+          (removed)="removeChipsFilters(keyword)"
+          style="background: #004857"
+        >
+          <span style="color: #fff">
+            {{ keyword }}
+          </span>
+          <button matChipRemove aria-label="'remove ' + keyword">
+            <img
+              src="assets/icons/delete-chip-icon.svg"
+              width="15px"
+              height="15px"
+              alt=""
+              svg
+            />
+          </button>
+        </mat-chip-row>
+      </mat-chip-grid>
+    </div>
+
+    <verisure-alert
+      class="alert-history"
+      *ngIf="myResults.length === 0 && formHistory.controls['rut'].value !== ''"
+      [label]="'Este RUT no ha sido consultado'"
+      [type]="'information'"
+    ></verisure-alert>
+
+    <div *ngIf="myResults.length > 0">
+      <verisure-card-history
+        *ngFor="let result of myResults; let i = index"
+        [content]="result"
+        (toFullOffer)="getIdFullOffer($event)"
+        (toResumeOffer)="getIdResumeOffer($event)"
+      >
+      </verisure-card-history>
+    </div>
+
+    <!-- CARGAR MAS OPCIONES -->
+    <div *ngIf="currentPage < totalPage" class="more-results">
+      <span *ngIf="!isLoading" class="load-more-link" (click)="loadMoreOrLess()"
+        >Cargar más clientes</span
+      >
+      <span *ngIf="isLoading" class="loader"></span>
+    </div>
+  </div>
+</div>
+
+<mat-sidenav
+  filternav
+  #filternav
+  mode="push"
+  style="width: 270px; position: fixed; z-index: 10000"
+  position="end"
+>
+  <div style="width: 270px; position: fixed; z-index: 10000">
+    <verisure-sidebar style="width: auto">
+      <div
+        header
+        class="header-sidebar"
+        style="justify-content: flex-start"
+        (click)="
+          titleHeadMenuFilter !== 'Filtrar por'
+            ? displaySubMenuFilter('Filtrar por')
+            : openFilter($event)
+        "
+      >
+        <span style="padding: 8px">
+          <object
+            style="padding: 4px; pointer-events: none"
+            data="assets/icons/icon-left-arrow.svg"
+            type=""
+          ></object>
+        </span>
+        <span
+          style="
+            font-family: 'Fira Sans';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+          "
+          >{{ titleHeadMenuFilter }}</span
+        >
+      </div>
+      <verisure-list-menu
+        listItems
+        (toggle)="filternav.toggle()"
+        [items]="filterItems"
+        (subMenuFilter)="displaySubMenuFilter($event)"
+        [hidden]="titleHeadMenuFilter !== 'Filtrar por'"
+      ></verisure-list-menu>
+
+      <div
+        *ngIf="listClients.length > 0"
+        listItems
+        [hidden]="titleHeadMenuFilter !== 'Tipo Cliente'"
+        style="max-width: 100%"
+      >
+        <form style="padding-top: 20px">
+          <verisure-radio-button
+            @enterState
+            label=""
+            [control]="$any(form.controls['client'])"
+            [items]="listClients"
+            gap="10px"
+          ></verisure-radio-button>
+        </form>
+      </div>
+
+      <div
+        *ngIf="listResources.length > 0"
+        listItems
+        [hidden]="titleHeadMenuFilter !== 'Tipo Recurso'"
+        style="max-width: 100%"
+      >
+        <form style="padding-top: 20px">
+          <verisure-radio-button
+            @enterState
+            label=""
+            [control]="$any(form.controls['resource'])"
+            [items]="listResources"
+            gap="10px"
+          ></verisure-radio-button>
+        </form>
+      </div>
+
+      <div
+        listItems
+        [hidden]="titleHeadMenuFilter !== 'Periodo de tiempo'"
+        style="max-width: 100%"
+      >
+        <form style="padding-top: 20px">
+          <verisure-radio-button
+            @enterState
+            label=""
+            [control]="$any(form.controls['timePeriod'])"
+            [items]="listTimePeriod"
+            gap="10px"
+          ></verisure-radio-button>
+        </form>
+      </div>
+
+      <div footer style="height: max-content; padding-top: 8px">
+        <div
+          style="
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 12px;
+            justify-content: center;
+            align-content: center;
+          "
+        >
+          <verisure-button
+            type="submit"
+            variant="accent"
+            size="medium"
+            (onClick)="applyFilters($event, titleHeadMenuFilter)"
+          >
+            <p content>Aplicar filtro</p>
+          </verisure-button>
+          <verisure-button
+            type="submit"
+            variant="ghost"
+            size="medium"
+            (onClick)="cleanFilters($event)"
+          >
+            <p content style="color: #000">Limpiar filtro</p>
+            <object svg data="assets/icons/trash-icon.svg"></object>
+          </verisure-button>
+        </div>
+      </div>
+    </verisure-sidebar>
+  </div>
+</mat-sidenav>

@@ -1,0 +1,84 @@
+<verisure-resultadoconsulta-layout [resultStatus]="dataStatus">
+  <!-- header / bread-->
+
+  <verisure-breadcrumb
+    header
+    [items]="breadcrumbsItems"
+    (tabChange)="breadSelectedLevel = $event"
+    [initTab]="breadSelectedLevel"
+  >
+  </verisure-breadcrumb>
+
+  <!-- info content  -->
+  <div
+    static-content
+    *ngIf="!breadSelectedLevel.includes('3') && clientData && mixClientData"
+  >
+    <verisure-offers-commons-components
+      [resultCardInfo]="{
+        id: offerData.id,
+        delegation: offerData.delegacion,
+        createdDate: offerData.fechaDeCreacion,
+        expiredDate: offerData.fechaDeVencimiento
+      }"
+      [userCardInfo]="clientData"
+      [mixUserInfo]="mixClientData"
+    >
+    </verisure-offers-commons-components>
+  </div>
+
+  <!-- dinamic content -->
+  <ng-container
+    *ngIf="
+      kitList !== undefined &&
+      readMode !== undefined &&
+      priceSelected !== undefined &&
+      breadSelectedLevel.includes('0')
+    "
+    dynamic-content
+  >
+    <verisure-screen-kitinicial
+      (priceSelectedOutPut)="priceSelected = $event"
+      [productsList]="kitList"
+      (paycodeSelected)="paycodeSelected = $event"
+      [paycodeSelectedValue]="paycodeSelected"
+      (authorizationSelected)="authorizationSelected = $event"
+      [authorizationSelectedValue]="authorizationSelected"
+      [priceSelected]="priceSelected"
+      [readMode]="readMode"
+      [offerHavePacks]="packList.length > 0"
+    >
+    </verisure-screen-kitinicial>
+  </ng-container>
+  <verisure-screen-descuentos
+    *ngIf="breadSelectedLevel.includes('1')"
+    dynamic-content
+    [readMode]="readMode"
+    [actualDiscount]="priceSelectedInfo?.datosAdicionales"
+    [cuponState]="cuponCurrentState"
+    (callback)="cuponCurrentState = $event"
+  >
+  </verisure-screen-descuentos>
+  <verisure-screen-packs
+    *ngIf="breadSelectedLevel.includes('2')"
+    dynamic-content
+    [packsInfo]="packList"
+  ></verisure-screen-packs>
+
+  <verisure-screen-resumen
+    *ngIf="resumenData && breadSelectedLevel.includes('3')"
+    dynamic-content
+    [rut]="clientData.rut"
+    [infoOfertaOfrecida]="resumenData"
+  >
+  </verisure-screen-resumen>
+  <!-- footer -->
+  <verisure-next-step
+    [actualLevel]="breadSelectedLevel"
+    lastLevel="3"
+    (toNextStep)="breadSelectedLevel = $event"
+    (getPdfBase64)="getPdf()"
+    [isDisabled]="priceSelected === null || !(priceSelected.length > 0)"
+    footer
+  ></verisure-next-step>
+</verisure-resultadoconsulta-layout>

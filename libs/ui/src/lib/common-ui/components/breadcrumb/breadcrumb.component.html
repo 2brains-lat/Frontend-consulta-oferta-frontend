@@ -1,0 +1,25 @@
+<mat-tab-group
+  class="breadcrumb-container"
+  animationDuration="200ms"
+  fitInkBarToContent
+  [disableRipple]="true"
+  [selectedIndex]="initTab"
+  (selectedTabChange)="tabSelected($event)"
+  id="breadcrumb-tabs"
+>
+  {{ initTab }}
+  <ng-container *ngFor="let item of items">
+    <mat-tab [id]="item.id" [disabled]="item.disabled && item.disabled">
+      <ng-template mat-tab-label>
+        {{ item.label }}
+        <div *ngIf="item.id !== (items.length - 1).toString()">
+          <img
+            class="icon-tab"
+            [src]="initTab === item.id ? urlArrowIconActive : urlArrowIcon"
+            alt=""
+          />
+        </div>
+      </ng-template>
+    </mat-tab>
+  </ng-container>
+</mat-tab-group>

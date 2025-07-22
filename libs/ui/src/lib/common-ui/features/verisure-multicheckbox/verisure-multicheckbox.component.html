@@ -1,0 +1,10 @@
+<span class="example-list-section">
+  <div class="label-category">{{ label }}</div>
+  <ul *ngIf="_catalog.length > 0">
+    <li *ngFor="let subtask of _catalog">
+      <mat-checkbox [(ngModel)]="subtask.active" (ngModelChange)="changeData()">
+        {{ subtask[labelOption] }}
+      </mat-checkbox>
+    </li>
+  </ul>
+</span>

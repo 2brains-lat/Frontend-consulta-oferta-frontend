@@ -1,0 +1,44 @@
+<form>
+  <verisure-input
+    [control]="$any(form.controls['rut'])"
+    type="text"
+    label="Rut Cliente"
+    placeholder="Ej: 19.456.789-k"
+    #input1
+    width="100%"
+  >
+  </verisure-input>
+  <!-- 19.256.782-3 -->
+  <verisure-radio-button
+    @enterState
+    label="Escoge tipo de cliente"
+    *ngIf="screenWidth >= 768 ? true : form.get('rut')?.valid"
+    [control]="$any(form.controls['tipoCliente'])"
+    [items]="tipoCliente"
+  ></verisure-radio-button>
+
+  <verisure-input
+    type="search-select"
+    label="Ingresa una comuna"
+    placeholder="Ej: Maipu"
+    [disabled]="!form.controls['tipoCliente'].valid"
+    width="100%"
+    (currentSearch)="comunaSelectId = $event"
+    [suggestionSelectionValue]="comunaSelectId"
+  >
+    <mat-option options *ngFor="let comuna of comunas" [value]="comuna.value">{{
+      comuna.label
+    }}</mat-option>
+  </verisure-input>
+</form>
+<div class="next-button-div">
+  <verisure-button
+    type="submit"
+    [disabled]="!form.valid"
+    (onClick)="onSubmit()"
+    variant="primary"
+    size="large"
+  >
+    <p content>Siguiente</p>
+  </verisure-button>
+</div>

@@ -1,0 +1,264 @@
+.backgroundImage {
+  background-image: url(/assets/background.webp);
+  height: 100vh;
+  background-size: cover;
+}
+
+body {
+  background: black;
+  height: 100vh;
+
+  margin: 0;
+  box-sizing: content-box;
+}
+header {
+  height: 70px;
+  width: 100%;
+  padding-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  gap: 30px;
+}
+.welcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  text-align: center;
+}
+h5,
+h2.title {
+  color: white;
+  /* body1/regular */
+  font-family: 'Fira Sans';
+  font-style: normal;
+  text-align: center;
+}
+
+h2 {
+  font-weight: 600;
+  font-size: 48px;
+  line-height: 58px;
+  /* Secondary/w */
+  margin: 0px !important;
+  color: #ffffff;
+}
+h5 {
+  font-weight: 300;
+}
+
+header > img {
+  height: 44px;
+}
+
+button {
+  /* Primary/400 */
+  font-family: 'Fira Sans';
+  font-style: normal;
+  text-align: center;
+  font-weight: 600;
+  cursor: pointer;
+  width: 280px;
+  color: white;
+  height: 40px;
+  border: none;
+  background: #eb002f;
+  border-radius: 32px;
+}
+
+button:hover {
+  background: #ab192d;
+}
+button:target,
+button:focus-visible {
+  background: #520010;
+}
+
+#popup {
+  display: block;
+  visibility: visible;
+  background: rgba(0, 0, 0, 0.151);
+  margin: auto;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  display: flex;
+  top: 0px;
+  right: 0px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-card {
+  position: relative;
+  width: 270px;
+  /* Secondary/w */
+  display: flex;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 18px;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 36px;
+  flex-direction: column;
+}
+.popup-card-header {
+  /* body1/bold */
+  text-align: left !important;
+  font-family: 'Fira Sans';
+  width: 100%;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+
+  /* Secondary/600 */
+
+  color: #636466;
+}
+
+.popup-card-title {
+  /* body1/regular */
+
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  /* or 150% */
+
+  text-align: center;
+
+  /* Secondary/500 */
+
+  color: #8a8c8e;
+}
+.tag {
+  position: fixed;
+  bottom: 20px;
+  width: -webkit-fill-available;
+  align-self: center;
+  text-align: center;
+  color: #ffffff91;
+  font-size: 12px;
+  font-weight: 600;
+}
+.popup-card-description {
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+
+  /* Secondary/500 */
+
+  color: #8a8c8e;
+}
+
+.displaynone {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.disabled-login-button {
+  background: #dcddde;
+  pointer-events: none;
+}
+.svg-logo-white,
+.svg-logo,
+.picture-on-desktop {
+  display: none;
+}
+
+@media only screen and (min-width: 768px) {
+  .svg-logo-white {
+    display: block;
+    padding-bottom: 64px;
+  }
+  .backgroundImage {
+    background-image: url(/assets/login-tablet-verisure-background.webp);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    display: flex;
+  }
+  .subtitle {
+    font-family: Fira Sans;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+  .card {
+    margin: auto;
+    height: auto;
+    width: 430px;
+  }
+  button {
+    width: -webkit-fill-available;
+  }
+  .welcome {
+    width: auto;
+  }
+  h5,
+  h2.title {
+    /* body1/regular */
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 64px;
+    line-height: 72px;
+    /* or 112% */
+    text-align: center;
+    /* Secondary/w */
+    color: #ffffff;
+  }
+  @media only screen and (min-width: 1024px) {
+    .tag {
+      color: #262626 !important;
+    }
+    .login-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+    }
+    .backgroundImage {
+      background: white;
+    }
+    .svg-logo-white {
+      display: none;
+    }
+    .svg-logo {
+      display: block;
+      padding-bottom: 64px;
+    }
+    .picture-on-desktop {
+      display: block;
+      background-image: url(/assets/login-tablet-verisure-background.webp);
+      background-position: left;
+      background-size: cover;
+      border-radius: 0px 32px 32px 0px;
+    }
+    .welcome,
+    h2.title,
+    h5.subtitle {
+      color: #262626 !important;
+    }
+  }
+}

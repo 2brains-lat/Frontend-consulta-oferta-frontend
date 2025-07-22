@@ -1,0 +1,272 @@
+@use '../../../../../styles/global-theme.scss' as theme;
+@use '../../../components/button/button.component.scss' as btn;
+@use '../../../components/input/input.component.scss' as input;
+@use '../../../components/radio-button/radio-button.component.scss' as radio;
+@use '../../../components/tab/tab.component.scss' as tab;
+@use '../../../components/card-emphasis/card-emphasis.component.scss' as
+  emphasis;
+@use '../../../components/alert/alert.component.scss' as alert;
+@use '../../../components/card-product/card-product.component.scss' as card;
+@use '../../../components/tiny-card/tiny-card.component.scss' as tinyCard;
+@use '../../../components/button/button.component.scss' as button;
+
+.kitinicial {
+  verisure-button {
+    @include button.VerisureButton(theme.$my-theme);
+  }
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  $my-colors: map-get(theme.$my-theme, 'color');
+  $my-custom-colors: map-get(theme.$my-theme, 'customcolors');
+  $my-primary: map-get($my-colors, 'primary');
+  $my-fontSizes: map-get(theme.$my-theme, 'fontSize');
+
+  .only-on-desktop {
+    @media only screen and (max-width: 767px) {
+      & {
+        display: none !important;
+      }
+    }
+    @media only screen and (min-width: 768px) {
+      & {
+        display: block;
+      }
+    }
+  }
+  .card-container {
+    background: white;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    padding: 15px 20px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+
+    & > span {
+      padding-bottom: 4px;
+    }
+  }
+
+  mat-radio-group {
+    gap: 7px;
+    padding-top: 7px;
+    display: flex;
+    flex-direction: column;
+    &.cascade-pricing {
+      @media only screen and (min-width: 768px) {
+        & {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: auto;
+        }
+      }
+    }
+
+    .card-content {
+      padding: 0px 20px 0px 5px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      & .card-content-title {
+        /* body1/regular */
+
+        font-family: 'Fira Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1.2rem;
+        line-height: 24px;
+        /* identical to box height, or 150% */
+
+        display: flex;
+        align-items: center;
+
+        /* Secondary/700 */
+
+        color: #262626;
+      }
+      & .card-content-price {
+        /* body2/bold */
+
+        font-family: 'Fira Sans';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 1rem;
+        line-height: 16px;
+        /* or 114% */
+
+        display: flex;
+        align-items: center;
+        text-align: right;
+
+        /* Secondary/700 */
+
+        color: #262626;
+      }
+    }
+  }
+
+  .price-wrapper {
+    display: flex;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    min-width: 98%;
+    .price-content {
+      display: flex;
+      flex-direction: row;
+      cursor: pointer;
+      justify-content: space-between;
+      align-items: flex-start !important;
+      width: 100%;
+      height: -webkit-fill-available;
+      min-height: 64px;
+      padding: 3px;
+      /* Secondary/700 */
+      color: #262626;
+      & > div {
+        display: flex;
+        min-width: 33%;
+        height: 100%;
+        &:not(:last-child) {
+          border-right: 1px #dcddde solid;
+        }
+        flex-direction: column !important;
+        font-family: 'Fira Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-content: center !important;
+        align-items: center !important;
+        &:nth-child(2) {
+          padding: 0 16px;
+          min-width: 28%;
+        }
+        &:nth-child(3) {
+          min-width: 27%;
+          justify-content: center;
+          text-align: center;
+          /* margin: auto; */
+          align-self: center;
+        }
+        div {
+          min-width: 100%;
+          padding: 4px;
+          &:not(:last-child) {
+            border-bottom: 1px #dcddde solid;
+            margin-bottom: 4px;
+          }
+        }
+        .price-amount {
+          align-items: flex-start !important;
+          font-family: 'Fira Sans';
+          font-style: normal;
+
+          font-weight: 700;
+          font-size: 14px;
+          line-height: 16px;
+        }
+      }
+    }
+  }
+  verisure-button {
+    @include btn.VerisureButton(theme.$my-theme);
+  }
+
+  verisure-alert {
+    @include alert.VerisureAlert(theme.$my-theme);
+  }
+
+  verisure-input {
+    @include input.VerisureInputs(theme.$my-theme);
+  }
+
+  verisure-radio-button {
+    @include radio.VerisureRadioButton(theme.$my-theme);
+  }
+
+  verisure-tab {
+    @include tab.VerisureTabButton(theme.$my-theme);
+  }
+
+  .custom-radio {
+    .mdc-radio {
+      display: none !important;
+    }
+  }
+
+  verisure-card-product {
+    @include card.VerisureCardProduct(theme.$my-theme);
+  }
+  .prices-legend {
+    display: flex;
+    width: -webkit-fill-available;
+    flex-direction: row;
+    align-items: center;
+    border-bottom: 1px solid black;
+    padding: 12px 5px;
+    /* gap: 20px; */
+    justify-content: space-around;
+    /* body2/bold */
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 16px;
+    /* identical to box height, or 114% */
+    text-align: center;
+    /* Secondary/600 */
+    color: #636466;
+  }
+  verisure-card-emphasis {
+    @include emphasis.VerisureCardEmphasis(theme.$my-theme);
+    .mat-mdc-radio-checked {
+      color: map-get($my-primary, 500) !important;
+      .mdc-radio__inner-circle {
+        transform: scale(0.37) !important;
+        -webkit-transform: scale(0.37) !important;
+        -moz-transform: scale(0.37) !important;
+        -ms-transform: scale(0.37) !important;
+        -o-transform: scale(0.37) !important;
+      }
+      .mat-mdc-radio-button .mdc-form-field,
+      mdc-radio,
+      .mat-mdc-radio-button,
+      .mat-mdc-radio-button .mdc-radio,
+      .mat-mdc-radio-button {
+        color: map-get($my-primary, 500) !important;
+      }
+    }
+    .mdc-radio__outer-circle {
+      border-width: 1px;
+    }
+  }
+
+  .parent-emphasis {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    padding-top: 0px;
+
+    .title-radio {
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      padding: 0px 0px 8px 0px;
+      border-bottom: 1px solid #bec0c2;
+      color: #262626;
+      font-size: 16px;
+      font-family: 'Fira Sans', sans-serif;
+      // margin-bottom: 8px;
+    }
+  }
+  verisure-tiny-card {
+    @include tinyCard.VerisureTinyCard(theme.$my-theme);
+  }
+}

@@ -1,0 +1,184 @@
+<div
+  *ngIf="!detailScreenStatus"
+  style="padding: 32px; display: flex; flex-direction: column; gap: 24px"
+>
+  <div
+    style="
+      /* h4/bold */
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 26px;
+      color: #262626;
+    "
+  >
+    Auditoría
+  </div>
+  <verisure-tab
+    [items]="tabSelectors"
+    [selectedItemName]="currentTab"
+    tab-form
+    (onChange)="currentTab = $event"
+  >
+  </verisure-tab>
+  <div>
+    <ng-container *ngIf="currentTab === 'oferta'">
+      <verisure-input
+        label="Ingresa Número de Oferta para nueva búsqueda"
+        type="search"
+        placeholder="ABD-343"
+        (currentSearch)="onSubmit($event)"
+      ></verisure-input>
+    </ng-container>
+    <ng-container *ngIf="currentTab === 'rut'">
+      <verisure-input
+        label="Ingresa Número de RUT para nueva búsqueda"
+        type="search"
+        [control]="$any(form.controls['rut'])"
+        placeholder="Ej: 12.345.678-9"
+        (currentSearch)="onSubmit($event)"
+      ></verisure-input>
+    </ng-container>
+    <verisure-alert
+      *ngIf="alertStatus"
+      @alertAnimation
+      size="md"
+      [label]="alertStatus.message"
+      type="error"
+    ></verisure-alert>
+
+    <ng-container *ngIf="currentTab === 'oferta'">
+      <verisure-offert-review
+        #offerRef
+        dynamic-content
+        [dataStatus]="dataStatus"
+        [kitList]="kitList"
+        [equifax]="equifax"
+        [cuponCurrentState]="cuponCurrentState"
+        [priceSelectedInfo]="priceSelectedInfo"
+        [clientData]="clientData"
+        [seller]="seller"
+        [offerData]="offerData"
+        [infoOfertaOfrecida]="resumenData"
+        [packList]="packList"
+        [priceSelected]="priceSelected"
+      ></verisure-offert-review>
+    </ng-container>
+
+    <div
+      *ngIf="
+        currentTab === 'rut' &&
+        offersByRutResponse &&
+        offersByRutResponse.usuario
+      "
+    >
+      <div>
+        <h5>Resultados de la ofertas del rut consultado</h5>
+
+        <div style="display: flex; flex-direction: column; gap: 16px">
+          <verisure-head-collapsible
+            actionType="header-uncollapsible"
+            [name]="capitalizeFullName(offersByRutResponse.usuario.name ?? '')"
+            [rut]="formatearRut(offersByRutResponse.usuario.rut ?? '')"
+            [type]="
+              offersByRutResponse.usuario.type === 'Residencial'
+                ? 'Primera Categoría'
+                : ''
+            "
+          ></verisure-head-collapsible>
+          <ng-container *ngIf="offersByRutResponse">
+            <div
+              class="card-container-offer"
+              *ngFor="let offer of offersByRutResponse.ofertas"
+            >
+              <div class="card-title-offer">ID Oferta: {{ offer.id }}</div>
+              <div class="card-dates-offer">
+                <verisure-tiny-card
+                  icon="icon-time-mini-alert"
+                  [label]="
+                    'Consultado el: ' + formatDate(offer.fechaCreacion, true)
+                  "
+                  width="fit-content"
+                ></verisure-tiny-card>
+              </div>
+              <div class="card-footer-offer">
+                <verisure-button
+                  (onClick)="openDetailsOfOneOffer(offer.id)"
+                  type="button"
+                  variant="ghost"
+                  width="auto"
+                >
+                  <p content>Mostrar detalles</p>
+                  <object svg data="assets/icons/arrow-right-red.svg"></object>
+                </verisure-button>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+        <div
+          *ngIf="
+            paginationInfo &&
+            (paginationInfo?.pagina ?? 0) !==
+              (paginationInfo?.totalPaginas ?? 0)
+          "
+          class="more-results"
+        >
+          <span
+            *ngIf="!loadMoreSpinner"
+            class="load-more-link"
+            (click)="getMoreOffers()"
+            >Cargar más clientes</span
+          >
+          <span *ngIf="loadMoreSpinner" class="loader"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="detailsScreen" *ngIf="detailScreenStatus">
+  <a
+    (click)="closeDetailsOfOneOffer()"
+    style="
+      font-family: Fira Sans;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+      padding: 16px;
+      width: max-content;
+      margin-right: auto;
+      display: flex;
+      cursor: pointer;
+      align-items: center;
+    "
+  >
+    <object
+      style="
+        width: 24px;
+        height: 24px;
+        /* padding: 10px; */
+        cursor: none;
+        transform: rotateY(160deg);
+      "
+      svg
+      data="assets/icons/arrow-right-red.svg"
+    ></object>
+    <span> Volver</span>
+  </a>
+
+  <verisure-offert-review
+    dynamic-content
+    [dataStatus]="dataStatus"
+    [kitList]="kitList"
+    [equifax]="equifax"
+    [cuponCurrentState]="cuponCurrentState"
+    [priceSelectedInfo]="priceSelectedInfo"
+    [clientData]="clientData"
+    [seller]="seller"
+    [offerData]="offerData"
+    [infoOfertaOfrecida]="resumenData"
+    [packList]="packList"
+    [priceSelected]="priceSelected"
+  ></verisure-offert-review>
+</div>

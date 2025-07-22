@@ -1,0 +1,126 @@
+verisure-input {
+  max-width: 594px;
+}
+
+.content-wrapper {
+  padding-top: 26px !important;
+}
+
+.card-title-offer {
+  /* body1/bold */
+
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+  /* identical to box height, or 150% */
+}
+.card-container-offer {
+  padding: 16px;
+  /* Secondary/w */
+
+  background: #ffffff;
+  /* Secondary/100 */
+  flex-direction: column;
+  border: 1px solid #fafafa;
+  border-radius: 16px;
+  display: flex;
+  gap: 8px;
+}
+
+.card-footer-offer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  border-bottom: 1px solid #eb002f;
+  padding: 8px;
+}
+.detailsScreen {
+  // position: fixed;
+  // height: 100vh;
+  // width: 100%;
+  // top: 0;
+  // bottom: 0;
+  // left: 0;
+  // right: 0;
+  // z-index: 1000;
+  // background: white;
+  // display: block;
+}
+
+.more-results {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: 10px 0px;
+
+  .load-more-link {
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    text-decoration-line: underline;
+    cursor: pointer;
+    color: #b1b1b1;
+  }
+
+  .loader {
+    color: #ed002f;
+    font-size: 3px;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    position: relative;
+    text-indent: -9999em;
+    animation: mulShdSpin 1.3s infinite linear;
+    transform: translateZ(0);
+  }
+
+  @keyframes mulShdSpin {
+    0%,
+    100% {
+      box-shadow: 0 -3em 0 0.2em, 2em -2em 0 0em, 3em 0 0 -1em, 2em 2em 0 -1em,
+        0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 0;
+    }
+
+    12.5% {
+      box-shadow: 0 -3em 0 0, 2em -2em 0 0.2em, 3em 0 0 0, 2em 2em 0 -1em,
+        0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+    }
+
+    25% {
+      box-shadow: 0 -3em 0 -0.5em, 2em -2em 0 0, 3em 0 0 0.2em, 2em 2em 0 0,
+        0 3em 0 -1em, -2em 2em 0 -1em, -3em 0 0 -1em, -2em -2em 0 -1em;
+    }
+
+    37.5% {
+      box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 0, 2em 2em 0 0.2em,
+        0 3em 0 0em, -2em 2em 0 -1em, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+
+    50% {
+      box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 0em,
+        0 3em 0 0.2em, -2em 2em 0 0, -3em 0em 0 -1em, -2em -2em 0 -1em;
+    }
+
+    62.5% {
+      box-shadow: 0 -3em 0 -1em, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em,
+        0 3em 0 0, -2em 2em 0 0.2em, -3em 0 0 0, -2em -2em 0 -1em;
+    }
+
+    75% {
+      box-shadow: 0em -3em 0 -1em, 2em -2em 0 -1em, 3em 0em 0 -1em,
+        2em 2em 0 -1em, 0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0.2em,
+        -2em -2em 0 0;
+    }
+
+    87.5% {
+      box-shadow: 0em -3em 0 0, 2em -2em 0 -1em, 3em 0 0 -1em, 2em 2em 0 -1em,
+        0 3em 0 -1em, -2em 2em 0 0, -3em 0em 0 0, -2em -2em 0 0.2em;
+    }
+  }
+}

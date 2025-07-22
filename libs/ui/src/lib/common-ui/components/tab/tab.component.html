@@ -1,0 +1,15 @@
+<mat-button-toggle-group
+  #group="matButtonToggleGroup"
+  [value]="selectedItemName"
+  [ngClass]="class"
+>
+  <mat-button-toggle
+    *ngFor="let item of items"
+    [value]="item.value"
+    (change)="onValChange($event.value)"
+    matTooltip="View Message"
+    [disabled]="item.disabled"
+  >
+    <i class="fa fa-eye" aria-hidden="true"></i>{{ item.label }}
+  </mat-button-toggle>
+</mat-button-toggle-group>

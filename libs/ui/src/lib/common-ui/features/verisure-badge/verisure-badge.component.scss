@@ -1,0 +1,39 @@
+.content-badge {
+    width: 100%;
+    display: grid;
+    justify-content: flex-start;
+    align-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(180px, max-content));
+    align-content: center;
+    padding-top: 15px;
+}
+
+.badge {
+    background: #004857;
+    color: #fff;
+    padding: 8px;
+    border: 1px solid #004857;
+    border-radius: 10px;
+    display: flex;
+    margin-right: 5px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    align-items: center;
+    justify-content: space-between;
+    /* align-content: center; */
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.badge-close {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid white;
+    text-align: center;
+    margin-bottom: 2px;
+    margin-left: 10px;
+    display: inline;
+}

@@ -1,0 +1,21 @@
+<div style="padding: 0px 4px 0px 16px">
+  <verisure-card-offer-info
+    [idOffer]="resultCardInfo?.id?.toString() ?? ''"
+    [delegation]="resultCardInfo?.delegation ?? ''"
+    [dateStart]="resultCardInfo?.createdDate ?? ''"
+    [dateEnd]="dateFormating(resultCardInfo?.expiredDate)"
+  ></verisure-card-offer-info>
+</div>
+
+<verisure-expansion [content]="content">
+  <verisure-head-collapsible
+    head-collapsible
+    class="collapsible"
+    [name]="
+      capitalizeFullName(userCardInfo?.nombres ?? '') +
+      ' ' +
+      capitalizeFullName(userCardInfo?.apellidos ?? '')
+    "
+    [rut]="formatearRut(userCardInfo?.rut ?? '')"
+  ></verisure-head-collapsible>
+</verisure-expansion>

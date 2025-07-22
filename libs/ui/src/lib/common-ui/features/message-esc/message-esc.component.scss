@@ -1,0 +1,52 @@
+@use '../../../../styles/global-theme.scss' as theme;
+@use '../../components/button/button.component.scss' as button;
+
+verisure-message-esc {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: -webkit-fill-available;
+  width: 100%;
+  > div {
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0px;
+    gap: 80px;
+    width: 328px;
+    height: 240px;
+    align-content: center;
+    flex-wrap: nowrap;
+  }
+  verisure-button {
+    @include button.VerisureButton(theme.$my-theme);
+  }
+  .message-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    /* body1/regular */
+
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    /* or 150% */
+
+    text-align: center;
+
+    /* Secondary/700 */
+
+    color: #262626;
+
+    .message-content-icon {
+      height: 48px;
+      width: 48px;
+      margin: 8px;
+    }
+  }
+}

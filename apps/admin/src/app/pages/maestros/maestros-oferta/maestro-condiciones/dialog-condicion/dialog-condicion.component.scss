@@ -1,0 +1,86 @@
+.dialog-condiciones {
+  font-family: 'Fira Sans' !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+
+  padding: 32px;
+  width: 850px;
+  box-shadow: 0px 0px 16px 0px #FFEBEF;
+  padding: 32px;
+  gap: 32px;
+  background: #FFFFFF;
+  border-radius: 16px;
+  border: 1px solid #FFEBEF;
+  z-index: 100;
+
+}
+
+.select-items {
+  z-index: 1000;
+}
+
+.btn-modal-close {
+  float: right;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  /* Primary/500 */
+  border-radius: 50%;
+  top: 32px;
+  border: 2px solid #AB192D;
+  right: 32px;
+  color: #AB192D;
+  background: white;
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+  cursor: pointer;
+}
+
+.modal-condiciones-title {
+  font-family: 'Fira Sans';
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 29px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.modal-condiciones-subtitle {
+  font-family: 'Fira Sans';
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+}
+
+.input-group-row {
+  padding-bottom: 20px;
+}
+
+.col-5 {
+  width: 47%;
+  display: inline-block;
+  margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.col-btn {
+  width: 44% !important;
+}
+
+.col-10 {
+  width: 97%;
+  display: inline-block;
+  margin: 0;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.actions-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}

@@ -1,0 +1,212 @@
+@use '../../../../../styles/global-theme.scss' as theme;
+@use '../../../components/button/button.component.scss' as btn;
+@use '../../../components/card-product/card-product.component.scss' as card;
+@use '../../../components/alert/alert.component.scss' as alert;
+@use '../../../components/tiny-card/tiny-card.component.scss' as tinyCard;
+
+verisure-screen-packs {
+  .packs {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-family: 'Fira Sans', sans-serif;
+    font-style: normal;
+    /* Secondary/w */
+    .title-card {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+
+      > div {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        & span:first-child {
+          /* body1/bold */
+
+          font-family: 'Fira Sans';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 1.2rem;
+          line-height: 24px;
+        }
+        & span:last-child {
+          /* body1/bold */
+
+          font-family: 'Fira Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 1rem;
+          line-height: 24px;
+        }
+      }
+    }
+    .card-container {
+      background: white;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding: 16px;
+      border-radius: 16px;
+      -webkit-border-radius: 16px;
+      -moz-border-radius: 16px;
+      -ms-border-radius: 16px;
+      -o-border-radius: 16px;
+      box-shadow: 0px 0px 16px #ffebef;
+
+      .header-packs {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        flex-direction: row;
+        gap: 8px;
+
+        .title-packs {
+          font-size: 1.2rem;
+          font-weight: 700;
+        }
+      }
+
+      .pack-info {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        padding: 6px;
+        .name {
+          display: flex;
+          align-items: center;
+          padding: 0px 0px 8px 0px;
+          margin-bottom: 8px;
+          border-bottom: 1px solid #bec0c2;
+          font-size: 1.1rem;
+          font-weight: 400;
+          font-family: 'Fira Sans', sans-serif;
+          font-style: normal;
+          color: #636466;
+        }
+
+        .prices-pack {
+          display: flex;
+          flex-direction: column;
+          width: -webkit-fill-available;
+          gap: 8px;
+          padding-right: 1rem;
+
+          .price-detail {
+            display: flex;
+            flex-direction: row;
+            padding-bottom: 3px;
+            justify-content: space-between;
+            color: #636466;
+            align-items: center;
+          }
+        }
+      }
+    }
+
+    verisure-card-product {
+      @include card.VerisureCardProduct(theme.$my-theme);
+    }
+    verisure-tiny-card {
+      @include tinyCard.VerisureTinyCard(theme.$my-theme);
+    }
+    verisure-alert {
+      @include alert.VerisureAlert(theme.$my-theme);
+      .alerta {
+        padding: 3px 10px;
+
+        font-family: 'Fira Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 17px;
+        display: flex;
+        align-items: center;
+      }
+    }
+    .price-wrapper {
+      display: flex;
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      min-width: 98%;
+      .price-content {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start !important;
+        width: 100%;
+        height: -webkit-fill-available;
+        min-height: 34px;
+        padding: 3px;
+        & > div {
+          display: flex;
+
+          &:not(:last-child) {
+            border-right: 1px #dcddde solid;
+          }
+          min-width: 33%;
+          height: 100%;
+          flex-direction: column !important;
+          font-family: 'Fira Sans';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 14px;
+          flex-wrap: nowrap;
+          justify-content: center;
+          align-content: center !important;
+          align-items: center !important;
+          &:nth-child(2) {
+            padding: 0 16px;
+            min-width: 28%;
+          }
+          &:nth-child(3) {
+            min-width: 27%;
+            justify-content: center;
+            text-align: center;
+            /* margin: auto; */
+            align-self: center;
+          }
+          div {
+            min-width: 100%;
+            padding: 4px;
+            &:not(:last-child) {
+              border-bottom: 1px #dcddde solid;
+              margin-bottom: 4px;
+            }
+          }
+          .price-amount {
+            align-items: flex-start !important;
+            font-family: 'Fira Sans';
+            font-style: normal;
+
+            font-weight: 700;
+            font-size: 14px;
+            line-height: 16px;
+          }
+        }
+      }
+    }
+    .prices-legend {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-bottom: 1px solid black;
+      padding: 12px 5px;
+      /* gap: 20px; */
+      justify-content: space-around;
+      /* body2/bold */
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 14px;
+      line-height: 16px;
+      /* identical to box height, or 114% */
+      text-align: center;
+      /* Secondary/600 */
+      color: #636466;
+    }
+  }
+}

@@ -1,0 +1,74 @@
+<div>
+  <h2>
+    Maestro Segmento: <span class="text-capitalize">{{ title }}</span>
+  </h2>
+  <verisure-tab
+    [items]="tabItems"
+    [selectedItemName]="itemSelect"
+    (onChange)="changeTap($event)"
+  ></verisure-tab>
+
+  <div class="list-containers">
+    <verisure-searchbar-list-admin
+      [formBarSearch]="formSearch"
+      [titleButtonAdd]="title"
+      (clickItem)="clickItem($event)"
+      [showFilter]="false"
+      (searchEvent)="getNewSearch($event)"
+    ></verisure-searchbar-list-admin>
+
+    <verisure-alert
+      style="padding-top: 20px"
+      *ngIf="hasAdded"
+      @alertAnimation
+      size="md"
+      [label]="textAlert"
+      type="success-tiny"
+    ></verisure-alert>
+    <div class="card-container">
+      <verisure-table
+        [displayedColumns]="displayedColumns"
+        [dataSource]="elementData"
+        [page]="currentPage"
+        [limit]="totalPaginas"
+        [totalItems]="totalItems"
+        (nextPage)="nextPage()"
+        (prevPage)="prevPage()"
+        (changeLimitPage)="changeLimit($event)"
+      >
+      </verisure-table>
+      <ng-template #group let-data="item">
+        {{ objItems[data.agrupacionId].agrupacion }}
+      </ng-template>
+      <ng-template #toggle let-data="item">
+        <div class="toggle-theme">
+          <mat-slide-toggle
+            color="primary"
+            #toggle
+            [checked]="data.activo"
+            (change)="changeToggle(data)"
+          ></mat-slide-toggle>
+        </div>
+      </ng-template>
+
+      <ng-template #btn let-data="item">
+        <verisure-button
+          type="button"
+          (onClick)="editData(data)"
+          variant="ghost"
+          size="medium"
+        >
+          <img
+            width="15px"
+            height="20px"
+            svg
+            src="assets/icons/edit-icon-list.svg"
+            alt="Editar"
+          />
+        </verisure-button>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<dialog id="modal" class="dialog-segmentos"></dialog>

@@ -1,0 +1,16 @@
+<!-- bienvenido user -->
+<div id="welcome-message">
+  <span>
+    Bienvenido/a
+    {{ capitalizeFullName(dataUserLogged?.nombreCompleto ?? '') }}
+  </span>
+  <br />
+  <span>
+    <span>Centro de costo {{ dataUserLogged?.centroCosto ?? '' }} </span>,
+    <span> delegación {{ dataUserLogged?.delegacion ?? '' }}</span>
+  </span>
+</div>
+<!--  -->
+<ng-content id="tab-form" select="[tab-form]"></ng-content>
+<!-- form -->
+<ng-content id="consulta-rut-content" select="[form-consulta]"></ng-content>

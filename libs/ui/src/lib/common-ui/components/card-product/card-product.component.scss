@@ -1,0 +1,106 @@
+@mixin VerisureCardProduct($theme) {
+  & {
+    [header] {
+      object {
+        position: relative;
+        z-index: 2;
+        height: 1.5rem;
+        width: 1.3rem;
+        padding: 1.5px 3px;
+        border-radius: 75px;
+        background: #ffebef;
+        margin: 0px 8px 0px 0px;
+        border: 1px solid #ff527500;
+        &.active {
+          /* Primary/300 */
+
+          border: 1px solid #ff5274;
+        }
+      }
+      /* body1/regular */
+
+      div.active {
+        font-family: 'Fira Sans';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 1.1rem;
+        line-height: 24px;
+      }
+      .mdc-form-field {
+        label > div {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          cursor: pointer;
+        }
+        font-family: 'Fira Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1.1rem;
+        line-height: 24px;
+      }
+    }
+
+    div[content] {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      padding: 0px !important;
+    }
+    #card-product {
+      background: #ffffff;
+      /* Primary/100 */
+      display: flex;
+      min-width: 40px;
+      border: 1px solid #ffebef;
+      border-radius: 8px;
+      flex-direction: column;
+      gap: 20px;
+      padding: 8px 16px;
+      font-family: 'Fira Sans';
+      font-style: normal;
+      &.sm {
+        padding: 8px;
+      }
+      .header {
+        width: 100%;
+        /* body1/bold */
+        background: red;
+        font-family: 'Fira Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 4rem;
+        line-height: 24px;
+      }
+
+      label,
+      .mdc-form-field {
+        width: 100% !important;
+      }
+      &.active {
+        &.header {
+          /* body1/regular */
+          font-family: 'Fira Sans';
+          font-style: normal;
+          font-weight: 800;
+          font-size: 1rem;
+          line-height: 24px;
+        }
+        /* Secondary/w */
+
+        background: #ffffff;
+        /* Primary/500 */
+
+        border: 1px solid #ab192d;
+        /* Shadow_color_3 */
+
+        box-shadow: 0px 0px 16px #ffebef;
+        border-radius: 8px;
+      }
+    }
+    .content {
+      margin: 200px;
+    }
+  }
+}

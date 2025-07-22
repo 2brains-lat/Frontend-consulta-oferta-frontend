@@ -1,0 +1,74 @@
+<div *ngIf="type === 'input'" style="display: flex; flex-direction: column">
+  <mat-label *ngIf="label.length > 0" id="radio-group-label"
+    >{{ label }}
+
+    <!-- <span ngIf="formControl.has('required')"> * </span> -->
+  </mat-label>
+  <mat-radio-group
+    aria-labelledby="radio-group-label"
+    class="radio-group"
+    [formControl]="control"
+    [ngStyle]="{ gap: gap, display: 'flex', 'flex-direction': direction }"
+  >
+    <mat-radio-button
+      class="example-radio-button"
+      *ngFor="let item of items"
+      (change)="change($event)"
+      [value]="item.value"
+      [disabled]="item.disabled"
+    >
+      {{ item.label }}
+    </mat-radio-button>
+  </mat-radio-group>
+</div>
+<div
+  *ngIf="type === 'kit'"
+  id="kit-selector"
+  style="display: flex; flex-direction: column"
+>
+  <mat-label *ngIf="label.length > 0" id="radio-group-label"
+    >{{ label }}
+
+    <!-- <span ngIf="formControl.has('required')"> * </span> -->
+  </mat-label>
+
+  <mat-radio-group
+    aria-labelledby="radio-group-label"
+    class="radio-group"
+    [formControl]="control"
+    [(ngModel)]="radioModel"
+    [ngStyle]="{ gap: gap, display: 'flex', 'flex-direction': direction }"
+  >
+    <verisure-card-emphasis
+      [active]="control.value === item.value"
+      *ngFor="let item of items"
+    >
+      <mat-radio-button
+        emphasis-content
+        class="example-radio-button"
+        (click)="onClick($event)"
+        (change)="change($event)"
+        [value]="item.value"
+      >
+        <div class="kit-container">
+          <ng-content [select]="'[header-' + item.value + ']'"></ng-content>
+
+          <object
+            [ngClass]="control.value === item.value ? 'active' : ''"
+            data="assets/icons/kit-icon.svg"
+            type="image/svg+xml"
+          ></object>
+          <div class="kit-content">
+            <span
+              class="title"
+              [ngClass]="control.value === item.value ? 'active' : ''"
+            >
+              {{ item.label }}
+            </span>
+            <!-- <span class="description"> {{ item?.description }} </span> -->
+          </div>
+        </div>
+      </mat-radio-button>
+    </verisure-card-emphasis>
+  </mat-radio-group>
+</div>

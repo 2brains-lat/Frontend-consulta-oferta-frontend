@@ -1,0 +1,54 @@
+<div class="searchbar-container">
+  <verisure-input
+    [control]="$any(formBarSearch.controls['results'])"
+    label=""
+    type="search"
+    placeholder="Ingresa tu búsqueda"
+    #searchHistory
+    [style]="windowCurrentWidth <= 360 ? 'width: 35%' : 'width: 58%'"
+    (currentSearch)="getNewSearch($event)"
+    [disabled]="disableButtonAdd"
+  ></verisure-input>
+
+  <!-- <verisure-button
+    type="submit"
+    (onClick)="filterdropdown.toggle()"
+    variant="ghost"
+    size="medium"
+  >
+    <p content>Filtrar por</p>
+    <object svg data="/assets/icons/filter-icon.svg"></object>
+  </verisure-button> -->
+
+  <verisure-button
+    type="submit"
+    (onClick)="toggle()"
+    variant="ghost"
+    size="medium"
+    [disabled]="disableButtonAdd"
+    *ngIf="showFilter"
+  >
+    <p content>Filtrar por</p>
+    <object svg data="/assets/icons/filter-icon.svg"></object>
+  </verisure-button>
+
+  <verisure-button
+    type="submit"
+    variant="accent"
+    (onClick)="addItem()"
+    [size]="windowCurrentWidth <= 360 ? 'small' : 'medium'"
+    width="100%"
+    [disabled]="disableButtonAdd"
+  >
+    <p content>Agregar {{ titleButtonAdd }}</p>
+    <object svg data="assets/icons/add-icon.svg"></object>
+  </verisure-button>
+</div>
+
+<mat-sidenav
+  style="display: contents"
+  #filterdropdown
+  (keydown.escape)="filterdropdown.close()"
+>
+  <ng-content select="[filter-content]"></ng-content>
+</mat-sidenav>

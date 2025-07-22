@@ -1,0 +1,33 @@
+<div style="display: block; width: 100%; background: '#FAFAFA'">
+  <verisure-consultarut-container [dataUserLogged]="dataUser">
+    <!-- PAGE LAYOUT -->
+    <!-- CONTENT LAYOUT -->
+    <verisure-tab
+      [items]="tabItems"
+      [selectedItemName]="onChange"
+      tab-form
+      (onChange)="onChange = $event"
+    >
+    </verisure-tab>
+
+    <div form-consulta>
+      <!-- TAB COMPONNT -->
+      <!-- FORM FEATURES LAYOUT -->
+      <verisure-form-consultarut
+        [form]="form"
+        [inmuebles]="inmuebleShowing"
+        [segmentos]="segmentos"
+        [recurso]="recurso"
+        [inmueblesStatus]="statusChangeInmuebles"
+        (Submit)="onSubmit()"
+        *ngIf="onChange.includes('consulta')"
+      ></verisure-form-consultarut>
+      <!-- HISTORIAL  -->
+
+      <verisure-history
+        *ngIf="onChange.includes('historial')"
+        (toggleFilterMenu)="openFilterMenuHistory($event)"
+      ></verisure-history>
+    </div>
+  </verisure-consultarut-container>
+</div>

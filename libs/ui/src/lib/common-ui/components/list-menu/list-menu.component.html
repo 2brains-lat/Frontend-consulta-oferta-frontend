@@ -1,0 +1,102 @@
+<div style="width: inherit; height: 100%">
+  <mat-list role="list" class="verisure-list">
+    <mat-list-item role="listitem" class="verisure-list-item">
+      <div class="items-side-menu">
+        <ng-container *ngFor="let item of items; let i = index">
+          <a
+            (mouseenter)="mouseEnter(item.path)"
+            (mouseleave)="mouseLeave(item.path)"
+            (click)="
+              item.label === 'Tipo Cliente' ||
+              item.label === 'Tipo Recurso' ||
+              item.label === 'Periodo de tiempo'
+                ? toggleSubMenuFilter(item.label)
+                : item.path.length === 0
+                ? onDropDownSubMenu(i)
+                : null
+            "
+            [routerLink]="
+              item.label !== 'Tipo Cliente' &&
+              item.label !== 'Tipo Recurso' &&
+              item.label !== 'Periodo de tiempo'
+                ? item.path.length > 0
+                  ? item.path.split('#')[0]
+                  : undefined
+                : undefined
+            "
+            [fragment]="
+              item.label !== 'Tipo Cliente' &&
+              item.label !== 'Tipo Recurso' &&
+              item.label !== 'Periodo de tiempo'
+                ? item.path.split('#')[1]
+                : undefined
+            "
+            [ngClass]="[
+              InputSelected === item.path ? 'active' : '',
+              item.label === 'Tipo Cliente' ||
+              item.label === 'Tipo Recurso' ||
+              item.label === 'Periodo de tiempo'
+                ? 'filter-list'
+                : '',
+              item.subMenu ? 'multiSelector' : '',
+              currentDropDownStatus === i ? 'multiActive' : ''
+            ]"
+          >
+            <span
+              class="icon-medium"
+              *ngIf="
+                item.iconUrl && item.iconUrl.length > 0 && item.activeIconUrl
+              "
+            >
+              <object
+                @opacityAnimation
+                [ngClass]="[InputSelected !== item.path ? 'active' : '']"
+                type="image/svg+xml"
+                [data]="item.iconUrl | safe"
+              ></object>
+              <object
+                @opacityAnimation
+                [ngClass]="[
+                  item.activeIconUrl && InputSelected === item.path
+                    ? 'active'
+                    : ''
+                ]"
+                type="image/svg+xml"
+                [data]="item.activeIconUrl | safe"
+              ></object>
+            </span>
+
+            <span class="label">
+              {{ item.label }}
+            </span>
+          </a>
+
+          <ul
+            *ngIf="currentDropDownStatus === i && item.subMenu"
+            style="
+              gap: 8px;
+              display: flex;
+              flex-direction: column;
+              margin-top: 0px;
+            "
+          >
+            <a
+              *ngFor="let subMenu of item.subMenu"
+              (mouseenter)="mouseEnter(subMenu.path)"
+              (mouseleave)="mouseLeave(subMenu.path)"
+              [routerLink]="
+                subMenu.path.length > 0 ? subMenu.path.split('#')[0] : undefined
+              "
+              [fragment]="
+                subMenu.path.length > 0 ? subMenu.path.split('#')[1] : undefined
+              "
+              [ngClass]="[InputSelected === subMenu.path ? 'active' : '']"
+            >
+              <span class="label"> {{ subMenu.label }} </span>
+            </a>
+          </ul>
+        </ng-container>
+      </div>
+    </mat-list-item>
+  </mat-list>
+</div>

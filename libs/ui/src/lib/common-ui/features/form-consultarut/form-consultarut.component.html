@@ -1,0 +1,92 @@
+<form>
+  <verisure-input
+    [control]="$any(form.controls['rut'])"
+    type="text"
+    label="Rut Cliente"
+    placeholder="Ej: 19.456.789-k"
+    #input1
+    width="100%"
+  >
+  </verisure-input>
+  <!-- 19.256.782-3 -->
+  <verisure-radio-button
+    @enterState
+    *ngIf="screenWidth >= 768 ? true : form.get('rut')?.valid"
+    label="Escoge tipo de recurso"
+    [control]="$any(form.controls['recurso'])"
+    [items]="recurso"
+  ></verisure-radio-button>
+
+  <verisure-radio-button
+    @enterState
+    label="Escoge tipo de cliente"
+    *ngIf="
+      screenWidth >= 768
+        ? true
+        : form.get('recurso')?.valid && form.get('rut')?.valid
+    "
+    [control]="$any(form.controls['segmento'])"
+    [items]="segmentos"
+  ></verisure-radio-button>
+  <!-- fake selector -->
+  <verisure-input
+    @enterState
+    [disabled]="true"
+    label="Tipo de inmueble"
+    *ngIf="screenWidth >= 768 && inmueblesStatus !== 1"
+    type="select"
+    width="100%"
+    placeholder="Selecciona un tipo de negocio"
+    #input3
+  >
+  </verisure-input>
+
+  <verisure-input
+    @enterState
+    label="Tipo de inmueble"
+    *ngIf="
+      screenWidth >= 768
+        ? inmueblesStatus === 1
+        : inmueblesStatus === 1 &&
+          form.get('segmento')?.valid &&
+          form.get('recurso')?.valid &&
+          form.get('rut')?.valid
+    "
+    [control]="$any(form.controls['inmueble'])"
+    type="select"
+    width="100%"
+    placeholder="Selecciona un tipo de negocio"
+    #input3
+  >
+    <mat-option options *ngFor="let option of inmuebles" [value]="option.key">{{
+      option.value
+    }}</mat-option>
+  </verisure-input>
+
+  <verisure-input
+    @enterState
+    *ngIf="
+      screenWidth >= 768
+        ? resetProspecto
+        : resetProspecto && form.get('inmueble')?.valid
+    "
+    type="text"
+    [control]="$any(form.controls['prospecto'])"
+    label="Ingresa N°Prospecto"
+    placeholder="Ej: 333.333"
+    #input1
+    width="100%"
+  >
+  </verisure-input>
+</form>
+<div class="next-button-div">
+  <verisure-button
+    type="submit"
+    [disabled]="!form.valid"
+    (onClick)="onSubmit()"
+    variant="primary"
+    size="large"
+  >
+    <p content>Siguiente</p>
+  </verisure-button>
+</div>

@@ -1,0 +1,39 @@
+@use '../../../../styles/global-theme.scss' as theme;
+
+verisure-multicheckbox {
+  width: 100%;
+
+  .example-section {
+    margin: 12px 0;
+  }
+
+  .example-margin {
+    margin: 0 12px;
+  }
+
+  .example-list-section {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .label-category {
+    display: flex;
+    width: 100%;
+    font-family: Fira Sans;
+    font-style: normal;
+    font-weight: 700;
+    padding: 0px 10px 10px 10px;
+    border-bottom: 1px solid #DCDDDE;
+    box-sizing: border-box;
+  }
+
+  ul {
+    list-style-type: none;
+    margin-top: 4px;
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    padding-left: 0px;
+  }
+}

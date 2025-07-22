@@ -1,0 +1,17 @@
+{
+  "$schema": "../../node_modules/@angular/service-worker/config/schema.json",
+  "index": "/index.html",
+  "navigationUrls": ["/**"],
+  "dataGroups": [
+    {
+      "name": "app",
+      "urls": ["/", "/index.html", "/assets/**", "/api/**"],
+      "cacheConfig": {
+        "maxSize": 10000000,
+        "maxAge": "1d",
+        "timeout": "5s",
+        "strategy": "freshness"
+      }
+    }
+  ]
+}

@@ -1,0 +1,89 @@
+verisure-offert-review {
+  .offer-review-container {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .offer-review-container > div:nth-child(2) {
+    @media screen and (max-width: 768px) {
+      min-width: -webkit-fill-available;
+    }
+  }
+  verisure-screen-packs,
+  verisure-screen-descuentos {
+    width: 530px;
+    @media screen and (max-width: 768px) {
+      width: auto !important;
+    }
+  }
+  .kitinicial {
+    width: min-content !important;
+    @media screen and (max-width: 768px) {
+      width: auto !important;
+    }
+  }
+  .offer-review-container > div:nth-child(1) {
+    min-width: min-content;
+    // max tablet size
+    @media screen and (max-width: 768px) {
+      min-width: -webkit-fill-available;
+    }
+    & > verisure-card-item {
+      max-width: 530px;
+      & div[card-header] {
+        font-family: 'Fira Sans';
+        font-style: normal !important;
+        font-weight: 400 !important;
+        font-size: 16px !important;
+        gap: 0px !important;
+        flex-direction: row;
+        flex-wrap: wrap;
+        line-height: 24px !important;
+        color: #636466 !important;
+        border-bottom: 0px !important;
+        & > :nth-child(3)::before {
+          width: 0.3px;
+          height: auto;
+          content: ' ';
+
+          margin: 0 12px;
+          border: 0.3px solid #c9c9c9;
+        }
+        span {
+          display: flex;
+        }
+      }
+      & div[card-details] {
+        display: flex;
+        /* body1/regular */
+        font-family: 'Fira Sans' !important;
+        font-style: normal !important;
+        font-weight: 400 !important;
+        font-size: 16px !important;
+        line-height: 24px !important;
+        color: #636466 !important;
+        span {
+          display: flex;
+        }
+        & > :nth-child(2)::before {
+          width: 0.3px;
+          height: auto;
+          content: ' ';
+
+          margin: 0 16px;
+          border: 0.3px solid #c9c9c9;
+        }
+      }
+    }
+  }
+  verisure-card-item > div {
+    gap: 8px !important;
+  }
+}
+verisure-tiny-card .main-info img.icon {
+  width: 12px !important;
+  height: 14px !important;
+  /* padding: 4px; */
+}

@@ -1,0 +1,72 @@
+@use '../../../../styles/global-theme.scss' as theme;
+@use '../../components/button/button.component.scss' as btn;
+@use '../../components/input/input.component.scss' as input;
+@use '../../components/radio-button/radio-button.component.scss' as radio;
+@use '../../components/tab/tab.component.scss' as tab;
+
+verisure-form-consultarut {
+  max-width: 100%;
+  @media only screen and (min-width: 768px) {
+    & {
+      position: relative;
+      height: 72vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-content: flex-start;
+      align-items: flex-start;
+    }
+  }
+  .next-button-div {
+    padding: 15px 0px;
+    padding-bottom: 25px;
+    @media only screen and (min-width: 768px) {
+      & {
+        background-color: #fafafa;
+        padding: 15px 0px;
+        width: 100%;
+        display: flex;
+        padding-bottom: 25px;
+        /* padding-right: 24px; */
+        position: sticky;
+        bottom: 0 !important;
+        border-top: 1px solid rgba(0, 0, 0, 0.132);
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: rgba(0, 0, 0, 0.133);
+        /* margin-top: auto; */
+        padding-top: 24px;
+        /* margin: auto; */
+        justify-content: flex-end;
+      }
+    }
+  }
+  & form {
+    @media only screen and (min-width: 768px) {
+      width: 300px;
+    }
+  }
+  verisure-button {
+    @include btn.VerisureButton(theme.$my-theme);
+    @media only screen and (min-width: 768px) {
+      & {
+        padding-right: 24px;
+      }
+    }
+  }
+  verisure-input {
+    @include input.VerisureInputs(theme.$my-theme);
+  }
+  verisure-radio-button {
+    @include radio.VerisureRadioButton(theme.$my-theme);
+    padding-bottom: 15px !important;
+  }
+  verisure-tab {
+    @include tab.VerisureTabButton(theme.$my-theme);
+  }
+  mat-error {
+    font-family: 'Fira Sans' !important;
+    font-style: light !important;
+    font-weight: 400 !important;
+  }
+}

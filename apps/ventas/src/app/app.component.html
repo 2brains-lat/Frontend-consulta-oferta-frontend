@@ -1,0 +1,5 @@
+<verisure-loader></verisure-loader>
+<verisure-app-layout [navigateItems]="links">
+  <!-- The routed views render in the <router-outlet>-->
+  <router-outlet (activate)="onActivate($event)"></router-outlet>
+</verisure-app-layout>

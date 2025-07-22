@@ -1,0 +1,24 @@
+@use '../../../styles/global-theme.scss' as theme; 
+@use '../../common-ui/components/button/button.component.scss' as btn;
+@use '../../common-ui/components/input/input.component.scss' as input;
+@use '../../common-ui/components/radio-button/radio-button.component.scss' as radio;
+@use '../../common-ui/components/tab/tab.component.scss' as tab;
+
+verisure-kitui-lab{
+    overflow-x: hidden;
+    width: 100vw;
+    height: 400px;
+    position: fixed;
+    verisure-button{
+    @include btn.VerisureButton(theme.$my-theme);
+    }
+   verisure-input{
+    @include input.VerisureInputs(theme.$my-theme);
+   }
+   verisure-radio-button{
+    @include radio.VerisureRadioButton(theme.$my-theme);
+   }
+   verisure-tab{
+    @include  tab.VerisureTabButton(theme.$my-theme);
+   }
+}

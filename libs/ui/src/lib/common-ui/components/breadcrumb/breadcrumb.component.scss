@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+
+:host {
+  font-family: 'Fira Sans', sans-serif;
+}
+
+@mixin VerisureBreadcrumb($theme) {
+  .breadcrumb-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #fafafa;
+    border-bottom: 1px solid #dcddde;
+    .mat-mdc-tab-labels {
+      padding: 0px 10px;
+    }
+    .mat-mdc-tab-header {
+      max-width: 550px;
+      width: -webkit-fill-available;
+      display: block;
+
+      .mdc-tab {
+        min-width: 0px;
+        padding-right: 0px;
+        padding-left: 0px;
+      }
+
+      .mdc-tab-indicator__content--underline {
+        border-bottom: 4px solid #00bf9e;
+        border-top-style: none;
+      }
+
+      .mat-mdc-tab:hover .mdc-tab__ripple::before {
+        opacity: 0;
+      }
+      .mdc-tab__content {
+        padding-left: 10px;
+      }
+
+      .mat-mdc-tab:not(.mat-mdc-tab-disabled).mdc-tab--active
+        .mdc-tab__text-label,
+      .mat-mdc-tab-link:not(.mat-mdc-tab-disabled).mdc-tab--active
+        .mdc-tab__text-label {
+        font-weight: 700;
+        color: #636466;
+      }
+
+      img.icon-tab {
+        padding-left: 7px;
+      }
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      align-content: center;
+      padding: 8px 16px;
+    }
+  }
+}

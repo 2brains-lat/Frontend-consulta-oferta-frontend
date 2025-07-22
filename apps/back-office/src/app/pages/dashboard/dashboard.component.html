@@ -1,0 +1,55 @@
+<div *ngIf="dataUserLogged" style="padding: 32px">
+  <div style="padding-bottom: 48px; display: flex; flex-direction: column">
+    <span
+      style="
+        /* h4/bold */
+
+        font-family: 'Fira Sans';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 40px;
+      "
+      >¡Hola {{ capitalizeFullName(dataUserLogged.nombreCompleto) }}!
+    </span>
+    <span
+      style="
+        font-family: 'Fira Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 24px;
+      "
+    >
+      Selecciona la gestión que quieres realizar hoy</span
+    >
+  </div>
+  <div class="dashboard-content-container">
+    <a *ngFor="let item of content" [routerLink]="item.redirectUrl">
+      <verisure-card-product
+        (mouseleave)="setActiveHover(null)"
+        style="cursor: pointer"
+        (mouseenter)="setActiveHover(item.id)"
+        [isActive]="activeHover === item.id"
+        mode="wrapper"
+      >
+        <div content class="dashboard-card-info">
+          <span class="dashboard-menu-icon">
+            <img [src]="item.iconUrl" alt="" />
+          </span>
+
+          <div style="width: 70%">
+            <span class="card-dashboard-title">{{ item.title }}</span>
+            <span class="card-dashboard-content">{{ item.content }}</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: flex-end" content>
+          <verisure-button width="auto" variant="ghost">
+            <p content>Ingrese</p>
+            <object svg data="assets/icons/small-right-arrow.svg"></object>
+          </verisure-button>
+        </div>
+      </verisure-card-product>
+    </a>
+  </div>
+</div>

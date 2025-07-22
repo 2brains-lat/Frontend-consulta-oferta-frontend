@@ -1,0 +1,58 @@
+@mixin VerisureNavbar($theme) {
+  $my-fontSizes: map-get($theme, 'fontSize');
+
+  object {
+    height: inherit;
+    width: inherit;
+  }
+  width: 100%;
+  position: fixed;
+  position: sticky;
+  top: 0px;
+  .mat-toolbar-row,
+  .mat-toolbar-single-row {
+    height: 100% !important;
+  }
+  mat-toolbar {
+    height: 56px;
+  }
+  @media only screen and (max-width: 768px) {
+    .brand-icon {
+      height: 25px;
+      padding: 2px;
+    }
+    .menu-icon {
+      height: 20px;
+      padding: 2px;
+    }
+    mat-toolbar {
+      background: #fafafa !important;
+    }
+    mat-toolbar-row {
+      box-shadow: 0px 0px 10px rgb(155, 155, 155) !important;
+      z-index: 100 !important;
+      background: white;
+    }
+  }
+  @media only screen and (min-width: 768px) {
+    &,
+    mat-toolbar-row,
+    mat-toolbar {
+      background: #fafafa !important;
+      box-shadow: none !important;
+      border-radius: 42px 0px 0px 0px;
+      mat-toolbar {
+        height: 80px;
+        border-bottom: 1px solid rgb(0 0 0 / 18%);
+      }
+    }
+
+    .brand-icon,
+    button {
+      display: none !important;
+    }
+    .menu-icon {
+      display: none !important;
+    }
+  }
+}

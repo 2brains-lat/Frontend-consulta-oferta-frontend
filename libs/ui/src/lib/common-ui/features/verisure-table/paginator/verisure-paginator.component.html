@@ -1,0 +1,45 @@
+<div class="verisure-paginator">
+  <span> {{ labelLeft }} </span>
+
+  <verisure-input
+    label=""
+    [control]="$any(formPaginator.controls['sizeList'])"
+    type="select"
+    width="100%"
+    placeholder="Seleccionar"
+  >
+    <mat-option options *ngFor="let item of rangePage" [value]="item">{{
+      item
+    }}</mat-option>
+  </verisure-input>
+
+  <!-- <mat-form-field>
+    <mat-select [(value)]="selected" (selectionChange)="changeLimit()">
+      <mat-option [value]="item" *ngFor="let item of rangePage">{{
+        item
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field> -->
+  <span
+    >{{ labelRight }} {{ currentPage }} {{ delimiter }} {{ limitPage }}
+  </span>
+  <!-- <span> {{ currentPage }} </span>
+  <span> {{ delimiter }} </span>
+  <span> {{ limitPage }} </span> -->
+  <button
+    class="verisure-btn btn-paginator"
+    (click)="clickPrev()"
+    style="padding-left: 4px"
+    [disabled]="currentPage - 1 === 0"
+  >
+    <
+  </button>
+
+  <button
+    class="verisure-btn btn-paginator"
+    (click)="clickNext()"
+    [disabled]="currentPage + 1 > limitPage"
+  >
+    >
+  </button>
+</div>

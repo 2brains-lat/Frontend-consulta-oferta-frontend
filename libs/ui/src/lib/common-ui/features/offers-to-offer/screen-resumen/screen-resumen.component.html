@@ -1,0 +1,137 @@
+<div class="screen-resumen-content">
+  <verisure-alert
+    label="
+    Descarga toda la oferta para
+    revisar todos los precios disponibles
+    "
+    type="information"
+  ></verisure-alert>
+
+  <verisure-card-item>
+    renove
+    <div card-header>
+      <object
+        style="background-color: #ffebef"
+        data="assets/icons/alarm1-icon.svg"
+        type="image/svg+xml"
+      ></object>
+      <span>Resumen de oferta seleccionada</span>
+    </div>
+    <div
+      *ngIf="
+        infoOfertaOfrecida.autorizacion &&
+        infoOfertaOfrecida.autorizacion !== null
+      "
+      card-details
+    >
+      <span> ID Oferta: {{ infoOfertaOfrecida.id }} </span>
+    </div>
+    <div card-details>
+      <span>
+        Vigencia: {{ formatDate(infoOfertaOfrecida.fechaDeCreacion) }} al
+        {{ formatDate(infoOfertaOfrecida.fechaDeVencimiento) }}
+      </span>
+    </div>
+    <div card-details>
+      <span>
+        Centro de costo: {{ infoOfertaOfrecida.centroCosto }}</span
+      >
+    </div>
+    <div *ngIf="infoOfertaOfrecida.nombres" card-details>
+      <span>
+        Nombre cliente:
+        {{
+          capitalizeFullName(infoOfertaOfrecida.nombres) +
+            ' ' +
+            capitalizeFullName(infoOfertaOfrecida.apellidos)
+        }}
+      </span>
+    </div>
+    <div *ngIf="infoOfertaOfrecida.rut" card-details>
+      <span> Rut cliente: {{ formatearRut(infoOfertaOfrecida.rut) }}</span>
+    </div>
+    <div *ngIf="infoOfertaOfrecida.tipoCliente" card-details>
+      <span>Tipo de cliente: {{ infoOfertaOfrecida.tipoCliente }}</span>
+    </div>
+    <div *ngIf="infoOfertaOfrecida.tipoRecurso" card-details>
+      <span>Tipo de recurso: {{ infoOfertaOfrecida.tipoRecurso }}</span>
+    </div>
+
+    <!-- AGREGAR LOGICA PARA FIRMANTES  -->
+    <div card-details>
+      <span> Kit: {{ infoOfertaOfrecida.glosaProducto }} </span>
+    </div>
+    <div card-details>
+      <span> Precio autorizado: {{ infoOfertaOfrecida.autorizacion }} </span>
+    </div>
+    <div
+      *ngIf="
+        infoOfertaOfrecida.montoInstalacion &&
+        infoOfertaOfrecida.montoInstalacion !== null
+      "
+      card-details
+    >
+      <span>
+        Precio normal instalación:
+        {{ formatPrice(infoOfertaOfrecida.montoInstalacion) }}
+      </span>
+    </div>
+    <div
+      *ngIf="
+        infoOfertaOfrecida.montoInstalacion &&
+        infoOfertaOfrecida.montoInstalacion !== null
+      "
+      card-details
+    >
+      <span>
+        Medios de pago instalación:
+        {{ infoOfertaOfrecida.medioPagoInstalacion }}
+      </span>
+    </div>
+
+    <div
+      *ngIf="
+        infoOfertaOfrecida.montoServicio &&
+        infoOfertaOfrecida.montoServicio !== null
+      "
+      card-details
+    >
+      <span>
+        Precio normal monitoreo:
+        {{ replaceDotWithComma(infoOfertaOfrecida.montoServicio) }}
+        {{ ' ' + infoOfertaOfrecida.monedaServicio }}</span
+      >
+    </div>
+    <div
+      *ngIf="
+        infoOfertaOfrecida.medioPagoMonitoreo &&
+        infoOfertaOfrecida.medioPagoMonitoreo !== null
+      "
+      card-details
+    >
+      <span>
+        Medios de pago monitoreo: {{ infoOfertaOfrecida.medioPagoMonitoreo }}
+      </span>
+    </div>
+
+    <div
+      *ngIf="
+        infoOfertaOfrecida.tipoCuotaGlosa &&
+        infoOfertaOfrecida.tipoCuotaGlosa !== null
+      "
+      card-details
+    >
+      <span>
+        Detalle Precio: {{ infoOfertaOfrecida.tipoCuotaGlosa }}
+      </span>
+    </div>
+
+    <div card-details *ngIf="infoOfertaOfrecida.permiteCupon">
+      <span> Disponible Descuento Cupon </span>
+    </div>
+    <div card-details *ngIf="infoOfertaOfrecida.permiteRenove">
+      <span> Descuento: Aplica Renove </span>
+    </div>
+  </verisure-card-item>
+
+</div>

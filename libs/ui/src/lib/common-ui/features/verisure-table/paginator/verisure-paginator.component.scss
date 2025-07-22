@@ -1,0 +1,44 @@
+@use '../../../../../styles/global-theme.scss' as theme;
+@use '../../../components/input/input.component.scss' as input;
+
+verisure-paginator {
+    verisure-input {
+        @include input.VerisureInputs(theme.$my-theme);
+    }
+}
+
+.verisure-paginator {
+    height: 65px;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 15px;
+    padding: 0px 25px;
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    text-align: end;
+    margin-top: 10px;
+    border: 1px solid #DCDDDE;
+    border-radius: 8px;
+    background: #fff;
+}
+
+.btn-paginator {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #EB002F;
+    color: #EB002F;
+    font-size: large;
+    cursor: pointer;
+
+    &:disabled {
+        background: #DCDDDE;
+        border: 2px solid #DCDDDE;
+        color: #BEC0C2;
+    }
+}

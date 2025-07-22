@@ -1,0 +1,137 @@
+<div class="dialog-condiciones">
+  <div mat-dialog-title>
+    <svg
+      width="36"
+      height="36"
+      viewBox="0 0 36 36"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M16 36H4C1.8 36 0 34.2 0 32V4C0 1.8 1.8 0 4 0H16V36ZM20 36H32C34.2 36 36 34.2 36 32V18H20V36ZM36 14V4C36 1.8 34.2 0 32 0H20V14H36Z"
+        fill="#59616E"
+      />
+    </svg>
+    <button class="btn-modal-close" (click)="closeModal()">x</button>
+  </div>
+  <p class="modal-condiciones-title">
+    Maestro segmento: {{ action === 'add' ? 'creación' : 'edición' }} de
+    <span style="text-transform: lowercase">{{ module }}</span>
+  </p>
+  <verisure-alert
+    *ngIf="hasError"
+    style="padding-top: 20px"
+    @alertAnimation
+    size="md"
+    [label]="messageError"
+    type="error"
+  ></verisure-alert>
+  <p class="modal-condiciones-subtitle">
+    Completa los campos para
+    {{ data.config.action === 'add' ? 'crear un nuevo' : 'editar un' }} segmento
+  </p>
+
+  <mat-dialog-content [formGroup]="form">
+    <form
+      [formGroup]="form"
+      style="display: flex; flex-direction: column; gap: 12px"
+    >
+      <div>
+        <div class="col-5">
+          <verisure-input
+            [control]="$any(form.controls['motorReglasId'])"
+            type="text"
+            label="ID Motor de Reglas (MR)"
+            placeholder=""
+          >
+          </verisure-input>
+        </div>
+        <div class="col-5">
+          <verisure-input
+            [control]="$any(form.controls['verisureId'])"
+            type="text"
+            label="ID Verisure (VS)"
+            placeholder=""
+          >
+          </verisure-input>
+        </div>
+      </div>
+      <div>
+        <div class="col-5">
+          <verisure-input
+            [control]="$any(form.controls['agrupacion'])"
+            type="text"
+            label="Agrupación"
+            placeholder=""
+            [disabled]="true"
+          >
+          </verisure-input>
+        </div>
+        <div class="col-5">
+          <verisure-input
+            [control]="$any(form.controls['glosa'])"
+            type="text"
+            label="Glosa"
+            placeholder=""
+          >
+          </verisure-input>
+        </div>
+      </div>
+      <div class="col-10">
+        <verisure-input
+          [control]="$any(form.controls['descripcion'])"
+          type="text"
+          label="Descripción"
+          placeholder=""
+          #input1
+          width="100%"
+        >
+        </verisure-input>
+      </div>
+      <hr />
+      <mat-dialog-actions
+        style="
+          border-top: 1px solid #b1b1b1 !important;
+          padding-top: 15px !important;
+        "
+      >
+        <div class="actions-container">
+          <div class="col-5">
+            <p>
+              ¿Quieres {{ data.action === 'add' ? 'crear' : 'editar' }} ésta
+              {{ module }}?
+            </p>
+          </div>
+          <div class="col-5">
+            <div style="display: block">
+              <div class="col-5 col-btn">
+                <verisure-button
+                  type="button"
+                  (onClick)="closeModal()"
+                  variant="accent"
+                  size="medium"
+                >
+                  <p content>Cancelar</p>
+                </verisure-button>
+              </div>
+              <div class="col-5 col-btn">
+                <verisure-button
+                  type="button"
+                  (onClick)="saveData()"
+                  variant="primary"
+                  size="medium"
+                  [disabled]="form.invalid"
+                >
+                  <p content>
+                    {{ action === 'add' ? 'Crear' : 'Guardar' }}
+                    <!-- <span style="text-transform: lowercase">{{ module }}</span> -->
+                  </p>
+                </verisure-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+</div>

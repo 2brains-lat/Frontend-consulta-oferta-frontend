@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+
+:host {
+  font-family: 'Fira Sans', sans-serif;
+}
+
+@mixin VerisureBack($theme) {
+  .back {
+    width: max-content;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    cursor: pointer;
+    padding: 8px;
+    gap: 24px;
+    align-items: center;
+
+    img.icon-redirect {
+      width: 18px;
+      height: 18px;
+      rotate: (180deg);
+    }
+
+    span {
+      font-size: 16px;
+      color: #636466;
+      font-weight: 700;
+    }
+  }
+}

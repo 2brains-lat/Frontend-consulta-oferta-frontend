@@ -1,0 +1,36 @@
+@use '../../../../styles/global-theme.scss' as theme;
+@use '../../components/input/input.component.scss' as input;
+@use '../../components/button/button.component.scss' as btn;
+@use '../../components/list-menu/list-menu.component.scss' as menulist;
+
+verisure-searchbar-list-admin {
+  verisure-input {
+    @include input.VerisureInputs(theme.$my-theme);
+  }
+
+  verisure-button {
+    @include btn.VerisureButton(theme.$my-theme);
+  }
+
+  verisure-list-menu {
+    @include menulist.VerisureListMenu(theme.$my-theme);
+  }
+
+  .searchbar-container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    gap: 16px;
+    width: 100%;
+    height: 80px;
+
+    /* Secondary/w */
+    background: #ffffff;
+    /* Secondary/200 */
+    border: 1px solid #dcddde;
+    border-radius: 8px;
+  }
+}

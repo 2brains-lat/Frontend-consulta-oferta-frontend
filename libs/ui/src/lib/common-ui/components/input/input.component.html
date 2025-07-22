@@ -1,0 +1,214 @@
+<div style="display: flex; align-items: center; position: relative">
+  <mat-form-field
+    class="input-form-field"
+    *ngIf="type === 'text' || type === 'search' || type === 'search-select'"
+    appearance="fill"
+    floatLabel="always"
+    [ngStyle]="{ width: width }"
+    style="padding: 0px 0px !important"
+  >
+    <mat-label class="label">{{ label }}</mat-label>
+
+    <!-- INPUT -->
+
+    <input
+      [type]="type === 'search-select' ? 'search' : type"
+      [class]="type === 'search-select' ? 'search' : type"
+      [disabled]="disabled"
+      matInput
+      #matInput
+      (keyup)="onChangeEvent($event.target)"
+      [formControl]="formControl"
+      [errorStateMatcher]="matcher"
+      [placeholder]="placeholder"
+    />
+    <!-- suffix / prefixx-->
+
+    <!--  -->
+    <mat-hint class="helper" align="end">
+      <ng-content select="[helper]"></ng-content>
+    </mat-hint>
+    <mat-error
+      *ngIf="formControl.hasError('customError')"
+      style="font-size: 12px !important; margin-top: -8px"
+    >
+      {{formControl.errors?.['customError']}}
+    </mat-error>
+
+    <!-- ERRORS HANDLES -->
+    <!-- <mat-hint>Errors appear instantly!</mat-hint> -->
+    <mat-error
+      *ngIf="formControl.hasError('email') && !formControl.hasError('required')"
+      style="margin-top: -8px"
+    >
+      Porfavor ingresar un correo válido
+    </mat-error>
+    <mat-error
+      *ngIf="formControl.hasError('required')"
+      style="margin-top: -8px"
+    >
+      {{ label }} es <strong>obligatorio</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <span
+    *ngIf="type === 'search' || type === 'search-select'"
+    class="suffix-search"
+  >
+    <!-- <object class="icon" data="/assets/icons/search-grey.svg"></object> -->
+    <div class="button-search">
+      <button
+        [ngClass]="
+          formControl.value === '' || formControl.errors ? 'disabled' : ''
+        "
+        (click)="sendSearch()"
+      >
+        <span>Buscar</span>
+        <img
+          *ngIf="formControl.value === '' || formControl.errors"
+          class="icon search-icon"
+          width="10px"
+          height="10px"
+          svg
+          src="/assets/icons/search-grey.svg"
+          alt=""
+        />
+        <img
+          *ngIf="formControl.value !== '' && !formControl.errors"
+          class="icon search-icon"
+          width="10px"
+          height="10px"
+          svg
+          src="/assets/icons/button-search-red.svg"
+          alt=""
+        />
+      </button>
+    </div>
+  </span>
+
+  <!--  SELECTOR -->
+  <mat-form-field
+    class="select-form-field"
+    [ngStyle]="{ width: width }"
+    *ngIf="type === 'select'"
+    appearance="fill"
+    style="padding: 0px; width: fit-content"
+    floatLabel="always"
+  >
+    <mat-label class="label">{{ label }}</mat-label>
+
+    <!--   SELECTOR  -->
+    <mat-select
+      [(value)]="state"
+      panelClass="mat-selector"
+      [formControl]="formControl"
+      [placeholder]="placeholder"
+    >
+      <mat-option [value]="null" options disabled>{{ label }}</mat-option>
+      <ng-container *ngIf="yet">
+        <mat-option *ngFor="let option of options" [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+    <!--  -->
+    <mat-error
+      *ngIf="formControl.hasError('required')"
+      style="margin-top: -8px"
+    >
+      {{ label }} es <strong>obligatorio</strong>
+    </mat-error>
+    <!--  -->
+    <div style="display: none" *ngIf="!yet">
+      <ng-content></ng-content>
+    </div>
+  </mat-form-field>
+
+  <!-- DATE (miss styles)-->
+  <mat-form-field *ngIf="type === 'date'" floatLabel="always">
+    <mat-label>{{ label }}</mat-label>
+    <input matInput [matDatepicker]="picker" />
+    <mat-hint>
+      <ng-content select="[helper]"></ng-content>
+    </mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <!-- SELECTOR MULTIPLE -->
+  <mat-form-field
+    class="select-form-field"
+    [ngStyle]="{ width: width }"
+    *ngIf="type === 'multiselect'"
+    appearance="fill"
+    style="padding: 0px; width: fit-content"
+    floatLabel="always"
+  >
+    <mat-label class="label">{{ label }}</mat-label>
+    <mat-select
+      [(value)]="stateMultiselect"
+      panelClass="mat-selector"
+      [formControl]="formControl"
+      [placeholder]="placeholder"
+      multiple
+    >
+      <mat-option [value]="null" options disabled>{{ label }}</mat-option>
+      <ng-container *ngIf="yet">
+        <mat-option *ngFor="let option of options" [value]="option.value">
+          {{ option.label }}
+        </mat-option>
+      </ng-container>
+    </mat-select>
+
+    <mat-error
+      *ngIf="formControl.hasError('required')"
+      style="margin-top: -8px"
+    >
+      {{ label }} es <strong>obligatorio</strong>
+    </mat-error>
+
+    <div style="display: none" *ngIf="!yet">
+      <ng-content></ng-content>
+    </div>
+  </mat-form-field>
+</div>
+<!-- {{ formControl.value }}
+<ul class="list-group list-group-flush">
+  <li
+    class="list-group-item"
+    *ngFor="let option of options | appFilter : formControl.value"
+    appHighlight
+    [searchedWord]="formControl.value"
+    [content]="option.label"
+    classToApply="font-weight-bold"
+    [setTitle]="true"
+  >
+    {{ option.label }}
+  </li>
+</ul> -->
+
+<ul
+  class="list-search-group"
+  *ngIf="
+    type === 'search-select' &&
+    yet &&
+    !(suggestionSelectionValue.length > 0) &&
+    formControl.value.length > 0
+  "
+>
+  <mat-option
+    *ngFor="let option of options | appFilter : formControl.value"
+    appHighlight
+    [searchedWord]="formControl.value"
+    [content]="option.label"
+    classToApply="font-weight-bold"
+    [setTitle]="true"
+    class="search-select"
+    (click)="suggestionSelected(option.value, option.label)"
+    clickable
+  >
+    <div>
+      {{ option.label }}
+    </div>
+  </mat-option>
+</ul>

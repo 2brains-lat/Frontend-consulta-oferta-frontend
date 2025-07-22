@@ -1,0 +1,136 @@
+.card-reglas-title {
+  /* body2/bold */
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.85rem;
+
+  line-height: 32px;
+  /* or 114% */
+  display: flex;
+  align-items: center;
+  color: #636466;
+}
+.fileInput {
+  position: absolute;
+  cursor: pointer;
+  opacity: 0;
+  height: 39px;
+  width: 190px;
+}
+button[mat-menu-item] > span::before {
+  content: '.';
+  display: inline-block;
+  font-weight: 900;
+  padding: 4px;
+  transform: TRANSLATEY(-5px) TRANSLATEX(-5px);
+  color: #ed1c2c;
+}
+verisure-reglas-de-negocio verisure-tiny-card .main-info img.icon {
+  width: 12px;
+  height: 12px;
+  padding: 4px;
+}
+.reglas-content-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 32px;
+  grid-template-rows: 2fr 2fr;
+  grid-auto-rows: auto;
+  grid-template-rows: 1fr;
+  @media only screen and (max-width: 767px) {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.card-reglas-content {
+  /* body2/bold */
+
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.85rem;
+  line-height: 16px;
+  /* or 114% */
+
+  display: flex;
+  align-items: center;
+  color: #636466;
+}
+
+.reglas-menu-icon {
+  /* Primary/100 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  background: #ffebef;
+  border-radius: 8px;
+  padding: auto;
+  min-width: 72px;
+  width: 10%;
+  height: 72px;
+}
+a:link,
+a:visited,
+a:active {
+  text-decoration: none;
+}
+verisure-dashboard verisure-alert .alerta.sm .left-info,
+verisure-reglas-de-negocio verisure-alert .alerta.sm .left-info {
+  gap: 0px !important;
+}
+verisure-alert .alerta.sm.success-tiny {
+  padding: 0px !important;
+}
+verisure-reglas-de-negocio .reglas-card-info {
+  display: flex;
+  flex-direction: row !important;
+  gap: 16px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #efebeb;
+  padding-bottom: 7;
+  align-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+verisure-alert .alerta.sm {
+  padding: 0px 4px !important;
+}
+
+verisure-tiny-card .main-info img.icon {
+  width: 12px !important;
+  height: 12px !important;
+  /* padding: 4px; */
+}
+.footer-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+verisure-reglas-de-negocio verisure-tiny-card .main-info img.icon {
+  width: 14px;
+  height: 14px;
+  /* padding: 4px; */
+}
+.file-tag {
+  /* label/regular */
+
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+
+  /* Secondary/500 */
+
+  color: #8a8c8e;
+}
+object {
+  & svg {
+    color: blue;
+  }
+}

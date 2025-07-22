@@ -1,0 +1,55 @@
+<div @alertAnimation *ngIf="status !== null" class="alert-container">
+  <verisure-alert
+    [label]="status.message"
+    [type]="status.status > 200 || status.status < 300 ? 'success' : 'error'"
+  ></verisure-alert>
+</div>
+
+<div class="container">
+  <verisure-button
+    type="button"
+    (onClick)="DownloadAll()"
+    variant="primary"
+    size="large"
+    width="100%"
+    *ngIf="lastLevel === actualLevel"
+    style="
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 24px;
+      /* identical to box height, or 150% */
+
+      text-align: center;
+    "
+  >
+    <p content>Descargar resumen de la oferta</p>
+    <object svg data="assets/icons/download-white-icon.svg"></object>
+  </verisure-button>
+
+  <verisure-button
+    type="button"
+    (onClick)="goTo(actualLevel + 1)"
+    variant="primary"
+    size="large"
+    width="100%"
+    [disabled]="isDisabled"
+    *ngIf="lastLevel !== actualLevel"
+  >
+    <p content>Siguiente</p>
+  </verisure-button>
+  <!-- <verisure-button
+    type="button"
+    (onClick)="goTo(0)"
+    variant="accent"
+    size="large"
+    width="100%"
+    *ngIf="lastLevel === actualLevel"
+  >
+    <p content>Volver a Kit inicial</p>
+  </verisure-button> -->
+  <a *ngIf="!ignoreBackToConsult" href="/panel">Volver a nueva consulta</a>
+
+  <!--   [disabled]="!form.valid" -->
+</div>

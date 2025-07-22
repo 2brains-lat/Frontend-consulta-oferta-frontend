@@ -1,0 +1,165 @@
+<div class="dialog-productos">
+  <div mat-dialog-title>
+    <svg
+      width="36"
+      height="36"
+      viewBox="0 0 36 36"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M16 36H4C1.8 36 0 34.2 0 32V4C0 1.8 1.8 0 4 0H16V36ZM20 36H32C34.2 36 36 34.2 36 32V18H20V36ZM36 14V4C36 1.8 34.2 0 32 0H20V14H36Z"
+        fill="#59616E"
+      />
+    </svg>
+    <button class="btn-modal-close" (click)="closeModal()">x</button>
+  </div>
+  <p class="modal-productos-title">
+    {{ title }}
+  </p>
+  <verisure-alert
+    *ngIf="hasError"
+    style="padding-top: 20px"
+    @alertAnimation
+    size="md"
+    [label]="messageError"
+    type="error"
+  ></verisure-alert>
+  <p class="modal-productos-subtitle">
+    Completa los campos para {{ data.action === 'add' ? 'crear' : 'editar' }} el
+    nuevo producto
+  </p>
+
+  <mat-dialog-content [formGroup]="formProduct">
+    <form style="display: flex; flex-direction: column; gap: 12px">
+      <div>
+        <div class="col-5">
+          <verisure-input
+            [control]="$any(formProduct.controls['descripcion'])"
+            type="text"
+            label="Descripción"
+            placeholder=""
+          >
+          </verisure-input>
+        </div>
+        <div class="col-5">
+          <div class="select-items">
+            <verisure-input
+              label="Tipo de ítem"
+              [control]="$any(formProduct.controls['tipoItem'])"
+              type="select"
+              width="100%"
+              placeholder="Seleccionar"
+            >
+              <mat-option
+                options
+                *ngFor="let option of tipoItemOptions"
+                [value]="option.key"
+                >{{ option.value }}</mat-option
+              >
+            </verisure-input>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="col-5">
+          <div class="select-items">
+            <verisure-input
+              *ngIf="changedSubtipo"
+              label="Sub tipo"
+              [control]="$any(formProduct.controls['subtipo'])"
+              type="select"
+              width="100%"
+              placeholder="Seleccionar"
+              [disabled]="
+                !$any(formProduct.controls['tipoItem']).valid ||
+                subtiposOptions.length === 0
+              "
+            >
+              <mat-option
+                options
+                *ngFor="let option of subtiposOptions"
+                [value]="option.key"
+                >{{ option.value }}</mat-option
+              >
+            </verisure-input>
+
+            <span
+              *ngIf="!changedSubtipo"
+              style="
+                font-family: Fira Sans;
+                font-style: normal;
+                font-weight: 400;
+                color: #0009;
+              "
+              >Cargando suptipos asociados...</span
+            >
+          </div>
+        </div>
+        <div class="col-5">
+          <verisure-input
+            [control]="$any(formProduct.controls['idVerisureSuperCuota'])"
+            type="text"
+            label="Id Verisure Supercuota (VS supercuota)"
+            placeholder=""
+          >
+          </verisure-input>
+        </div>
+      </div>
+      <div class="col-5">
+        <verisure-input
+          [control]="$any(formProduct.controls['idVerisure'])"
+          type="text"
+          label="Id Verisure VS"
+          placeholder=""
+          #input1
+          width="100%"
+        >
+        </verisure-input>
+      </div>
+
+      <mat-dialog-actions
+        style="
+          border-top: 1px solid #b1b1b1 !important;
+          padding-top: 15px !important;
+        "
+      >
+        <div class="actions-container">
+          <div class="col-5">
+            <p>
+              ¿Quieres {{ data.action === 'add' ? 'crear' : 'editar' }} este
+              producto?
+            </p>
+          </div>
+          <div class="col-5">
+            <div style="display: block">
+              <div class="col-5 col-btn">
+                <verisure-button
+                  type="button"
+                  (onClick)="closeModal()"
+                  variant="accent"
+                  size="medium"
+                >
+                  <p content>Cancelar</p>
+                </verisure-button>
+              </div>
+              <div class="col-5 col-btn">
+                <verisure-button
+                  type="button"
+                  (onClick)="saveData()"
+                  variant="primary"
+                  size="medium"
+                  [disabled]="formProduct.invalid"
+                >
+                  <p content>
+                    {{ data.action === 'add' ? 'Crear' : 'Guardar' }}
+                  </p>
+                </verisure-button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </mat-dialog-actions>
+    </form>
+  </mat-dialog-content>
+</div>

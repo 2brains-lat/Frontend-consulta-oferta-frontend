@@ -1,0 +1,92 @@
+<div class="info-history">
+  <div class="header-history">
+    <div class="header-icon">
+      <img class="icon" [src]="urlIcon" alt="" />
+    </div>
+    <div
+      class="head"
+      [ngClass]="windowCurrentWidth <= 350 ? 'lower-width-phone' : ''"
+    >
+      <span class="name-text">
+        {{
+          content.usuario.name === null || content.usuario.name === ''
+            ? '(Nombre sin indicar)'
+            : content.usuario.name
+        }}</span
+      >
+      -
+      <span>
+        {{
+          content.usuario.rut === null || content.usuario.rut === ''
+            ? '(RUT sin indicar)'
+            : content.usuario.rut
+        }}</span
+      >
+    </div>
+  </div>
+
+  <div class="content-history">
+    <ng-container *ngFor="let item of offersArr">
+      <div class="card-offer" *ngIf="item.ofertaId !== ''">
+        <div class="item-oferta id">ID OFERTA: {{ item.ofertaId }}</div>
+        <div class="item-oferta prospecto">
+          N° de prospecto: {{ item.ofertaProspecto }}
+        </div>
+        <div class="item-oferta fecha">
+          <verisure-tiny-card
+            [icon]="'icon-calendar-user'"
+            [label]="'Consultado: ' + item.ofertaFecha.value"
+            width="fit-content"
+          ></verisure-tiny-card>
+        </div>
+        <ng-container *ngIf="item.ofertaPrecio !== ''">
+          <div class="item-oferta precio">
+            <!-- <div>Precio vendedor para instalación:</div> -->
+            <div>
+              {{ item.ofertaPrecio }}
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="item.ofertaPrecio === ''">
+          <verisure-alert
+            class="precio alert-not-price"
+            [label]="'No has seleccionado un precio de la oferta'"
+            [type]="'warning'"
+          ></verisure-alert>
+        </ng-container>
+
+        <div class="buttons-actions">
+          <verisure-button
+            type="submit"
+            variant="ghost"
+            [size]="windowCurrentWidth <= 360 ? 'small' : 'medium'"
+            (onClick)="goToFullOffer(item.ofertaId)"
+          >
+            <p content>Oferta completa</p>
+            <object svg data="assets/icons/icon-full-offer.svg"></object>
+          </verisure-button>
+
+          <verisure-button
+            type="submit"
+            [disabled]="item.ofertaPrecio === ''"
+            variant="accent"
+            [size]="windowCurrentWidth <= 360 ? 'small' : 'medium'"
+            (onClick)="goToResumeOffer(item.ofertaId)"
+          >
+            <p content>Resumen</p>
+            <object
+              *ngIf="item.ofertaPrecio !== ''"
+              svg
+              data="assets/icons/icon-resume-offer.svg"
+            ></object>
+            <object
+              *ngIf="item.ofertaPrecio === ''"
+              svg
+              data="assets/icons/icon-resume-offer-disable.svg"
+            ></object>
+          </verisure-button>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

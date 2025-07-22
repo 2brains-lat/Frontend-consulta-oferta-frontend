@@ -1,0 +1,11 @@
+<button
+  [ngStyle]="{ width: width }"
+  class="{{ variant }} {{ size }} {{ onlyIcon ? 'onlyIconMode' : '' }}"
+  (click)="callBack()"
+  [type]="type"
+  [disabled]="disabled"
+>
+  <ng-content #content2 select="p[content]"></ng-content>
+  <ng-content class="small-icon" select="[svg]"></ng-content>
+  <!-- icon -->
+</button>

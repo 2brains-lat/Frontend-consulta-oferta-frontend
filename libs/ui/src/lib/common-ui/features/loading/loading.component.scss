@@ -1,0 +1,41 @@
+@mixin VerisureLoader() {
+  & {
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    z-index: 2000;
+    background-color: white;
+    display: flex;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: space-around;
+    flex-direction: column !important;
+
+    & ng-lottie {
+      height: 10rem !important;
+      padding-bottom: 20px;
+    }
+
+    .message {
+      display: block;
+      /* body1/regular */
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 24px;
+      /* or 150% */
+
+      text-align: center;
+
+      /* Secondary/500 */
+
+      color: #8a8c8e;
+    }
+  }
+}
+
+.loader {
+  @include VerisureLoader();
+}

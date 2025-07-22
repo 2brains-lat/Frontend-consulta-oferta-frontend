@@ -1,0 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+
+:host {
+  font-family: 'Fira Sans', sans-serif;
+}
+
+@mixin VerisureCardEmphasis($theme) {
+  .emphasis {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-content: center;
+    padding-top: 8px;
+
+    .emphasis-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-content: center;
+      padding: 0px;
+      border-width: 0px 0px 1px 8px;
+      border-style: solid;
+      border-color: #ffebef;
+
+      &.active {
+        border-color: #ff5274;
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+
+        justify-content: center;
+        width: -webkit-fill-available;
+        font-family: 'Fira Sans', sans-serif;
+
+        .mat-mdc-radio-button .mdc-radio {
+          // padding-left: 0px !important;
+        }
+        .mdc-form-field,
+        label {
+          width: -webkit-fill-available;
+        }
+      }
+
+      .pack-info {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding-left: 8px;
+        .info-detail {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          color: #636466;
+          padding-bottom: 8px;
+
+          .monitoreo-info {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+
+            .title-m {
+              display: flex;
+              width: 100%;
+              justify-content: space-between;
+
+              .text-m {
+                padding-bottom: 4px;
+              }
+            }
+
+            .packs {
+              font-weight: bold;
+            }
+          }
+        }
+      }
+    }
+  }
+}

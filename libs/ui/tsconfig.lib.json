@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc",
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSources": true,
+    "types": [],
+    "lib": ["ES2021.String", "dom"]
+  },
+  "exclude": [
+    "src/test-setup.ts",
+    "src/**/*.spec.ts",
+    "jest.config.ts",
+    "src/**/*.test.ts"
+  ],
+  "include": [
+    "src/**/*.ts",
+    "src/lib/common-ui/animations/enterState.ts",
+    "../services/src/lib/routing/routing.service.spec.ts"
+  ]
+}

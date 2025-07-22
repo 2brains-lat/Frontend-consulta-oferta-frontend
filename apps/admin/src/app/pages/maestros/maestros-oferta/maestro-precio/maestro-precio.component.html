@@ -1,0 +1,125 @@
+<div>
+  <verisure-searchbar-list-admin
+    #searchbar
+    [formBarSearch]="formSearch"
+    [onChangeTab]="tabItem"
+    titleButtonAdd="precio"
+    (searchEvent)="getNewSearch($event)"
+    (clickItem)="clickAddItem($event)"
+    [disableButtonAdd]="
+      productosOptions === undefined || productosOptions.length < 0
+    "
+  >
+    <div class="filter-dropdown" filter-content>
+      <verisure-multicheckbox
+        [label]="'Categoría'"
+        [keyOption]="'key'"
+        [labelOption]="'value'"
+        [catalog]="catalogs.categoriasOptions"
+        [control]="$any(form.controls['categoriasOptions'])"
+      >
+      </verisure-multicheckbox>
+
+      <verisure-multicheckbox
+        [label]="'Estado'"
+        [keyOption]="'key'"
+        [labelOption]="'value'"
+        [catalog]="catalogs.estadoOptions"
+        [control]="$any(form.controls['estadoOptions'])"
+      >
+      </verisure-multicheckbox>
+
+      <div class="container-buttons-dropdown">
+        <verisure-button
+          type="button"
+          (onClick)="applyFilter()"
+          variant="accent"
+          size="large"
+          style="width: 95%"
+        >
+          <p content>Aplicar filtro</p>
+        </verisure-button>
+        <verisure-button
+          type="button"
+          (onClick)="cleanFilter()"
+          variant="ghost"
+          size="large"
+          style="width: 95%"
+        >
+          <p style="color: #000" content>Limpiar filtro</p>
+          <object svg data="assets/icons/trash-icon.svg"></object>
+        </verisure-button>
+      </div>
+    </div>
+  </verisure-searchbar-list-admin>
+
+  <div style="margin-top: 25px; width: 100%" *ngIf="hasAdded">
+    <verisure-alert
+      style="padding-top: 20px"
+      @alertAnimation
+      size="md"
+      [label]="messageAlertList"
+      type="success-tiny"
+    ></verisure-alert>
+  </div>
+  <div style="margin-top: 25px; width: 100%" *ngIf="showMsgErrorProducts">
+    <verisure-alert
+      style="padding-top: 20px"
+      @alertAnimation
+      size="md"
+      label="Disculpe, debe agregar al menos un Producto (Kit o Pack) para poder agregar/asociar un nuevo Precio!"
+      type="warning"
+    ></verisure-alert>
+  </div>
+
+  <div class="card-container">
+    <verisure-badge
+      [keyOption]="'key'"
+      [labelOption]="'value'"
+      [catalogs]="catalogs"
+      [labels]="labelsCatalog"
+      [models]="query"
+      (clickItem)="clickItem($event)"
+    ></verisure-badge>
+
+    <verisure-table
+      [displayedColumns]="displayedColumns"
+      [dataSource]="elementData"
+      [page]="currentPage"
+      [limit]="totalPaginas"
+      [totalItems]="totalItems"
+      (nextPage)="nextPage()"
+      (prevPage)="prevPage()"
+      (changeLimitPage)="changeLimit($event)"
+      *ngIf="productosOptions !== undefined && productosOptions.length > 0"
+    >
+    </verisure-table>
+    <ng-template #toggle let-data="item">
+      <div class="toggle-theme">
+        <mat-slide-toggle
+          #toggle
+          color="primary"
+          [checked]="data.activo"
+          (change)="changeToggle(data)"
+        ></mat-slide-toggle>
+      </div>
+    </ng-template>
+
+    <ng-template #btn let-data="item">
+      <verisure-button
+        type="button"
+        (onClick)="edit(data)"
+        variant="ghost"
+        size="medium"
+      >
+        <img
+          width="15px"
+          height="20px"
+          svg
+          src="assets/icons/edit-icon-list.svg"
+          alt="Editar"
+        />
+      </verisure-button>
+    </ng-template>
+  </div>
+</div>

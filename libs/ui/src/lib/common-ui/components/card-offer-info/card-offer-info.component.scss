@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+
+:host {
+  font-family: 'Fira Sans', sans-serif;
+}
+
+@mixin VerisureCradOfferInfo($theme) {
+  .share-page-url {
+    display: flex;
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.85rem;
+    gap: 8px;
+    line-height: 12px;
+    text-align: center;
+    color: #eb002f;
+    align-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius: 64px;
+    -webkit-border-radius: 64px;
+    -moz-border-radius: 64px;
+    -ms-border-radius: 64px;
+    -o-border-radius: 64px;
+    padding: 10px 20px;
+    &:hover {
+      color: #970825;
+      background-color: #eb002f;
+    }
+    object {
+      cursor: pointer;
+      width: 12px;
+      height: 12px;
+    }
+  }
+  .offer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+
+    & > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+      align-content: center;
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-size: 1.1rem;
+      line-height: 24px;
+      &:nth-child(2) {
+        justify-content: space-between;
+      }
+      & span.offer-id {
+        /* body1/bold */
+        font-weight: 400 !important;
+        /* Secondary/600 */
+        color: #636466;
+        padding-right: 4px;
+      }
+    }
+  }
+}

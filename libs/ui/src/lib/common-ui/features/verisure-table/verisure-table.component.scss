@@ -1,0 +1,39 @@
+:host {
+  width: 100%;
+}
+
+table {
+  border-radius: 15px 15px 0px 0px;
+  border: 1px solid #BEC0C2;
+  background: #FAFAFA;
+}
+
+th {
+  border-radius: 20px 20px 0px 0px;
+}
+
+::ng-deep.mat-mdc-table tbody {
+  background: #ffffff !important;
+}
+
+.result-align {
+  text-align: end;
+}
+
+.th-font {
+  font-family: 'Fira Sans';
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 16px;
+  letter-spacing: 0em;
+  text-align: center;
+}
+
+.td-font {
+  font-family: 'Fira Sans';
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+}

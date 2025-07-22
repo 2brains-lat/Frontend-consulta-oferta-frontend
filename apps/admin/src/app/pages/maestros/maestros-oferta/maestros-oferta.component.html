@@ -1,0 +1,28 @@
+<div>
+  <h2>
+    Maestro Oferta:
+    <span [class]="tabItemSelected !== 'producto' ? 'text-capitalize' : ''">{{
+      title
+    }}</span>
+  </h2>
+  <verisure-tab
+    [items]="tabItems"
+    [selectedItemName]="tabItemSelected"
+    (onChange)="changeTap($event)"
+  ></verisure-tab>
+
+  <div class="list-containers">
+    <verisure-maestro-producto
+      *ngIf="tabItemSelected === 'producto'"
+      [tabItem]="tabItemSelected"
+    ></verisure-maestro-producto>
+    <verisure-maestro-precio
+      *ngIf="tabItemSelected === 'precio'"
+      [tabItem]="tabItemSelected"
+    ></verisure-maestro-precio>
+    <verisure-maestro-condiciones
+      *ngIf="tabItemSelected === 'condiciones'"
+      [tabItem]="tabItemSelected"
+    ></verisure-maestro-condiciones>
+  </div>
+</div>

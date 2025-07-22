@@ -1,0 +1,14 @@
+// @use '../../../global-theme.scss' as theme;
+// @use './button/button.component.scss' as btn;
+@import './button//button.component.scss';
+
+
+// verisure-button  {
+//     @include btn.VerisureButton(theme.$my-theme);
+// }
+
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+
+:host {
+  font-family: 'Fira Sans', sans-serif;
+}

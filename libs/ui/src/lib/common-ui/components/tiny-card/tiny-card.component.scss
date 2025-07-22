@@ -1,0 +1,46 @@
+@mixin VerisureTinyCard($theme) {
+  & {
+    .main-info {
+      display: flex;
+      align-items: center;
+      align-content: center;
+      border: 1px solid #262626;
+      border-radius: 4px;
+      padding: 8px 8px;
+      color: #262626;
+      background-color: #fff;
+
+      img.icon {
+        width: 12px;
+        height: 12px;
+        padding: 4px;
+      }
+      @media only screen and (max-width: 600px) {
+        padding: 2px 4px;
+        & span {
+          font-size: 0.87rem;
+          line-height: 14px;
+          /* Secondary/700 */
+          color: #262626;
+        }
+      }
+    }
+    .main-info.small {
+      padding: 2px 2px;
+      & span {
+        font-size: 12px !important;
+        /* label/regular */
+
+        font-family: 'Fira Sans';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 14px;
+
+        /* Secondary/700 */
+
+        color: #262626;
+      }
+    }
+  }
+}

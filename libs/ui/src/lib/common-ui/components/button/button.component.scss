@@ -1,0 +1,219 @@
+@use '../../../../styles/global-theme.scss' as globaltheme;
+//bases
+%base {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5em;
+  border: 0px solid;
+  font-family: 'Fira Sans';
+  font-style: normal;
+  font-weight: 600;
+  line-height: 16px;
+  /* identical to box height, or 114% */
+  text-align: center;
+}
+
+// BUTTON LARGE ONLY ON DESKTOP
+
+// use this mixing every time you load this component
+@mixin VerisureButton($theme) {
+  //var
+  $my-colors: map-get($theme, 'color');
+  $my-primary: map-get($my-colors, 'primary');
+  $my-secondary: map-get($my-colors, 'accent');
+  $my-borderRadius: map-get($theme, 'borderRadius');
+  $my-fontSizes: map-get($theme, 'fontSize');
+
+  button {
+    object {
+      height: 20px;
+      width: 20px;
+      padding: 4px;
+      color: map-get($my-primary, 'default-contrast');
+      fill: map-get($my-primary, 'default-contrast');
+      stroke: white;
+    }
+
+    @extend%base;
+    border-radius: map-get($my-borderRadius, 'lg');
+
+    &.primary {
+      color: map-get($my-secondary, 'w');
+      background: map-get($my-primary, 'default');
+      fill: map-get($my-primary, 'default');
+      &:hover {
+        color: map-get($my-secondary, 'w') !important;
+        background: map-get($my-primary, 500) !important;
+      }
+
+      &:target,
+      &:focus-visible {
+        outline: map-get($my-primary, 600) 2px solid;
+        outline-offset: -1px;
+        color: map-get($my-primary, 'w') !important;
+        background: map-get($my-primary, 500) !important;
+        border: none;
+      }
+
+      &:active {
+        color: map-get($my-secondary, 'w') !important;
+        background: map-get($my-primary, 600) !important;
+      }
+    }
+
+    &.accent {
+      color: map-get($my-primary, 'default');
+      background: map-get($my-secondary, 'w');
+      border: map-get($my-primary, 'default') 2px solid;
+
+      object {
+        height: 20px;
+        width: 20px;
+        padding: 4px;
+        color: map-get($my-primary, 'default');
+        fill: map-get($my-primary, 'default');
+        stroke: map-get($my-primary, 'default');
+      }
+    }
+
+    &.ghost {
+      color: map-get($my-primary, 'default');
+      background: #00000000;
+      border: map-get($my-primary, 'default') 0px solid;
+
+      object {
+        height: 20px;
+        width: 20px;
+        padding: 4px;
+        color: map-get($my-primary, 'default');
+        fill: map-get($my-primary, 'default');
+        stroke: map-get($my-primary, 'default');
+      }
+    }
+
+    &.accent,
+    &.ghost {
+      &:hover {
+        color: map-get($my-primary, 500) !important;
+        background: map-get($my-primary, 100) !important;
+
+        &:not(.ghost) {
+          border: map-get($my-primary, 500) 2px solid;
+        }
+      }
+
+      &:target,
+      &:focus-visible {
+        outline: map-get($my-primary, 600) 2px solid;
+        outline-offset: -1px;
+        color: map-get($my-primary, 'w') !important;
+        background: map-get($my-primary, 500) !important;
+        border: none;
+      }
+
+      &:active {
+        color: map-get($my-primary, 600) !important;
+        background: map-get($my-primary, 200) !important;
+
+        &:not(.ghost) {
+          border: map-get($my-primary, 600) 2px solid;
+        }
+      }
+      &.ghost:disabled,
+      &.ghost[disabled='true'] {
+        &,
+        &:active,
+        &:target,
+        &:focus-visible,
+        &:hover {
+          color: map-get($my-secondary, 300) !important;
+          background: #00000000 !important;
+          border: map-get($my-primary, 'default') 0px solid !important;
+        }
+      }
+    }
+
+    &.small {
+      height: 28px;
+      padding: 8px 16px;
+      font-size: map-get($my-fontSizes, 'sm');
+      line-height: 12px;
+
+      object {
+        height: 10px;
+        width: 10px;
+      }
+    }
+
+    &.medium {
+      height: 40px;
+      padding: 12px 24px;
+      font-size: map-get($my-fontSizes, 'md');
+      line-height: 16px;
+
+      object {
+        height: 12px;
+        width: 12px;
+      }
+    }
+
+    &.large {
+      height: 45px;
+      padding: 16px 32px;
+      font-size: map-get($my-fontSizes, 'lg');
+      line-height: 24px;
+      font-weight: 700;
+      object {
+        height: 15px;
+        width: 15px;
+      }
+      p {
+        padding-right: 2px;
+      }
+    }
+  }
+
+  & > button:disabled,
+  & > button[disabled='true'] {
+    cursor: not-allowed;
+    pointer-events: visiblePainted !important;
+  }
+  button:not(.ghost) {
+    &:disabled,
+    &[disabled='true'] {
+      &,
+      &:hover,
+      &:target,
+      &:focus,
+      &:active,
+      &:focus-visible {
+        cursor: not-allowed !important;
+        border: none !important;
+        pointer-events: visiblePainted !important;
+        background-color: map-get($my-secondary, 200) !important;
+        color: map-get($my-secondary, 300) !important;
+        border: none;
+      }
+    }
+  }
+
+  button.onlyIconMode {
+    border-radius: 100%;
+    padding: 6px !important;
+    &.medium,
+    &.large {
+      padding: 10px !important;
+    }
+
+    height: auto !important;
+  }
+
+  //////////////// CONTENT //////////////////
+  p {
+    padding-right: 4px;
+  }
+}

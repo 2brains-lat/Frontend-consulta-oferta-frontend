@@ -1,0 +1,202 @@
+<div class="kitinicial">
+  <!--  -->
+
+  <verisure-alert
+    *ngIf="offerHavePacks && haveDiscount"
+    label="<strong> Esta oferta tiene descuentos y pack. </strong>
+    Podrás ofrecerlos en los siguientes pasos."
+    type="information"
+  ></verisure-alert>
+
+  <verisure-alert
+    *ngIf="alertContent.length > 0"
+    [label]="alertContentHtml(alertContent) ?? ''"
+    type="warning"
+  ></verisure-alert>
+  <p
+    style="
+      /* body1/bold */
+
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 4px;
+      /* identical to box height, or 150% */
+
+      /* Secondary/700 */
+
+      color: #262626;
+    "
+  >
+    Selecciona el Kit a ofertar
+  </p>
+  <verisure-alert
+    *ngIf="readMode"
+    label="<strong> Este archivo es solo de lectura. </strong>
+    No podrás modificar las opciones"
+    type="warning"
+  ></verisure-alert>
+  <!-- TEST NEW KIT -->
+  <div class="custom-radio">
+    <mat-radio-group
+      aria-labelledby="radio-group-label"
+      class="radio-group"
+      [(ngModel)]="selectedKit"
+    >
+      <verisure-card-product
+        *ngFor="let kit of productsList"
+        [isActive]="
+          selectedKit !== null &&
+          selectedKit.toString() === kit.idProducto.toString()
+        "
+      >
+        <mat-radio-button
+          class="example-radio-button"
+          header
+          [value]="kit.idProducto"
+          (click)="onClickRadio($event)"
+        >
+          <div
+            [ngClass]="{
+              active:
+                selectedKit &&
+                selectedKit.toString() === kit.idProducto.toString()
+            }"
+          >
+            <object
+              [ngClass]="
+                selectedKit &&
+                kit.idProducto.toString() === selectedKit.toString()
+                  ? 'active'
+                  : ''
+              "
+              data="assets/icons/kit-icon.svg"
+              type="image/svg+xml"
+            ></object>
+            {{ kit.glosaProducto }}
+          </div>
+        </mat-radio-button>
+        <div content>
+          <verisure-alert
+            *ngIf="isKitPriceSelected(kit.idProducto, priceSelected)"
+            size="sm"
+            label="Kit seleccionado"
+            type="success"
+          ></verisure-alert>
+          <h4>Selecciona modo de pago monitoreo</h4>
+
+          <verisure-tab
+            header
+            *ngIf="reset"
+            [items]="kit.paycodeList"
+            [selectedItemName]="paycodeSelectedValue"
+            tab-form
+            (onChange)="paycodeSelectedValue = $event"
+          >
+          </verisure-tab>
+          <h4>Selecciona modo de autorización</h4>
+
+          <verisure-tab
+            header
+            [items]="authorizationList"
+            [selectedItemName]="authorizationSelectedValue"
+            tab-form
+            class="subtab"
+            (onChange)="authorizationSelected.emit($event)"
+          >
+          </verisure-tab>
+
+          <div style="margin: 10px 0px; display: flex; gap: 8px">
+            <div class="prices-legend">
+              <div>Instalación</div>
+              <div>Monitoreo</div>
+              <div>Info</div>
+            </div>
+            <div class="prices-legend only-on-desktop">
+              <div>Instalación</div>
+              <div>Monitoreo</div>
+              <div>Info</div>
+            </div>
+          </div>
+          <mat-radio-group
+            aria-labelledby="radio-group-label"
+            class="radio-group cascade-pricing"
+            [(ngModel)]="priceSelected"
+            [disabled]="readMode"
+          >
+            <verisure-card-product
+              *ngFor="let price of pricing"
+              [isActive]="
+                priceSelected === kit.idProducto + '---' + price.idDetalleOferta
+              "
+              mode="wrapper"
+              size="sm"
+            >
+              <mat-radio-button
+                class="example-radio-button"
+                header
+                (click)="onClickPriceRadio($event)"
+                [value]="kit.idProducto + '---' + price.idDetalleOferta"
+                header
+              >
+                <div class="price-wrapper">
+                  <div *ngIf="price.vigencia" style="padding-bottom: 10px">
+                    <verisure-tiny-card
+                      [icon]="'icon-calendar-user'"
+                      [label]="'Oferta hasta: ' + formatDate(price.vigencia)"
+                      width="fit-content"
+                    ></verisure-tiny-card>
+                  </div>
+
+                  <div class="price-content">
+                    <div>
+                      <div class="price-amount">
+                        {{ formatPrice(price.montoInstalacion) }}
+                      </div>
+                      <div>
+                        {{
+                          replaceThis(
+                            price.medioPagoInstalacion.toString(),
+                            ',',
+                            ' - '
+                          )
+                        }}
+                      </div>
+                    </div>
+                    <div>
+                      <div class="price-amount">
+                        {{ replaceDotWithComma(price.montoServicio) }}
+                        {{ price.monedaServicio }}
+                      </div>
+                      <div>
+                        {{
+                          replaceThis(
+                            price.medioPagoMonitoreo.toString(),
+                            ',',
+                            ' - '
+                          )
+                        }}
+                      </div>
+                    </div>
+                    <div style="justify-content: center">
+                      {{ price.datosAdicionales.tipoCuotaGlosa }}
+                    </div>
+                  </div>
+                </div>
+              </mat-radio-button>
+            </verisure-card-product>
+          </mat-radio-group>
+        </div>
+      </verisure-card-product>
+    </mat-radio-group>
+  </div>
+  <!-- [color]="subtask.color"
+  (ngModelChange)="updateAllComplete()" -->
+
+  <verisure-alert
+    label="Debes escoger un Kit para poder visualizar la cascada de precios."
+    type="default"
+    *ngIf="selectedKit === null"
+  ></verisure-alert>
+</div>

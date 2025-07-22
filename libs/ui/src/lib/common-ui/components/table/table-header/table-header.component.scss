@@ -1,0 +1,21 @@
+verisure-table-header {
+  width: 100%;
+  display: flex;
+
+  .header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 10px;
+    padding: 0 10px;
+    width: 100%;
+
+    .cell-container {
+      display: flex;
+      padding: 28px 0px;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+  }
+}

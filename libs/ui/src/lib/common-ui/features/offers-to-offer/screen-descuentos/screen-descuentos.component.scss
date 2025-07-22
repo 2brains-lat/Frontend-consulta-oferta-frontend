@@ -1,0 +1,67 @@
+@use '../../../components/input/input.component.scss' as input;
+@use '../../../../../styles/global-theme.scss' as theme;
+@use '../../../components/button/button.component.scss' as btn;
+@use '../../../components/alert/alert.component.scss' as alert;
+@use '../../../components/card-emphasis/card-emphasis.component.scss' as
+  emphasis;
+@use '../../../components/card-item/card-item.component.scss' as card;
+@use '../../../components/checkbox/checkbox.component.scss' as check;
+
+verisure-screen-descuentos {
+  & > div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  & verisure-checkbox {
+    @include check.VerisureCheckbox(theme.$my-theme);
+  }
+
+  .discount-check-wrapper {
+    display: flex;
+
+    flex-direction: row;
+    justify-content: space-between;
+    width: -webkit-fill-available;
+    padding-right: 1rem;
+    padding-bottom: 2px;
+    & span:nth-child(1) {
+      /* body1/regular */
+
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1.1rem;
+      line-height: 24px;
+    }
+
+    & span:nth-child(2) {
+      /* body1/bold */
+
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 24px;
+      text-align: right;
+    }
+  }
+
+  & verisure-input {
+    @include input.VerisureInputs(theme.$my-theme);
+  }
+
+  & verisure-button {
+    @include btn.VerisureButton(theme.$my-theme);
+  }
+  verisure-card-item {
+    @include card.VerisureCardItem(theme.$my-theme);
+  }
+  verisure-card-emphasis {
+    @include emphasis.VerisureCardEmphasis(theme.$my-theme);
+  }
+  verisure-alert {
+    @include alert.VerisureAlert(theme.$my-theme);
+  }
+}

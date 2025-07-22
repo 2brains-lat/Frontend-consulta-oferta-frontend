@@ -1,0 +1,14 @@
+<div style="height: 100vh">
+  <verisure-message-esc
+    (click)="clearStorage()"
+    [iconSvgUrl]="'assets/icons/battery-icon.svg'"
+    [textContent]="{
+      title:
+        '<strong>Acceso no autorizado
+        </strong>',
+      content: content
+    }"
+    [buttonContent]="{ label: 'Iniciar sesión', path: 'login' }"
+  >
+  </verisure-message-esc>
+</div>

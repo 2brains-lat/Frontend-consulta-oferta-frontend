@@ -1,0 +1,49 @@
+@use '../../../../styles/global-theme.scss' as theme;
+@use '../../components/button/button.component.scss' as btn;
+@use '../../components/input/input.component.scss' as input;
+
+verisure-maestros-layout {
+
+  verisure-input {
+    @include input.VerisureInputs(theme.$my-theme);
+  }
+
+  verisure-button {
+    @include btn.VerisureButton(theme.$my-theme);
+  }
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  #master-title {
+    >span {
+      font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
+      font-style: normal;
+      // font-style: bold !important;
+      font-weight: 700 !important;
+      font-size: 1rem;
+      line-height: 24px;
+      color: #262626;
+      padding-bottom: 24px;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    & {
+      gap: 20px;
+    }
+
+    #welcome-message {
+      >span {
+        font-family: 'Fira Sans', Arial, Helvetica, sans-serif;
+        font-style: normal;
+        // font-style: bold !important;
+        font-weight: 700 !important;
+        font-size: 1.5rem;
+        line-height: 64px;
+        color: #262626;
+      }
+    }
+  }
+}

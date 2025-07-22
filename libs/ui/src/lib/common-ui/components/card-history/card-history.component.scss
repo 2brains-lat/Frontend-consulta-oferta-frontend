@@ -1,0 +1,200 @@
+@use '../../../../styles/global-theme.scss' as theme;
+@use '../tiny-card/tiny-card.component.scss' as tiny;
+@use '../alert/alert.component.scss' as alert;
+
+@mixin VerisureHistoryCard($theme) {
+  verisure-tiny-card {
+    @include tiny.VerisureTinyCard(theme.$my-theme);
+  }
+
+  verisure-alert {
+    width: 100%;
+    margin-top: 6px;
+
+    &.alert-not-price {
+      margin: 6px 0px 8px 0px;
+    }
+
+    @include alert.VerisureAlert(theme.$my-theme);
+  }
+
+  .info-history {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 16px 16px;
+    background: #ffffff;
+    border: 1px solid #ffeeee;
+    border-radius: 8px;
+    margin-bottom: 16px;
+
+    .header-history {
+      width: 100%;
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 1.1rem;
+      line-height: 24px;
+      color: #636466;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      align-content: center;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #dcddde;
+
+      .header-icon {
+        width: 40px;
+        height: 40px;
+        background: #fafafa;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .icon {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+      }
+
+      .head {
+        display: flex;
+        min-width: 190px;
+        flex-direction: row;
+        // align-items: center;
+        justify-content: center;
+        font-family: 'Fira Sans';
+        font-style: normal;
+        font-weight: 700;
+        color: #636466;
+        gap: 3px;
+        position: absolute;
+        left: 20px;
+        right: 0;
+
+        @media only screen and (min-width: 768px) {
+          & {
+            justify-content: flex-start;
+            left: 100px;
+          }
+        }
+
+        .name-text {
+          text-overflow: ellipsis;
+          display: inline-block;
+          max-width: 38%;
+          width: auto;
+          white-space: nowrap;
+          overflow: hidden;
+        }
+      }
+    }
+
+    .content-history {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+
+      .card-offer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+
+        .item-oferta {
+          width: 100%;
+          margin: 0px 0px 8px 0px;
+          font-family: 'Fira Sans';
+          font-style: normal;
+          font-size: 16px;
+
+          &.id {
+            margin-top: 10px;
+            font-weight: 700;
+            color: #636466;
+          }
+
+          &.prospecto,
+          &.precio {
+            color: #636466;
+            // font-size: 16px;
+            line-height: 24px;
+          }
+        }
+
+        .precio {
+          padding-bottom: 8px;
+          border-bottom: 1px solid #dcddde;
+        }
+
+        // verisure-alert {
+        //   width: 100%;
+        //   margin-top: 6px;
+
+        //   &.alert-not-price {
+        //     margin: 6px 0px 8px 0px;
+        //   }
+
+        //   @include alert.VerisureAlert(theme.$my-theme)
+        // }
+
+        .buttons-actions {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          align-content: center;
+          padding-bottom: 8px;
+          border-bottom: 1px solid #ffb8c6;
+
+          @media only screen and (min-width: 768px) {
+            & {
+              justify-content: flex-end;
+            }
+          }
+        }
+      }
+    }
+
+    // &.expanded {
+    //   padding: 8px 16px 16px;
+    //   box-shadow: 0px 0px 16px #ffebef;
+    // }
+
+    // .content {
+    //   width: 100%;
+    //   display: none;
+    //   gap: 8px;
+    //   flex-direction: column;
+    //   margin: 8px 0px 0px 0px;
+    //   padding: 16px 0px 0px 0px;
+    //   border-top: 1px solid #dcddde;
+
+    //   .info-user {
+    //     display: flex;
+    //     width: 100%;
+    //     align-content: center;
+    //     font-family: 'Fira Sans';
+    //     font-style: normal;
+    //     font-weight: 400;
+    //     font-size: 1rem;
+    //     color: #262626;
+
+    //     &:not(:first-of-type) {
+    //       border-top: 1px solid #dcddde;
+    //       padding: 16px 0px 0px 0px;
+    //     }
+
+    //     &.first-info {
+    //       flex-direction: row;
+    //       justify-content: space-between;
+    //     }
+    //   }
+    // }
+  }
+}

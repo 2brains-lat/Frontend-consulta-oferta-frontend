@@ -1,0 +1,143 @@
+<div *ngIf="checkEnableSignature()" class="firmantes-container">
+  <div class="firmantes-title">
+    ¿Quieres conocer los firmantes de la <strong>Empresa </strong>?
+  </div>
+  <div class="firmantes-content">
+    <verisure-button
+      (onClick)="firmantesOnSubmit()"
+      *ngIf="!!!firmantes"
+      variant="accent"
+      size="large"
+    >
+      <p content>Consultar firmantes</p>
+    </verisure-button>
+    <div *ngIf="firmantes && firmantes !== null" class="card-firmantes">
+      <!-- alert -->
+      <verisure-alert
+        size="sm"
+        [type]="
+          firmantes?.exito === undefined || firmantes?.exito === null || firmantes?.resultado?.existeEnEmpresaUnDia === undefined || firmantes?.resultado?.existeEnEmpresaUnDia === null
+            ? 'error'
+            : firmantes.exito
+            ? 'success'
+            : 'warning'
+        "
+        [urlIcons]="
+          firmantes?.exito === undefined || firmantes?.exito === null || firmantes?.resultado?.existeEnEmpresaUnDia === undefined || firmantes?.resultado?.existeEnEmpresaUnDia === null
+            ? 'assets/icons/icon-error-mini-alert.svg'
+            : (firmantes.exito && firmantes?.resultado?.existeEnEmpresaUnDia)
+            ? 'assets/icons/icon-success-mini-alert.svg'
+            : 'assets/icons/icon-time-mini-alert.svg'
+        "
+        [label]="
+          firmantes?.exito === undefined || firmantes?.exito === null || firmantes?.resultado?.existeEnEmpresaUnDia === false
+            ? 'Error'
+            : firmantes.exito
+            ? 'Consulta exitosa'
+            : 'En espera'
+        "
+      ></verisure-alert>
+      <!-- error -->
+      <div
+        *ngIf="firmantes?.exito === undefined || firmantes.exito === null"
+        class="card-firmantes-content"
+        style="padding-top: 0px"
+      >
+        <div class="card-firmante-sub-content">
+          No ha sido posible conseguir datos. Existen problemas con la
+          plataforma, disculpa las molestias.
+        </div>
+      </div>
+      <!-- No existe empresa en un dia -->
+      <div
+        *ngIf="firmantes.exito === true && firmantes?.resultado?.existeEnEmpresaUnDia === false"
+        class="card-firmantes-content"
+        style="padding-top: 0px"
+      >
+        <div class="card-firmante-sub-content">
+          RUT consultado no existe en empresas en un día
+        </div>
+      </div>
+      <!-- waiting  -->
+      <div
+        *ngIf="firmantes.exito === false"
+        class="card-firmantes-content"
+        style="padding-top: 0px"
+      >
+        <div class="card-firmante-sub-content">
+          Los firmantes estarán disponibles en unos minutos
+        </div>
+      </div>
+      <!-- successful -->
+      <ng-container
+        *ngIf="
+          firmantes.exito &&
+          firmantes?.resultado?.existeEnEmpresaUnDia &&
+          firmantes.resultado !== null &&
+          firmantes.resultado !== undefined &&
+          firmantes!.resultado!.gruposAdministracion !== null &&
+          firmantes!.resultado!.gruposAdministracion !== undefined &&
+          firmantes!.resultado!.gruposAdministracion!.length > 0
+        "
+      >
+        <div
+          class="card-firmantes-content-result"
+          *ngFor="
+            let firmas of firmantes?.resultado?.gruposAdministracion &&
+              (firmantes?.resultado?.gruposAdministracion ?? [])
+          "
+        >
+          <div
+            *ngIf="firmas?.modoDeFirma ?? ''"
+            class="card-firmantes-sub-title"
+          >
+            Modo de firma
+          </div>
+          <div
+            *ngIf="firmas?.modoDeFirma ?? ''"
+            class="card-firmante-sub-content"
+          >
+            {{ firmas && (firmas?.modoDeFirma ?? '') }}
+          </div>
+
+          <div class="card-firmantes-sub-title">
+            Número de firmantes: {{ firmas.apoderados.length }}
+          </div>
+          <div
+            *ngFor="let apoderado of firmas.apoderados"
+            class="card-firmante-sub-content card-apoderados"
+          >
+            <object data="assets/icons/icon-contrato.svg"></object>
+            <div>
+              {{ apoderado.nombres }} {{ apoderado.apellidoPaterno }} -
+              {{ formatearRut(apoderado.rut) }}
+            </div>
+          </div>
+          <div
+            class="card-firmante-sub-content"
+            *ngIf="firmas?.facultadLimitada && firmas?.facultadLimitada"
+          >
+            <div class="card-firmantes-sub-title">Facultades</div>
+            <div class="card-firmantes-sub-content">
+              Limitada: {{ firmas?.limitacionTextual }}
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="firmantes.exito && firmantes.resultado === null">
+        <div
+          class="card-firmante-sub-content"
+          style="
+            width: 100%;
+            font-weight: 600;
+            justify-content: center;
+            font-size: 16px;
+            color: #63646669;
+          "
+        >
+          SIN FIRMANTES
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

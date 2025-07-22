@@ -1,0 +1,102 @@
+{
+  "name": "admin",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/admin/src",
+  "prefix": "verisure",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/admin",
+        "index": "apps/admin/src/index.html",
+        "main": "apps/admin/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/admin/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/admin/src/favicon.ico",
+          "apps/admin/src/assets",
+          {
+            "input": "libs/ui/src/assets",
+            "glob": "**/*",
+            "output": "assets/"
+          }
+        ],
+        "styles": ["libs/ui/src/index.scss", "apps/admin/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "environments/environment.ts",
+              "with": "environments/environment.prod.ts"
+            }
+          ],
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "17mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2mb",
+              "maximumError": "4mb"
+            }
+          ],
+          "baseHref": "/v1/admin/",
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "admin:build:production"
+        },
+        "development": {
+          "browserTarget": "admin:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4001
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "admin:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/admin/**/*.ts", "apps/admin/**/*.html"]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/admin/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

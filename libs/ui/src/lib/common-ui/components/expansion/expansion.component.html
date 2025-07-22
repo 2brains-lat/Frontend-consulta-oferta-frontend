@@ -1,0 +1,46 @@
+<div class="info-collapsible">
+  <!-- <verisure-head-collapsible
+    class="collapsible"
+    [name]="headInfo.nameUser"
+    [rut]="headInfo.rutUser"
+    [type]="headInfo.type"
+  
+  ></verisure-head-collapsible> -->
+
+  <ng-content select="[head-collapsible]"></ng-content>
+
+  <div class="content">
+    <!-- CONTENIDO QUE SE REQUIERA (Ej: Lista items, etc) -->
+    <ng-container [ngSwitch]="typeContent">
+      <!-- case 0: EL CONTENIDO ES UNA LISTA DE ELEMENTOS (ARRAY) -->
+      <ng-container *ngSwitchCase="0">
+        <ng-container *ngFor="let item of content; index as i">
+          <div *ngIf="item.type === 'mix'" class="info-user first-info">
+            <ng-container *ngFor="let elemMix of item.value">
+              <verisure-tiny-card
+                [icon]="elemMix.type"
+                [label]="elemMix.value"
+                size="small"
+              ></verisure-tiny-card>
+            </ng-container>
+          </div>
+
+          <div *ngIf="item.type !== 'mix'" class="info-user">
+            {{ item.mainKey }}: {{ item.value }}
+          </div>
+        </ng-container>
+      </ng-container>
+
+      <!-- case 1: EL CONTENIDO ES UN OBJETO (OBJECT) -->
+      <ng-container *ngSwitchCase="1">
+        <div>{{ content }}</div>
+      </ng-container>
+
+      <!-- case default: EL CONTENIDO ES SOLO TEXTO (STRING) -->
+      <ng-container *ngSwitchDefault>
+        <p>{{ content }}</p>
+      </ng-container>
+    </ng-container>
+    <!-- END CONTENIDO -->
+  </div>
+</div>

@@ -1,0 +1,22 @@
+@mixin VerisureCheckbox($theme) {
+  & {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    padding: 0px;
+    mat-checkbox {
+      padding: 0px;
+      margin: 0px;
+      position: relative !important;
+      width: -webkit-fill-available !important;
+      .mdc-checkbox__background {
+        width: 16px;
+        height: 16px;
+        border: 1px solid currentColor;
+        border-radius: 6px;
+      }
+    }
+    display: flex;
+    flex-direction: row;
+  }
+}

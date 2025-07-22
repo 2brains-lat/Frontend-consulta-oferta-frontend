@@ -1,0 +1,43 @@
+<div
+  style="
+    display: flex;
+    flex-direction: column;
+    padding: 32px 32px 0px 32px;
+    gap: 32px;
+    background: '#FAFAFA';
+  "
+>
+  <div *ngIf="dataUserLogged">
+    <div style="display: flex; flex-direction: column">
+      <span
+        style="
+          /* h4/bold */
+
+          font-family: 'Fira Sans';
+          font-style: normal;
+          font-weight: 700;
+          font-size: 24px;
+          line-height: 40px;
+        "
+        >¡Hola {{ capitalizeFullName(dataUserLogged.nombreCompleto) }}!
+      </span>
+    </div>
+  </div>
+
+  <verisure-tab
+    [items]="tabItems"
+    [selectedItemName]="onChange"
+    tab-form
+    (onChange)="onChange = $event"
+  >
+  </verisure-tab>
+  <div>
+    <verisure-form-marketing
+      [form]="form"
+      [comunas]="comunas"
+      (Submit)="submit()"
+      [tipoCliente]="tipoCliente"
+      *ngIf="onChange.includes('consulta')"
+    ></verisure-form-marketing>
+  </div>
+</div>

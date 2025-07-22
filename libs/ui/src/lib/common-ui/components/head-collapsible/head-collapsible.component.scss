@@ -1,0 +1,97 @@
+@mixin VerisureHeadCollapsible($theme) {
+  & {
+    width: 100%;
+    /* body1/regular */
+
+    font-family: 'Fira Sans';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1.1rem;
+    line-height: 24px;
+    /* identical to box height, or 150% */
+
+    /* Secondary/600 */
+    color: #636466;
+
+    .header-collapsible {
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      align-content: center;
+
+      &::after {
+        content: url('/assets/icons/arrow-open-collapsible.svg');
+        transition: all 0.5s;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -ms-transition: all 0.5s;
+        -o-transition: all 0.5s;
+      }
+
+      &.active::after {
+        -webkit-transform: rotate(180deg);
+        -moz-transform: rotate(180deg);
+        transform: rotate(180deg);
+        transform-origin: center;
+      }
+
+      .icon {
+        width: 1.2rem;
+        height: 1.2rem;
+      }
+
+      .head {
+        display: flex;
+        min-width: 190px;
+        flex-direction: row;
+
+        pointer-events: none;
+        justify-content: space-between;
+        color: #636466;
+        gap: 3px;
+        @media only screen and (min-width: 768px) {
+          & {
+            padding-left: 20px;
+            margin-right: auto;
+          }
+        }
+      }
+    }
+    .header-uncollapsible {
+      display: flex;
+      gap: 24px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      background: white;
+      padding: 16px;
+      .head {
+        display: flex !important;
+        gap: 6px !important;
+      }
+    }
+  }
+  span:nth-child(2).line {
+    width: 1px;
+    height: inherit;
+    border-right: 1px solid #00000047;
+    margin: 0px 4px;
+  }
+  .fix-long-text-mobile {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start !important;
+    align-content: flex-start !important;
+    & > div.head {
+      display: flex;
+      min-width: 190px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      color: #636466;
+      gap: 3px;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<div
+  *ngIf="resultStatus === status.PROCCESS || resultStatus === status.ERROR"
+  style="margin: 20px 16px"
+>
+  <verisure-card-item>
+    <div card-header style="border-bottom: 0px">
+      <verisure-alert
+        size="sm"
+        [type]="resultStatus === status.PROCCESS ? 'warning' : 'error'"
+        [urlIcons]="
+          resultStatus === status.PROCCESS
+            ? 'assets/icons/icon-time-mini-alert.svg'
+            : 'assets/icons/icon-error-mini-alert.svg'
+        "
+        [label]="resultStatus === status.PROCCESS ? 'En espera' : 'Error'"
+      ></verisure-alert>
+    </div>
+
+    <div
+      card-details
+      [innerHTML]="
+        resultStatus === status.PROCCESS
+          ? 'Estamos procesando su solicitud'
+          : 'Existen problemas con la plataforma Equifax, esto podría tardar más de lo normal, disculpa las molestias'
+      "
+    ></div>
+  </verisure-card-item>
+</div>
+<div *ngIf="resultStatus === status.SUCCESS" class="resultado-layout">
+  <ng-content class="resultado-header" select="[header]"></ng-content>
+  <div class="content-wrapper">
+    <ng-content select="[static-content]"></ng-content>
+    <ng-content select="[dynamic-content]"></ng-content>
+  </div>
+  <ng-content select="[footer]"></ng-content>
+</div>

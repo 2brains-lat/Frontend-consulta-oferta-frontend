@@ -1,0 +1,86 @@
+<div class="packs">
+  <verisure-alert
+    label="
+    <strong> Los medios de pago de los Pack</strong> serán los mismos del precio escogido en el kit
+  "
+    type="information"
+  ></verisure-alert>
+
+  <verisure-card-product [isActive]="true" *ngFor="let pack of packsInfo">
+    <div header>
+      <div class="title-card">
+        <object
+          [ngClass]="'active'"
+          data="assets/icons/kit-icon.svg"
+          type="image/svg+xml"
+        ></object>
+        <div>
+          <span> {{ pack.glosaProducto }}</span>
+          <span> {{ pack.detalle ?? '' }}</span>
+        </div>
+      </div>
+      <div>
+        <div
+          style="
+            margin: 10px 0px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+          "
+        >
+          <div class="prices-legend">
+            <div>Instalación</div>
+            <div>Monitoreo</div>
+            <div>Info</div>
+          </div>
+          <verisure-card-product size="sm">
+            <div
+              header
+              class="price-wrapper"
+              *ngFor="let detalles of pack.detalleOferta"
+            >
+              <div style="padding-bottom: 10px">
+                <verisure-tiny-card
+                  *ngIf="detalles?.vigencia"
+                  [icon]="'icon-calendar-user'"
+                  [label]="'Vigencia: ' + formatDate(detalles?.vigencia ?? '')"
+                  width="fit-content"
+                ></verisure-tiny-card>
+              </div>
+
+              <div class="price-content">
+                <div>
+                  <div class="price-amount">
+                    {{ formatPrice(detalles.montoInstalacion) }}
+                  </div>
+                </div>
+                <div>
+                  <div class="price-amount">
+                    {{ replaceDotWithComma(detalles.montoServicio) }}
+                    {{ detalles.monedaServicio }}
+                  </div>
+                </div>
+                <div style="justify-content: center">
+                  {{ detalles.datosAdicionales.tipoCuotaGlosa }}
+                </div>
+              </div>
+              <div
+                style="width: -webkit-fill-available"
+                header
+                *ngIf="showNodes && detalles.glosaNodo"
+              >
+                <verisure-alert
+                  [label]="
+                    'Este pack pertenece al nodo : ' + detalles?.glosaNodo
+                  "
+                  type="default"
+                >
+                </verisure-alert>
+              </div>
+            </div>
+          </verisure-card-product>
+        </div>
+      </div>
+    </div>
+  </verisure-card-product>
+</div>

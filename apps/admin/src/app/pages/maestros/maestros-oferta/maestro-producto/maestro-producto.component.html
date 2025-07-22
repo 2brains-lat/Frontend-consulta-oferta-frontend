@@ -1,0 +1,111 @@
+<div>
+  <verisure-searchbar-list-admin
+    [formBarSearch]="formSearch"
+    [onChangeTab]="tabItem"
+    titleButtonAdd="producto"
+    (searchEvent)="getNewSearch($event)"
+    (clickItem)="clickAddItem($event)"
+    [toggleFilters]="closeFilters"
+    #searchbar
+  >
+    <div class="filter-dropdown" filter-content>
+      <verisure-multicheckbox
+        [label]="'Tipo de ítem'"
+        [keyOption]="'key'"
+        [labelOption]="'value'"
+        [catalog]="catalogs.tipoItemsOptions"
+        [control]="$any(form.controls['tipoItemsOptionsCtrl'])"
+      >
+      </verisure-multicheckbox>
+
+      <verisure-multicheckbox
+        [label]="'Sub tipo de ítem'"
+        [keyOption]="'key'"
+        [labelOption]="'value'"
+        [catalog]="catalogs.subtiposOptions"
+        [control]="$any(form.controls['subtiposOptionsCtrl'])"
+      >
+      </verisure-multicheckbox>
+      <div class="container-buttons-dropdown">
+        <verisure-button
+          type="button"
+          (onClick)="applyFilter()"
+          variant="accent"
+          size="large"
+          style="width: 95%"
+        >
+          <p content>Aplicar filtro</p>
+        </verisure-button>
+        <verisure-button
+          type="button"
+          (onClick)="cleanFilter()"
+          variant="ghost"
+          size="large"
+          style="width: 95%"
+        >
+          <p style="color: #000" content>Limpiar filtro</p>
+          <object svg data="assets/icons/trash-icon.svg"></object>
+        </verisure-button>
+      </div>
+    </div>
+  </verisure-searchbar-list-admin>
+
+  <div style="margin-top: 25px; width: 100%" *ngIf="hasAdded">
+    <verisure-alert
+      style="padding-top: 20px"
+      @alertAnimation
+      size="md"
+      [label]="messageAlertList"
+      type="success-tiny"
+    ></verisure-alert>
+  </div>
+
+  <div class="card-container">
+    <verisure-badge
+      [keyOption]="'key'"
+      [labelOption]="'value'"
+      [catalogs]="catalogs"
+      [labels]="labelsCatalog"
+      [models]="query"
+      (clickItem)="clickItem($event)"
+    ></verisure-badge>
+    <verisure-table
+      [displayedColumns]="displayedColumns"
+      [dataSource]="elementData"
+      [page]="currentPage"
+      [limit]="totalPaginas"
+      [totalItems]="totalItems"
+      (nextPage)="nextPage()"
+      (prevPage)="prevPage()"
+      (changeLimitPage)="changeLimit($event)"
+    >
+    </verisure-table>
+    <ng-template #toggle let-data="item">
+      <div class="toggle-theme">
+        <mat-slide-toggle
+          #toggle
+          color="primary"
+          [checked]="data.activo"
+          (change)="changeToggle(data)"
+        ></mat-slide-toggle>
+      </div>
+    </ng-template>
+
+    <ng-template #btn let-data="item">
+      <verisure-button
+        type="button"
+        (onClick)="edit(data)"
+        variant="ghost"
+        size="medium"
+      >
+        <img
+          width="15px"
+          height="20px"
+          svg
+          src="assets/icons/edit-icon-list.svg"
+          alt="Editar"
+        />
+      </verisure-button>
+    </ng-template>
+  </div>
+</div>

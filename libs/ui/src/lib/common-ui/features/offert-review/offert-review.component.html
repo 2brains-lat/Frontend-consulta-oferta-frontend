@@ -1,0 +1,266 @@
+<verisure-resultadoconsulta-layout
+  *ngIf="dataStatus !== null"
+  [resultStatus]="dataStatus"
+>
+  <ng-container dynamic-content> </ng-container>
+  <ng-container *ngIf="!!kitList" dynamic-content>
+    <h5>Resultado de oferta para número {{ offerData && offerData.id }}</h5>
+    <div class="offer-review-container">
+      <div style="display: flex; gap: 16px; flex-direction: column">
+        <verisure-card-item *ngIf="offerData">
+          <div card-header>
+            <object
+              style="background-color: #ffebef00"
+              data="assets/icons/pending-actions-icon.svg"
+              type="image/svg+xml"
+            ></object>
+            <span>ID de oferta: {{ offerData.id }}</span>
+          </div>
+          <div card-details *ngIf="offerData && offerData.fechaDeCreacion">
+            <verisure-tiny-card
+              icon="icon-calendar-user"
+              [label]="
+                'Vigencia: ' +
+                formatDate(offerData.fechaDeCreacion) +
+                ' al ' +
+                formatDate(offerData.fechaDeVencimiento)
+              "
+              width="fit-content"
+            ></verisure-tiny-card>
+          </div>
+        </verisure-card-item>
+        <verisure-card-item *ngIf="equifax">
+          <div card-header>
+            <object
+              style="background-color: #ffebef00"
+              data="assets/icons/assignment-icon.svg"
+              type="image/svg+xml"
+            ></object>
+            <span>Datos de Equifax</span>
+          </div>
+          <div card-details *ngIf="equifax && equifax.fechaConsultado">
+            <verisure-tiny-card
+              icon="icon-time-mini-alert"
+              [label]="'Consultado el: ' + formatDate(equifax?.fechaConsultado)"
+              width="fit-content"
+            ></verisure-tiny-card>
+          </div>
+          <div
+            *ngIf="equifax.ise && equifax.ise.length > 0 && equifax.score"
+            card-details
+          >
+            <div *ngIf="equifax.score">Scoring: {{ equifax.score }}</div>
+            <div *ngIf="equifax.ise && equifax.ise.length > 0">
+              Ise: {{ equifax.ise }}
+            </div>
+          </div>
+          <div
+            *ngIf="
+              (!!!equifax.ise || equifax.ise > 0) &&
+              (!!!equifax.score || equifax.score === 0)
+            "
+            card-details
+          >
+            SIN DATOS
+          </div>
+        </verisure-card-item>
+        <verisure-card-item *ngIf="seller">
+          <div card-header>
+            <object
+              style="background-color: #ffebef00"
+              data="assets/icons/supervisor-icon.svg"
+              type="image/svg+xml"
+            ></object>
+            <span *ngIf="seller && seller.nombreCompleto"
+              >Vendedor {{ capitalizeFullName(seller.nombreCompleto) }}</span
+            >
+            <span> {{ seller.matricula }}</span>
+          </div>
+          <div
+            *ngIf="
+              seller &&
+              seller.delegacion &&
+              seller.delegacion.length > 0 &&
+              seller.centroDeCosto &&
+              seller.centroDeCosto.length > 0
+            "
+            card-details
+          >
+            <span
+              *ngIf="
+                seller && seller.delegacion && seller.delegacion.length > 0
+              "
+              >Delegación {{ seller.delegacion }}</span
+            >
+            <span
+              *ngIf="
+                seller &&
+                seller.centroDeCosto &&
+                seller.centroDeCosto.length > 0
+              "
+              >Centro de costos {{ seller.centroDeCosto }}</span
+            >
+          </div>
+        </verisure-card-item>
+        <verisure-card-item *ngIf="clientData">
+          <div card-header>
+            <object
+              style="background-color: #ffebef00"
+              data="assets/icons/assignment-ind-icon.svg"
+              type="image/svg+xml"
+            ></object>
+            <span *ngIf="clientData && clientData.nombres?.length > 0"
+              >Cliente
+              {{
+                capitalizeFullName(clientData.nombres ? clientData.nombres : '')
+              }}
+              {{
+                capitalizeFullName(
+                  clientData.apellidos ? clientData.apellidos : ''
+                )
+              }}</span
+            >
+            <span *ngIf="clientData && clientData.rut?.length > 0">
+              {{ formatearRut(clientData.rut) }}</span
+            >
+          </div>
+          <div
+            *ngIf="clientData && clientData.tipoRecurso?.length > 0"
+            card-details
+          >
+            <span>Tipo de Recurso: {{ clientData.tipoRecurso }}</span>
+          </div>
+          <div card-details>
+            <span *ngIf="clientData && clientData.tipoCliente?.length > 0"
+              >Tipo de Cliente: {{ clientData.tipoCliente }}</span
+            >
+            <span *ngIf="clientData && clientData.tipoInmueble?.length > 0"
+              >Tipo de Inmueble: {{ clientData.tipoInmueble }}</span
+            >
+          </div>
+        </verisure-card-item>
+      
+        <verisure-screen-kitinicial
+          *ngIf="kitList"
+          [productsList]="kitList"
+          [priceSelected]="priceSelected"
+          (priceSelectedOutPut)="priceSelected = $event"
+          (paycodeSelected)="paycodeSelected = $event"
+          [paycodeSelectedValue]="paycodeSelected"
+          (authorizationSelected)="authorizationSelected = $event"
+          [authorizationSelectedValue]="authorizationSelected"
+          [readMode]="true"
+          [offerHavePacks]="false"
+        >
+        </verisure-screen-kitinicial>
+        <verisure-screen-descuentos
+          [readMode]="true"
+          [actualDiscount]="priceSelectedInfo?.datosAdicionales"
+          [cuponState]="cuponCurrentState"
+          (callback)="cuponCurrentState = $event"
+        >
+        </verisure-screen-descuentos>
+        <verisure-screen-packs
+          [showNodes]="true"
+          [packsInfo]="packList"
+        ></verisure-screen-packs>
+      </div>
+      <div style="width: 370px">
+        <verisure-card-item
+          *ngIf="infoOfertaOfrecida"
+          style="position: sticky; top: 95px"
+        >
+          renove
+          <div card-header>
+            <object
+              style="background-color: #ffebef"
+              data="assets/icons/alarm1-icon.svg"
+              type="image/svg+xml"
+            ></object>
+            <span>Resumen de oferta seleccionada</span>
+          </div>
+
+          <!-- AGREGAR LOGICA PARA FIRMANTES  -->
+          <div *ngIf="infoOfertaOfrecida?.glosaProducto" card-details>
+            <span> Kit: {{ infoOfertaOfrecida.glosaProducto }} </span>
+          </div>
+          <div *ngIf="infoOfertaOfrecida?.autorizacion" card-details>
+            <span>
+              Precio autorizado: {{ infoOfertaOfrecida.autorizacion }}
+            </span>
+          </div>
+          <div
+            *ngIf="
+              infoOfertaOfrecida.montoInstalacion &&
+              infoOfertaOfrecida.montoInstalacion !== null
+            "
+            card-details
+          >
+            <span>
+              Precio normal instalación:
+              {{ formatPrice(infoOfertaOfrecida.montoInstalacion) }}
+            </span>
+          </div>
+          <div
+            *ngIf="
+              infoOfertaOfrecida.montoInstalacion &&
+              infoOfertaOfrecida.montoInstalacion !== null
+            "
+            card-details
+          >
+            <span>
+              Medios de pago instalación:
+              {{ infoOfertaOfrecida.medioPagoInstalacion }}
+            </span>
+          </div>
+
+          <div
+            *ngIf="
+              infoOfertaOfrecida.montoServicio &&
+              infoOfertaOfrecida.montoServicio !== null
+            "
+            card-details
+          >
+            <span>
+              Precio normal monitoreo:
+              {{ replaceDotWithComma(infoOfertaOfrecida.montoServicio) }}
+              {{ ' ' + infoOfertaOfrecida.monedaServicio }}</span
+            >
+          </div>
+          <div
+            *ngIf="
+              infoOfertaOfrecida.medioPagoMonitoreo &&
+              infoOfertaOfrecida.medioPagoMonitoreo !== null
+            "
+            card-details
+          >
+            <span>
+              Medios de pago monitoreo:
+              {{ infoOfertaOfrecida.medioPagoMonitoreo }}
+            </span>
+          </div>
+
+          <div card-details *ngIf="infoOfertaOfrecida.permiteCupon">
+            <span> Disponible Descuento Cupon </span>
+          </div>
+          <div card-details *ngIf="infoOfertaOfrecida.permiteRenove">
+            <span> Descuento: Aplica Renove </span>
+          </div>
+
+          <!-- agregar otros descuentos aqui -->
+          <!-- {{ actualDiscount.descuentoMonitoreo }}
+            {{ actualDiscount.mesesDescuento }} -->
+        </verisure-card-item>
+      </div>
+    </div>
+  </ng-container>
+  <verisure-next-step
+    *ngIf="!!priceSelected && priceSelected.length > 0"
+    [actualLevel]="0"
+    [ignoreBackToConsult]="true"
+    lastLevel="0"
+    (getPdfBase64)="getPdf()"
+    [isDisabled]="priceSelected === null || !(priceSelected.length > 0)"
+    footer
+  ></verisure-next-step>
+</verisure-resultadoconsulta-layout>

@@ -1,0 +1,97 @@
+{
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "login",
+  "projectType": "application",
+  "sourceRoot": "apps/login/src",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/msal-login",
+        "index": "apps/login/src/index.html",
+        "main": "apps/login/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/login/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/login/src/favicon.ico",
+          "apps/login/src/assets",
+          {
+            "input": "libs/ui/src/assets",
+            "glob": "**/*",
+            "output": "assets/"
+          }
+        ],
+        "styles": ["libs/ui/src/index.scss", "apps/ventas/src/styles.scss"],
+        "scripts": [],
+        "ngswConfigPath": "apps/login/ngsw-config.json",
+        "serviceWorker": true
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "17mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "12mb",
+              "maximumError": "294kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "environments/environment.ts",
+              "with": "environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "login:build:production"
+        },
+        "development": {
+          "browserTarget": "login:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 8080
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "login:build"
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/login/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}

@@ -1,0 +1,106 @@
+<div
+  *ngIf="reglas"
+  style="padding: 32px; display: flex; flex-direction: column; gap: 24px"
+>
+  <div
+    style="
+      /* h4/bold */
+      font-family: 'Fira Sans';
+      font-style: normal;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 26px;
+      color: #262626;
+    "
+  >
+    Reglas de Negocio
+  </div>
+  <verisure-tab
+    [items]="tabSelectors"
+    [selectedItemName]="currentTab"
+    tab-form
+    (onChange)="currentTab = $event"
+  >
+  </verisure-tab>
+  <verisure-alert
+    *ngIf="alertStatus && alertStatus.status === 200"
+    @alertAnimation
+    size="md"
+    [label]="alertStatus.message"
+    type="success"
+  ></verisure-alert>
+  <verisure-alert
+    *ngIf="alertStatus && alertStatus.status !== 200"
+    @alertAnimation
+    size="md"
+    [label]="
+      alertStatus.status === 404
+        ? 'La linea de precio no es válida. <strong> El documento no se cargó correctamente</strong>, intenta de nuevo'
+        : alertStatus.message
+    "
+    type="error"
+  ></verisure-alert>
+  <div class="reglas-content-container">
+    <ng-container *ngFor="let item of reglas">
+      <verisure-card-product
+        (mouseleave)="setActiveHover(null)"
+        style="cursor: pointer; display: flex; height: auto"
+        (mouseenter)="setActiveHover(item.identificador)"
+        [isActive]="activeHover === item.identificador"
+        mode="wrapper"
+      >
+        <div content class="reglas-card-info">
+          <span class="reglas-menu-icon">
+            <img [src]="svgIcon(item.identificador)" alt="" />
+          </span>
+
+          <div style="width: auto">
+            <span class="card-reglas-title">{{ item.titulo }}</span>
+            <span class="card-reglas-content">{{ item.descripcion }}</span>
+          </div>
+          <div style="display: flex; height: max-content; align-self: start">
+            <button
+              mat-icon-button
+              [matMenuTriggerFor]="menu"
+              aria-label="Example icon-button with a menu"
+            >
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <input
+                  *ngIf="reset"
+                  class="fileInput"
+                  type="file"
+                  (change)="uploaddAction($event, item.identificador)"
+                />
+                <span>Adjuntar nueva plantilla</span>
+              </button>
+              <button
+                (click)="downloadAction(item.identificador, item.nombreArchivo)"
+                mat-menu-item
+              >
+                <span>Descargar plantilla actual</span>
+              </button>
+            </mat-menu>
+          </div>
+        </div>
+        <div class="footer-card" content>
+          <div style="display: flex; gap: 8px">
+            <verisure-alert
+              size="sm"
+              [label]="(item.reglasVigente ?? 0) + ' reglas vigente'"
+              type="success-tiny"
+            ></verisure-alert>
+            <verisure-tiny-card
+              icon="icon-calendar-user"
+              [label]="'Última carga: ' + formatDate(item.ultimaCarga)"
+              width="fit-content"
+            ></verisure-tiny-card>
+          </div>
+          <div class="file-tag">📎 Archivo {{ item.nombreArchivo }}</div>
+        </div>
+      </verisure-card-product>
+    </ng-container>
+  </div>
+</div>

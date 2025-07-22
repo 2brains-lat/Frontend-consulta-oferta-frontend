@@ -1,0 +1,38 @@
+@use '../../../components/card-offer-info/card-offer-info.component.scss' as
+  cardInfo;
+@use '../../../../../styles/global-theme.scss' as theme;
+@use '../../../components/tiny-card/tiny-card.component.scss' as tinyCard;
+
+@use '../../../components/expansion/expansion.component.scss' as expansion;
+@use '../../../components/head-collapsible/head-collapsible.component.scss' as
+  head;
+@use '../../../components/button/button.component.scss' as button;
+verisure-offers-commons-components {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  verisure-card-offer-info {
+    @include cardInfo.VerisureCradOfferInfo(theme.$my-theme);
+    @include tinyCard.VerisureTinyCard(theme.$my-theme);
+  }
+
+  verisure-button {
+    $my-colors: map-get(theme.$my-theme, 'color');
+    $my-primary: map-get($my-colors, 'primary');
+    fill: map-get($my-primary, 'default');
+    :hover {
+      fill: map-get($my-primary, 500) !important;
+    }
+    @include button.VerisureButton(theme.$my-theme);
+  }
+  verisure-expansion {
+    verisure-head-collapsible {
+      @include head.VerisureHeadCollapsible(theme.$my-theme);
+    }
+    @include expansion.VerisureExpansion(theme.$my-theme);
+    verisure-tiny-card {
+      @include tinyCard.VerisureTinyCard(theme.$my-theme);
+    }
+  }
+}

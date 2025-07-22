@@ -1,0 +1,77 @@
+<mat-sidenav-container style="height: 100vh; background-color: #fff">
+  <!-- mobile  mode == push , web / tablet  === side  -->
+  <mat-sidenav
+    #sidenav
+    [ngClass]="smallIconNavbarStatus ? 'desktop' : 'mobile'"
+    [mode]="screenWidth >= 768 ? 'side' : 'over'"
+    [ngStyle]="{
+      width:
+        screenWidth >= 768
+          ? smallIconNavbarStatus
+            ? '12vw'
+            : '23.5vw'
+          : '270px'
+    }"
+    [position]="screenWidth >= 768 ? 'start' : 'end'"
+    [opened]="screenWidth >= 768 ? true : false"
+  >
+    <verisure-sidebar style="width: auto">
+      <div
+        header
+        class="header-sidebar"
+        [ngClass]="smallIconNavbarStatus ? 'active' : ''"
+        (click)="screenWidth >= 768 ? changeMenuSize() : sidenav.toggle()"
+      >
+        <img
+          [src]="
+            smallIconNavbarStatus
+              ? 'assets/icons/logo-verisure.svg'
+              : 'assets/icons/verisure-logo.svg'
+          "
+        />
+      </div>
+      <verisure-list-menu
+        listItems
+        (click)="screenWidth >= 768 ? null : sidenav.toggle()"
+        (toggle)="screenWidth >= 768 ? null : sidenav.toggle()"
+        [items]="smallIconNavbarStatus ? navigateItemsOnlyIcon : navigateItems"
+      ></verisure-list-menu>
+      <div footer style="border-top: 1px solid rgba(0, 0, 0, 0.132)">
+        <a class="signout" style="cursor: pointer" (click)="exitSession()">
+          <span class="icon-medium">
+            <object
+              style="pointer-events: none"
+              data="assets/icons/logout-bold-icon.svg"
+              type=""
+            ></object>
+          </span>
+          <span class="label">
+            {{ smallIconNavbarStatus ? '' : 'Cerrar Sesión' }}</span
+          >
+        </a>
+      </div>
+    </verisure-sidebar>
+  </mat-sidenav>
+
+  <ng-content
+    style="width: 270px; position: fixed; z-index: 10000"
+    select="filternav"
+  ></ng-content>
+
+  <mat-sidenav-content
+    class="layout-content"
+    [ngStyle]="{
+      'margin-left':
+        screenWidth >= 768
+          ? smallIconNavbarStatus
+            ? '12vw'
+            : '23.5vw'
+          : '270px'
+    }"
+  >
+    <verisure-navbar (toggle)="sidenav.toggle()"></verisure-navbar>
+    <div class="page"><ng-content select="router-outlet"></ng-content></div>
+
+    <!-- <button (click)="sidenav.toggle()">Toggle drawer</button> -->
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,342 @@
+@use './global-theme' as glb;
+@use '../lib/common-ui/components/tab/tab.component.scss' as tab;
+@use '../lib/common-ui/components/alert/alert.component.scss' as alert;
+@use '../lib/common-ui/components/button/button.component.scss' as button;
+@use '../lib/common-ui/components/card-product/card-product.component.scss' as
+  card;
+@use '../lib/common-ui/components/tiny-card/tiny-card.component.scss' as tinyTag;
+@use '../lib/common-ui/components/input/input.component.scss' as input;
+@use '../lib/common-ui/components/card-item/card-item.component.scss' as
+  cardItems;
+@use '../lib/common-ui/components/head-collapsible/head-collapsible.component.scss'
+  as head;
+
+@import '@angular/material/theming';
+@include mat-core();
+
+@mixin global_css($core-themes) {
+  verisure-maestro-producto {
+    verisure-input {
+      @include input.VerisureInputs($core-themes);
+      z-index: 1000;
+    }
+
+    verisure-alert {
+      @include alert.VerisureAlert($core-themes);
+    }
+  }
+
+  verisure-dialog-producto {
+    verisure-input {
+      @include input.VerisureInputs($core-themes);
+      z-index: 1000;
+    }
+
+    verisure-button {
+      @include button.VerisureButton($core-themes);
+
+      button.medium.primary {
+        padding: 12px 15px !important;
+      }
+    }
+
+    verisure-alert {
+      @include alert.VerisureAlert($core-themes);
+    }
+  }
+
+  verisure-maestro-precio {
+    verisure-input {
+      @include input.VerisureInputs($core-themes);
+      z-index: 1000;
+    }
+
+    verisure-alert {
+      @include alert.VerisureAlert($core-themes);
+    }
+  }
+
+  verisure-dialog-precio {
+    verisure-input {
+      @include input.VerisureInputs($core-themes);
+      z-index: 1000;
+    }
+
+    verisure-button {
+      @include button.VerisureButton($core-themes);
+
+      button.medium.primary {
+        padding: 12px 15px !important;
+      }
+    }
+
+    verisure-alert {
+      @include alert.VerisureAlert($core-themes);
+    }
+  }
+
+  verisure-maestro-condiciones {
+    verisure-input {
+      @include input.VerisureInputs($core-themes);
+      z-index: 1000;
+    }
+
+    verisure-alert {
+      @include alert.VerisureAlert($core-themes);
+    }
+  }
+
+  verisure-dialog-condicion {
+    verisure-input {
+      @include input.VerisureInputs($core-themes);
+      z-index: 1000;
+    }
+
+    verisure-button {
+      @include button.VerisureButton($core-themes);
+
+      button.medium.primary {
+        padding: 12px 15px !important;
+      }
+    }
+
+    verisure-alert {
+      @include alert.VerisureAlert($core-themes);
+    }
+  }
+
+  verisure-maestros-segmentos {
+    verisure-input {
+      @include input.VerisureInputs($core-themes);
+      z-index: 1000;
+    }
+
+    verisure-alert {
+      @include alert.VerisureAlert($core-themes);
+    }
+  }
+
+  verisure-segmentos-condicion {
+    verisure-input {
+      @include input.VerisureInputs($core-themes);
+      z-index: 1000;
+    }
+
+    verisure-button {
+      @include button.VerisureButton($core-themes);
+
+      button.medium.primary {
+        padding: 12px 15px !important;
+      }
+    }
+
+    verisure-alert {
+      @include alert.VerisureAlert($core-themes);
+    }
+  }
+
+  verisure-offert-review {
+    verisure-card-item {
+      @include cardItems.VerisureCardItem($core-themes);
+    }
+  }
+  verisure-strategy-result {
+    verisure-card-item {
+      @include cardItems.VerisureCardItem($core-themes);
+    }
+    verisure-tiny-card {
+      @include tinyTag.VerisureTinyCard($core-themes);
+    }
+    verisure-alert {
+      @include alert.VerisureAlert($core-themes);
+    }
+  }
+  verisure-auditoria {
+    verisure-head-collapsible {
+      @include head.VerisureHeadCollapsible($core-themes);
+    }
+  }
+  verisure-reglas-de-negocio,
+  verisure-offert-review,
+  verisure-auditoria {
+    verisure-tiny-card {
+      @include tinyTag.VerisureTinyCard($core-themes);
+    }
+  }
+  verisure-auditoria {
+    verisure-input {
+      @include input.VerisureInputs($core-themes);
+    }
+  }
+
+  verisure-dashboard,
+  verisure-maestros-segmentos,
+  verisure-maestros-oferta,
+  verisure-maestro-producto,
+  verisure-maestro-precio,
+  verisure-maestro-condiciones,
+  verisure-reglas-de-negocio,
+  verisure-auditoria {
+    verisure-button {
+      @include button.VerisureButton($core-themes);
+    }
+
+    verisure-alert {
+      @include alert.VerisureAlert($core-themes);
+    }
+
+    verisure-card-product {
+      @include card.VerisureCardProduct($core-themes);
+    }
+  }
+  $my-primary-palette: map-get($core-themes, 'primary');
+
+  // ROOT DOESNT WORK IN THIS APP AT THIS MOMENT
+  html {
+    background-color: #fafafa;
+    font-size: 14px;
+    width: 100vw;
+
+    @media only screen and (min-width: 768px) {
+      font-size: 16px;
+    }
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+  }
+
+  @media only screen and (max-width: 768px) {
+    html {
+      background-color: #fafafa;
+      font-size: 14px;
+      width: 100vw;
+    }
+  }
+
+  @media only screen and (max-width: 359px) {
+    html {
+      background-color: #fafafa;
+      font-size: 12px;
+      width: 100vw;
+    }
+  }
+
+  .mdc-radio {
+    transform: scale(0.8) !important;
+    padding: 8px;
+    -webkit-transform: scale(0.8) !important;
+    -moz-transform: scale(0.8) !important;
+    -ms-transform: scale(0.8) !important;
+    -o-transform: scale(0.8) !important;
+
+    .mat-mdc-radio-button
+      .mdc-radio:hover
+      .mdc-radio__native-control:enabled
+      + .mdc-radio__background
+      .mdc-radio__inner-circle {
+      transform: scale(0.398) !important;
+      -webkit-transform: scale(0.398) !important;
+      -moz-transform: scale(0.398) !important;
+      -ms-transform: scale(0.398) !important;
+      -o-transform: scale(0.398) !important;
+    }
+  }
+
+  object {
+    width: inherit;
+    height: inherit;
+  }
+
+  mat-checkbox {
+    position: relative !important;
+    width: -webkit-fill-available !important;
+  }
+
+  /// css to required to be global
+
+  mat-option {
+    font-family: 'Fira Sans' !important;
+    font-style: light !important;
+    font-weight: 200 !important;
+    font-size: 14px !important;
+    color: #262626 !important;
+  }
+
+  mat-option {
+    font-weight: 400 !important;
+  }
+
+  mat-option.mat-mdc-option-active,
+  .mat-mdc-option:hover:not(.mdc-list-item--disabled),
+  .mat-mdc-option:focus:not(.mdc-list-item--disabled),
+  .mat-mdc-option.mat-mdc-option-active,
+  .mat-mdc-option.mdc-list-item--selected:not(.mat-mdc-option-multiple):not(
+      .mdc-list-item--disabled
+    ) {
+    font-weight: 500 !important;
+    background-color: map-get($my-primary-palette, 100) !important;
+
+    span {
+      color: map-get($my-primary-palette, 600) !important;
+    }
+  }
+
+  .mdc-menu-surface.mat-mdc-select-panel,
+  .cdk-overlay-pane:not(.mat-mdc-select-panel-above)
+    .mdc-menu-surface.mat-mdc-select-panel {
+    width: calc(100% + 8px) !important;
+    border-radius: 8px !important;
+    -webkit-border-radius: 8px !important;
+    -moz-border-radius: 8px !important;
+    -ms-border-radius: 8px !important;
+    -o-border-radius: 8px !important;
+  }
+
+  verisure-tab {
+    @include tab.VerisureTabButton($core-themes);
+  }
+}
+
+mat-error {
+  font-family: 'Fira Sans' !important;
+  font-style: normal !important;
+  font-weight: 400 !important;
+}
+
+@include global_css(glb.$my-theme);
+
+$my-green-color: (
+  100: #00ffd5,
+  200: #02e2bd,
+  300: #00bf9e,
+  400: #03ad86,
+  500: #049e7a,
+  600: #028465,
+  700: #007056,
+  contrast: (
+    100: #000000,
+    200: #000000,
+    300: #000000,
+    400: #ffffff,
+    500: #ffffff,
+    600: #ffffff,
+    700: #ffffff,
+  ),
+);
+
+// Alternate Angular Material Theme
+.toggle-theme {
+  $my-alternate-primary: mat-palette($my-green-color);
+  $my-alternate-accent: mat-palette($my-green-color, 400);
+  $my-alternate-warn: mat-palette($mat-grey);
+
+  $my-alternate-theme: mat-light-theme(
+    $my-alternate-primary,
+    $my-alternate-accent,
+    $my-alternate-warn
+  );
+
+  @include angular-material-theme($my-alternate-theme);
+}

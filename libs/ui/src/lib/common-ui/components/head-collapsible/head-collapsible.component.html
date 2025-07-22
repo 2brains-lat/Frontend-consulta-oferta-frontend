@@ -1,0 +1,22 @@
+<div
+  [ngClass]="
+    windowCurrentWidth <= 375 && name.length >= 20 ? 'fix-long-text-mobile' : ''
+  "
+  [class]="actionType"
+  (click)="toggleCollapsable($event)"
+>
+  <img class="icon" [src]="urlIcon" alt="" />
+  <div class="head">
+    <span *ngIf="name && name.length > 1"> {{ name }}</span>
+    <span
+      class="line"
+      *ngIf="
+        name &&
+        name.length > 1 &&
+        (windowCurrentWidth >= 375 || name.length < 20)
+      "
+    >
+    </span>
+    <span> {{ rut }}</span>
+  </div>
+</div>

@@ -1,0 +1,105 @@
+{
+  "name": "marketing",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "apps/marketing/src",
+  "prefix": "verisure",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/marketing",
+        "index": "apps/marketing/src/index.html",
+        "main": "apps/marketing/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/marketing/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          "apps/marketing/src/favicon.ico",
+          "apps/marketing/src/assets",
+          {
+            "input": "libs/ui/src/assets",
+            "glob": "**/*",
+            "output": "assets/"
+          }
+        ],
+        "styles": ["libs/ui/src/index.scss", "apps/marketing/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "fileReplacements": [
+            {
+              "replace": "environments/environment.ts",
+              "with": "environments/environment.prod.ts"
+            }
+          ],
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "17mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2mb",
+              "maximumError": "4mb"
+            }
+          ],
+          "baseHref": "/v1/mkt/",
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "marketing:build:production"
+        },
+        "development": {
+          "browserTarget": "marketing:build:development"
+        }
+      },
+      "defaultConfiguration": "development",
+      "options": {
+        "port": 4002
+      }
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "marketing:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "apps/marketing/**/*.ts",
+          "apps/marketing/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "apps/marketing/jest.config.ts",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

@@ -1,0 +1,24 @@
+.filter-dropdown {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px 10px;
+  gap: 8px;
+  position: absolute;
+  width: 100%;
+  max-width: 270px;
+  right: 23.5%;
+  margin-top: -15px;
+  background: #ffffff;
+  box-shadow: 0 0 16px #ffebef;
+  border-radius: 8px;
+  z-index: 10000;
+
+  .container-buttons-dropdown {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 10px;
+    align-items: center;
+  }
+}

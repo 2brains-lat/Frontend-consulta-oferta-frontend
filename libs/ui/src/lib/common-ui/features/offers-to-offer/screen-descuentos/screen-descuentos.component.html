@@ -1,0 +1,84 @@
+<div>
+  <verisure-alert
+    label="En estos momentos no cuentas con ningún tipo de descuento"
+    type="error"
+    *ngIf="
+      actualDiscount === null ||
+      (actualDiscount &&
+        !(
+          actualDiscount.permiteCupon ||
+          actualDiscount.permiteDescuentoMonitoreo
+        ))
+    "
+  ></verisure-alert>
+
+  <!-- cupon  -->
+  <verisure-card-item *ngIf="actualDiscount && actualDiscount.permiteCupon">
+    <div card-header>
+      <object
+        data="assets/icons/badge-red-check-icon.svg"
+        type="image/svg+xml"
+      ></object>
+      <span>Cupón</span>
+      <span
+        style="
+          /* body1/regular */
+
+          font-family: 'Fira Sans';
+          font-style: normal;
+          font-weight: 400 !important;
+          font-size: 1rem !important;
+          line-height: 24px;
+          /* identical to box height, or 150% */
+        "
+        >Opcional</span
+      >
+    </div>
+
+    <div card-content>
+      <verisure-card-emphasis card-content [active]="myForm.value">
+        <div class="custom-check-component" emphasis-content>
+          <verisure-checkbox [form]="myForm" color="primary">
+            <div content class="discount-check-wrapper">
+              <span>Aplicar cupón</span>
+            </div>
+          </verisure-checkbox>
+        </div>
+      </verisure-card-emphasis>
+    </div>
+  </verisure-card-item>
+
+  <!-- alert with counter after saveCode(); -->
+
+  <verisure-card-item
+    *ngIf="
+      actualDiscount &&
+      actualDiscount.permiteDescuentoMonitoreo &&
+      actualDiscount.porcentajeDescuentoMonitoreo
+    "
+  >
+    <div card-header>
+      <object
+        data="assets/icons/house-with-padlock.svg"
+        type="image/svg+xml"
+      ></object>
+      <span>Descuento monitoreo</span>
+    </div>
+
+    <div
+      card-content
+      style="
+        color: #636466;
+        font-family: Fira Sans;
+        font-style: normal;
+        font-weight: 400;
+        font-size: 1.1rem;
+        line-height: 24px;
+      "
+    >
+      Descuento a cliente en monitoreo de
+      {{ percentFormat(actualDiscount.porcentajeDescuentoMonitoreo) }} durante
+      {{ actualDiscount.mesesDescuentoMonitoreo ?? 0 }} meses
+    </div>
+  </verisure-card-item>
+</div>

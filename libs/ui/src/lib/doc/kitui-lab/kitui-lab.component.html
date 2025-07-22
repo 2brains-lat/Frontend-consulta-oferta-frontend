@@ -1,0 +1,185 @@
+<div>
+  <br />
+
+  <h1 class="text-xs">KIT UI</h1>
+
+  <h1>COMPONENTS</h1>
+
+  <h3>Buttons</h3>
+
+  <div style="display: flex; gap: 20px; align-items: center; padding: 20px 0">
+    primary
+    <verisure-button (onClick)="Submit()" variant="primary" size="small">
+      <object svg data="/assets/icons/arrow-right-white.svg"></object>
+      <p content>Button</p>
+    </verisure-button>
+
+    <verisure-button (onClick)="Submit()" variant="primary" size="medium">
+      <object svg data="/assets/icons/arrow-right-white.svg"></object>
+      <p content>Button</p>
+    </verisure-button>
+    <verisure-button (onClick)="Submit()" variant="primary" size="large">
+      <object svg data="/assets/icons/arrow-right-white.svg"></object>
+      <p content>Button</p>
+    </verisure-button>
+    <verisure-button
+      [onlyIcon]="true"
+      (onClick)="Submit()"
+      variant="primary"
+      size="large"
+    >
+      <object
+        svg
+        type="image/svg+xml"
+        data="assets/icons/arrow-right-white.svg"
+      ></object>
+    </verisure-button>
+
+    <verisure-button (onClick)="Submit()" variant="primary" size="large">
+      <p content>Button</p>
+    </verisure-button>
+    <verisure-button
+      [disabled]="true"
+      (onClick)="Submit()"
+      variant="primary"
+      size="large"
+    >
+      <p content>Button</p>
+    </verisure-button>
+  </div>
+
+  <!--  -->
+  <div style="display: flex; gap: 20px; align-items: center; padding: 20px 0">
+    secondary
+    <verisure-button (onClick)="Submit()" variant="accent" size="small">
+      <p content>Button</p>
+    </verisure-button>
+
+    <verisure-button (onClick)="Submit()" variant="accent" size="medium">
+      <p content>Button</p>
+    </verisure-button>
+    <verisure-button (onClick)="Submit()" variant="accent" size="large">
+      <p content>Button</p>
+    </verisure-button>
+  </div>
+
+  <!--  -->
+  <div style="display: flex; gap: 20px; align-items: center; padding: 20px 0">
+    ghost
+    <verisure-button (onClick)="Submit()" variant="ghost" size="small">
+      <p content>Button</p>
+    </verisure-button>
+
+    <verisure-button (onClick)="Submit()" variant="ghost" size="medium">
+      <p content>Button</p>
+    </verisure-button>
+    <verisure-button (onClick)="Submit()" variant="ghost" size="large">
+      <p content>Button</p>
+    </verisure-button>
+    <verisure-button
+      [disabled]="true"
+      (onClick)="Submit()"
+      variant="ghost"
+      size="large"
+    >
+      <p content>Button</p>
+    </verisure-button>
+  </div>
+
+  <div style="display: flex; gap: 20px; align-items: center; padding: 20px 0">
+    <form [formGroup]="form" (ngSubmit)="Submit()">
+      INPUTS input normal
+      <div>
+        <verisure-input
+          [control]="$any(form.controls['email'])"
+          type="text"
+          label="Text label / Email"
+          placeholder="Placeholder text"
+          #input1
+          width="353px"
+        >
+          <span helper>esto es un helper</span>
+        </verisure-input>
+      </div>
+      <div>
+        <verisure-input
+          label="Searcher "
+          placeholder="Placeholder text"
+          [control]="$any(form.controls['select'])"
+          type="search"
+          #input2
+          width="353px"
+        ></verisure-input>
+      </div>
+      <div>
+        <verisure-input
+          label="Selector example"
+          [control]="$any(form.controls['select'])"
+          type="select"
+          width="353px"
+          placeholder=" esto es un placeholder"
+          #input3
+        >
+          <mat-option options value="option1">Option 1</mat-option>
+          <mat-option options value="option2">Option 2</mat-option>
+          <mat-option options value="option3">Option 3</mat-option>
+        </verisure-input>
+      </div>
+
+      <!-- date
+    <div>
+      <verisure-input
+        label="date"
+        type="date"
+        placeholder=" esto es un placeholder"
+        #input4
+      ></verisure-input>
+    </div> -->
+      <div>
+        <verisure-radio-button
+          label="Text label"
+          [control]="$any(form.controls['radio'])"
+          [items]="[
+            { label: 'Recurso empresa', value: 1, disabled: true },
+            { label: 'Recurso propio', value: 2 }
+          ]"
+        ></verisure-radio-button>
+      </div>
+      <button type="submit" [disabled]="form.invalid">click me</button>
+    </form>
+    <!-- checkbox -->
+    <div style="display: block">
+      <div>
+        <verisure-radio-button
+          gap="200px"
+          label="this is a label"
+          direction="row"
+          [control]="$any(form.controls['radio'])"
+          [items]="[
+            { label: 'Recurso empresa', value: 1 },
+            { label: 'Recurso propio', value: 2 }
+          ]"
+        ></verisure-radio-button>
+      </div>
+    </div>
+  </div>
+
+  <h1>tests assets prod/dev</h1>
+
+  ------------------
+  <br />
+  Sass order
+  <br />
+  - .component.scss (Mixin function) > Organism > Modules | views mixin(call all
+  component)
+  <br />
+  <mat-form-field appearance="fill">
+    <mat-label>State</mat-label>
+    <mat-select>
+      <mat-option>None</mat-option>
+      <mat-option *ngFor="let state of states" [value]="state">{{
+        state
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

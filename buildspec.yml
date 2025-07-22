@@ -1,0 +1,56 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - npm ci
+
+  pre_build:
+    commands:
+      - npm install -g @angular/cli
+
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com
+
+      - REPOSITORY_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME
+      - sed -i -e 's@IMAGE@'"$REPOSITORY_URI:latest"'@' ./deployment.yaml
+      - sed -i -e 's@MAX_REPLICAS@'"$MAX_REPLICAS"'@' -e 's@DEPLOY_NAME@'"$DEPLOY_NAME"'@' ./deployment.yaml
+      - sed -i -e 's@HOST_WEB@'"$AWS_HOST_WEB"'@' -e 's@CERT@'"$AWS_SSL_CERT"'@' ./service-ingress.yaml
+
+      - sed -i -e 's@AWS_VAR_BASE_FRONT_URL@'"$AWS_VAR_BASE_FRONT_URL"'@' -e 's@AWS_VAR_TENANT_ID@'"$AWS_VAR_TENANT_ID"'@' ./environments/environment.prod.ts
+      - sed -i -e 's@AWS_VAR_CLIENT_ID@'"$AWS_VAR_CLIENT_ID"'@' -e 's@AWS_VAR_GRAPH_ENDPOINT@'"$AWS_VAR_GRAPH_ENDPOINT"'@' ./environments/environment.prod.ts
+      - sed -i -e 's@AWS_VAR_ID_GROUPS_VENTAS@'"$AWS_VAR_ID_GROUPS_VENTAS"'@' -e 's@AWS_VAR_ID_GROUPS_MARKETING@'"$AWS_VAR_ID_GROUPS_MARKETING"'@' ./environments/environment.prod.ts
+      - sed -i -e 's@AWS_VAR_ID_GROUPS_ADMIN@'"$AWS_VAR_ID_GROUPS_ADMIN"'@' -e 's@AWS_VAR_ID_GROUPS_SUPERADMIN@'"$AWS_VAR_ID_GROUPS_SUPERADMIN"'@' ./environments/environment.prod.ts
+      - sed -i -e 's@AWS_VAR_APIGATEWAY_URL@'"$AWS_VAR_APIGATEWAY_URL"'@' ./environments/environment.prod.ts
+      - sed -i -e 's@PROSP_RP_ID@'"$PROSP_RP_ID"'@' -e 's@PROSP_RP_STATUS@'"$PROSP_RP_STATUS"'@' ./environments/environment.prod.ts
+      - sed -i -e 's@PROSP_RE_ID@'"$PROSP_RE_ID"'@' -e 's@PROSP_RE_STATUS@'"$PROSP_RE_STATUS"'@' ./environments/environment.prod.ts
+      - sed -i -e 's@RANGO_RUT@'"$RANGO_RUT"'@' -e 's@SEG_RESIDENCIA@'"$SEG_RESIDENCIA"'@' ./environments/environment.prod.ts
+      - sed -i -e 's@REPORTERIA_URL@'"$REPORTERIA_URL"'@' -e 's@AWS_VAR_ID_GROUPS_BACKOFFICE@'"$AWS_VAR_ID_GROUPS_BACKOFFICE"'@' ./environments/environment.prod.ts
+      - cat environments/environment.prod.ts
+      - sed -i -e 's@AWS_GOOGLE_ANALYTICS@'"$AWS_GOOGLE_ANALYTICS"'@' ./apps/marketing/src/index.html
+      - sed -i -e 's@AWS_GOOGLE_ANALYTICS@'"$AWS_GOOGLE_ANALYTICS"'@' ./apps/ventas/src/index.html
+  build:
+    commands:
+      - ng run-many --target=build --skip-nx-cache --parallel=false
+      - docker-compose -f docker-compose.yml -p consultaoferta-web up --build -d
+      - docker tag consultaoferta-web-main $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest
+  post_build:
+    commands:
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:latest
+      - echo "Update Kube Config"
+      - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME --region $AWS_DEFAULT_REGION
+      - echo "Apply changes to kube manifests"
+      - |
+        if [ "$UPDATE_DEPLOYMENT" = "true" ]; then
+          kubectl apply -f deployment.yaml -n $AWS_NAMESPACE
+        fi
+      - |
+        if [ "$UPDATE_SERVICE" = "true" ]; then
+          kubectl apply -f service-ingress.yaml -n $AWS_NAMESPACE
+        fi
+      - |
+        if [ "$RESET_POD" = "true" ]; then
+          kubectl delete pods -l app=$DEPLOY_NAME -n $AWS_NAMESPACE
+        fi
+
+# cache:
+#   paths:
+#     - "node_modules/**/*"

@@ -1,0 +1,162 @@
+@use '@angular/material'as mat;
+
+
+@include mat.core();
+
+$my-primary-color: (100: #ffebef,
+    200: #ffb8c6,
+    300: #ff5274,
+    400: #ed002f,
+    500: #AB192d,
+    600: #520010,
+    700: #1f0006,
+    contrast:(100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #ffffff,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+    ));
+
+$my-secondary-color: (w:#FFFFFF,
+    100:#FAFAFA,
+    200:#DCDDDE,
+    300:#BEC0C2,
+    400:#B1B1B1,
+    500:#8A8C8E,
+    600:#636466,
+    700:#262626,
+    b:#0D0D0D,
+    contrast:(w: #000000,
+        100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #000000,
+        500: #000000,
+        600: #000000,
+        700: #ffffff,
+        b: #ffffff,
+    ));
+
+$my-error-color: (100: #FFE9DB,
+    200:#FFC7A6,
+    300: #FF9254,
+    400: #EB5500,
+    500: #B84300,
+    600: #853000,
+    700: #521E00,
+    contrast:(100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #000000,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+    ));
+
+
+$my-warn-color: (100:#FFF8CC,
+    200:#FFEF82,
+    300:#FFE21A,
+    400:#E5C800,
+    500:#B29C00,
+    600:#806F00,
+    700:#4D4300, contrast:(100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #000000,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+    ));
+
+$my-success-color: (100: #D6FFF5,
+    200: #A3FFEA,
+    300: #0AFFC6,
+    400: #00BF9E,
+    500: #00A37D,
+    600: #007056,
+    700: #003D2F,
+    contrast:(100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #000000,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+    ));
+
+
+$my-green-color: (100: #00ffd5,
+    200: #02e2bd,
+    300: #00BF9E,
+    400: #03ad86,
+    500: #049e7a,
+    600: #028465,
+    700: #007056,
+    contrast:(100: #000000,
+        200: #000000,
+        300: #000000,
+        400: #ffffff,
+        500: #ffffff,
+        600: #ffffff,
+        700: #ffffff,
+    ));
+
+
+$my-primary: mat.define-palette($my-primary-color, 400);
+$my-accent: mat.define-palette($my-secondary-color, 400);
+$my-secondary: mat.define-palette($my-secondary-color, 400);
+
+$my-green: mat.define-palette($my-green-color, 400);
+
+$my-error: mat.define-palette($my-error-color, 400);
+$my-warn: mat.define-palette($my-warn-color, 500);
+$my-success: mat.define-palette($my-success-color, 400);
+$my-typography: mat.define-typography-config($font-family: 'Fira Sans',
+);
+
+$my-theme: mat.define-light-theme((color: (primary: $my-primary,
+            accent: $my-accent,
+            warn: $my-warn,
+
+            success:$my-success),
+        customcolors:(error: $my-error,
+        ),
+        boxShadow:(sm: '0 4px 4px 0.25 #00000040',
+            md: '0 4px 8px 0.25 #00000040',
+            lg: '0 8px 16px 0.25 #00000040',
+            xl: '0 8px 8px 0.25 #00000040',
+            2xl: '0 16px 16px 0.25 #00000040',
+            3xl: '0 16px 18px 0.25 #00000040',
+        ),
+        borderRadius:(sm: 8px,
+            md: 16px,
+            lg: 24px,
+            xl: 32px,
+            2xl: 40px,
+            3xl: 48px,
+        ),
+        //change this to em 
+        fontSize:(xs: 0.58rem,
+            sm: 0.86rem, //11
+            md: 1rem, //14px
+            lg: 1.15rem, // 16px
+            xl: 1.714rem,
+            2xl: 2.29rem,
+            3xl: 3.43rem,
+            4xl: 64.58rem,
+        ), // box-shadows, typographic, letters, line-height 
+        density: 0,
+    ));
+
+// Emit theme-dependent styles for common features used across multiple components.
+@include mat.all-component-themes($my-theme);
+
+// Emit styles for MatButton based on `$my-theme`. Because the configuration
+// passed to `define-light-theme` omits typography, `button-theme` will not
+// emit any typography styles.
+
+
+// Include the theme mixins for other components you use here.
