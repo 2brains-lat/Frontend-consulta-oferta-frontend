@@ -341,6 +341,8 @@ export class ResultadoconsultaComponent implements OnInit, OnDestroy {
         permiteCupon: detalleOferta.datosAdicionales.permiteCupon ?? false,
         permiteRenove: detalleOferta.datosAdicionales.permiteRenove ?? false,
         tipoCuotaGlosa: detalleOferta.datosAdicionales.tipoCuotaGlosa,
+        hasVigencia: detalleOferta.vigencia !== null && detalleOferta.vigencia !== undefined,
+        vigencia: detalleOferta.vigencia,
       };
     }
     const kitAndPriceSelected = value?.split('---') ?? [];

@@ -51,4 +51,10 @@ export class ScreenResumenComponent {
 	capitalizeFullName(name: string): string {
 		return capitalizeFullName(name);
 	}
+
+	formatDateVigencia(vigencia: string) {
+		const [year, month, day] = vigencia.split('-');
+		return `${day}-${month}-${year.slice(-2)}`;
+	}
+
 }

@@ -83,7 +83,8 @@ export const environment = {
     backOffice: '264a787c-8a0e-4e40-b289-fd9f93ddc6e0',
   },
   graph_endpoint: 'https://graph.microsoft.com/v1.0/me',
-  apigateway_url: 'https://vcddi56377.execute-api.eu-west-1.amazonaws.com/v2',
+  // apigateway_url: 'https://vcddi56377.execute-api.eu-west-1.amazonaws.com/v2',
+  apigateway_url: 'http://localhost:8081',
   form: {
     prospecto_rp: '{"verisureId": "RP", "requiredStatus": false }',
     prospecto_re: '{"verisureId":"RE", "requiredStatus":true}',

@@ -246,6 +246,8 @@ export type ResumenT = {
   permiteCupon?: boolean;
   permiteRenove?: boolean;
   tipoCuotaGlosa?: string;
+  hasVigencia?: boolean;
+  vigencia?: string;
   [key: string]: any;
 };
 export type asyncCallParamsT = {

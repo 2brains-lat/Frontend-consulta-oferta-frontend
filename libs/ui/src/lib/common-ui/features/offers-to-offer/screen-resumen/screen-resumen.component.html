@@ -29,7 +29,7 @@
     <div card-details>
       <span>
         Vigencia: {{ formatDate(infoOfertaOfrecida.fechaDeCreacion) }} al
-        {{ formatDate(infoOfertaOfrecida.fechaDeVencimiento) }}
+        {{ infoOfertaOfrecida.hasVigencia ? formatDateVigencia(infoOfertaOfrecida.vigencia ?? '')  : formatDate(infoOfertaOfrecida.fechaDeVencimiento) }}
       </span>
     </div>
     <div card-details>
